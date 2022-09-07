@@ -1,5 +1,5 @@
 {
-  "name": "wk1-frontend-vue",
+  "name": "wk-frontend-vue1",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,14 +34,13 @@
       "@vue/standard"
     ],
     "parserOptions": {
-      "ecmaVersion": 2021,
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/multi-word-component-names": "off",
-      "vue/no-mutating-props": "off",
       "no-unused-vars": "off",
-      "no-unreachable": "off"
+      "vue/no-mutating-props": "off",
+      "no-unreachable": "off",
+      "vue/multi-word-component-names": "off"
     }
   },
   "browserslist": [

@@ -1,4 +1,4 @@
-# wk1-frontend-vue
+# wk-frontend-vue1
 
 ## Project setup
 ```
