@@ -56,7 +56,7 @@ export default {
 
 .row {
   display: grid;
-  grid-template-columns: 275px auto 300px;
+  grid-template-columns: 275px auto 400px;
   grid-template-rows: auto;
 }
 h1{
