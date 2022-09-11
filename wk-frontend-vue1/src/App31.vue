@@ -1,15 +1,18 @@
 <template>
-  <Header msg="Header component works!"/>
-  <Welcome msg="Welcome Component works!"/>
+  <Header msg=""/>
+  <NavBar msg=""/>
+  <Welcome msg=""/>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Welcome from './components/Welcome.vue'
+import NavBar from '@/components/NavBar'
 
 export default {
   name: 'App31',
   components: {
+    NavBar,
     Header,
     Welcome
   }
