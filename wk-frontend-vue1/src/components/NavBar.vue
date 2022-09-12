@@ -29,7 +29,6 @@ export default {
 .navbar {
   overflow: hidden;
   background-color: gray;
-  width: available;
 }
 .navbar .right{
   float: right;

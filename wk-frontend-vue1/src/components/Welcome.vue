@@ -14,6 +14,33 @@
     </div>
     <div class="content" id="content-2">
       <h1>{{ photo_galery }}</h1>
+      <div class="fotos">
+        <img v-bind:src="motor_gang">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="gold_car">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="frontside_black_car">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="green_electric_scooter">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="grey_scooter">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="black_scooter">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="red_scooter">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="blue_scooter">
+      </div>
+      <div class="fotos">
+        <img v-bind:src="orange_scooter">
+      </div>
     </div>
     <div class="content" id="content-3">
       <h1>{{ tours }}</h1>
@@ -26,6 +53,15 @@
 export default {
   data () {
     return {
+      motor_gang: require('../assets/images/motorgang.jpg'),
+      gold_car: require('../assets/images/gold-car.jpg'),
+      frontside_black_car: require('../assets/images/frontside-black-car.jpg'),
+      green_electric_scooter: require('../assets/images/green-electric-scooter.jpg'),
+      grey_scooter: require('../assets/images/grey-scooter.jpg'),
+      black_scooter: require('../assets/images/black-scooter.jpg'),
+      red_scooter: require('../assets/images/red-scooter.jpg'),
+      blue_scooter: require('../assets/images/darkblue-scooter.jpg'),
+      orange_scooter: require('../assets/images/orange-scooter.jpg'),
       pickabrand: 'Pick a brand:',
       availability: 'Availability:',
       photo_galery: 'Photo gallery:',
@@ -60,6 +96,21 @@ export default {
   display: grid;
   grid-template-columns: 275px auto 400px;
   grid-template-rows: auto;
+}
+
+.fotos {
+
+}
+
+img {
+  max-height: 300px;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.fotos {
+  display: inline;
+  margin: 10px;
 }
 
 h1 {
