@@ -1,23 +1,23 @@
 <template>
-  <div class="row">
+  <div class="columns">
     <div class="content" id="content-1">
-      <h1>{{pickabrand}}</h1>
+      <h1>{{ pickabrand }}</h1>
       <select name="brand">
         <option value="Lime-S">Lime-S</option>
       </select>
-      <h1>{{availability}}</h1>
+      <h1>{{ availability }}</h1>
       <ul id="list">
-        <li>{{leidseplein}}</li>
-        <li>{{rembrandtplein}}</li>
-        <li>{{centraal_station}}</li>
+        <li>{{ leidseplein }}</li>
+        <li>{{ rembrandtplein }}</li>
+        <li>{{ centraal_station }}</li>
       </ul>
     </div>
     <div class="content" id="content-2">
-      <h1>{{photo_galery}}</h1>
+      <h1>{{ photo_galery }}</h1>
     </div>
     <div class="content" id="content-3">
-      <h1>{{tours}}</h1>
-      <p>{{tour_info}}</p>
+      <h1>{{ tours }}</h1>
+      <p>{{ tour_info }}</p>
     </div>
   </div>
 </template>
@@ -41,40 +41,35 @@ export default {
 
 <style scoped>
 
-.content{
+.content {
   background-color: grey;
   padding: 15px;
   margin-top: 10px;
   min-height: 200%;
 }
-#content-2{
+
+#content-2 {
   margin: 10px;
 }
-#content-3{
+
+#content-3 {
   float: right;
 }
 
-.row {
+.columns {
   display: grid;
   grid-template-columns: 275px auto 400px;
   grid-template-rows: auto;
 }
-h1{
+
+h1 {
   color: white;
 }
-li{
+
+li {
   display: table;
   margin-bottom: 20px;
   list-style-type: none;
-}
-
-.numberbackground{
-  background-color: lightgreen;
-
-}
-
-#numbers li{
-  background-color: lightgreen;
 }
 
 </style>
