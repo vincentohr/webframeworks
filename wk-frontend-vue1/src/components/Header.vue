@@ -2,7 +2,6 @@
   <div id="content">
     <h1 id="title">{{ header }}</h1>
     <h3 id="subtitle">{{ subheader }}</h3>
-    <p>today is{{time}}</p>
     <div class="logo" id="logo">
       <img v-bind:src="logo">
     </div>
@@ -20,8 +19,7 @@ export default {
       header: 'E-scooters Amsterdam!',
       subheader: 'Get your kicks on Route 66!',
       logo: require('../assets/images/blue-scooter.png'),
-      logo2: require('../assets/images/yellow-scooter.png'),
-      time: 'Maandag 12 september 2022'
+      logo2: require('../assets/images/yellow-scooter.png')
     }
   }
 }
@@ -61,7 +59,7 @@ export default {
 .logo {
   position: absolute;
   top: -2%;
-  margin-top:19px
+  margin-top: 19px
 }
 
 #logo2 {
