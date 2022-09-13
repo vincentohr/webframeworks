@@ -7,9 +7,7 @@
       </select>
       <h1>{{ availability }}</h1>
       <ul id="list">
-        <li>{{ leidseplein }}</li>
-        <li>{{ rembrandtplein }}</li>
-        <li>{{ centraal_station }}</li>
+        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}: {{placeholdNumbers()}}</li>
       </ul>
     </div>
     <div class="content" id="content-2">
@@ -66,12 +64,21 @@ export default {
       availability: 'Availability:',
       photo_galery: 'Photo gallery:',
       tours: 'City tours:',
-      centraal_station: 'Centraal Station',
-      leidseplein: 'Leidseplein',
-      rembrandtplein: 'Rembrandtplein',
-      tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.'
+      tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.',
+      places: [
+        'Leidseplein',
+        'Rembrandtplein',
+        'Centraal Station'
+      ]
+    }
+  },
+
+  methods: {
+    placeholdNumbers () {
+      return Math.round(Math.random() * 5)
     }
   }
+
 }
 </script>
 
@@ -81,7 +88,7 @@ export default {
   background-color: grey;
   padding: 15px;
   margin-top: 10px;
-  min-height: 200%;
+  min-height: 85vh;
 }
 
 #content-2 {
@@ -94,12 +101,8 @@ export default {
 
 .columns {
   display: grid;
-  grid-template-columns: 275px auto 400px;
+  grid-template-columns: auto auto auto;
   grid-template-rows: auto;
-}
-
-.fotos {
-
 }
 
 img {

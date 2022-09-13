@@ -36,7 +36,7 @@ export default {
 }
 
 #content {
-  height: 125pt;
+  height: 15vh;
   background-image: url("../assets/images/night-sky.jpg");
   background-repeat: no-repeat;
   background-size: cover;
