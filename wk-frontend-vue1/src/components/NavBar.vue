@@ -5,10 +5,7 @@
       <button class="scooters">Scooters
       </button>
       <div class="scooters-content">
-        <a href="#">Scooters overview</a>
-        <a href="#">Scooters details</a>
-        <a href="#">Available Scooters</a>
-        <a href="#">Abandonned Scooters</a>
+        <a v-for="(subject, index) in scooterssubjects" v-bind:key="index" href="#">{{ subject }}</a>
       </div>
     </div>
     <a href="#mytrips">My Trips</a>
@@ -20,12 +17,21 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  data () {
+    return {
+      name: 'NavBar',
+      scooterssubjects: [
+        'Scooters overview',
+        'Scooters details',
+        'Available scooters',
+        'Abandonned scooters'
+      ]
+    }
+  }
 }
 </script>
 
 <style scoped>
-
 .navbar {
   overflow: hidden;
   background-color: gray;

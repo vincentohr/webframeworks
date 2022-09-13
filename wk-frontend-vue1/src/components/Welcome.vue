@@ -7,37 +7,13 @@
       </select>
       <h1>{{ availability }}</h1>
       <ul id="list">
-        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}: {{placeholdNumbers()}}</li>
+        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}</li>
       </ul>
     </div>
     <div class="content" id="content-2">
       <h1>{{ photo_galery }}</h1>
-      <div class="fotos">
-        <img v-bind:src="motor_gang">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="gold_car">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="frontside_black_car">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="green_electric_scooter">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="grey_scooter">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="black_scooter">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="red_scooter">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="blue_scooter">
-      </div>
-      <div class="fotos">
-        <img v-bind:src="orange_scooter">
+      <div>
+        <img v-for="(image, index) in images" v-bind:src="image" v-bind:key="index">
       </div>
     </div>
     <div class="content" id="content-3">
@@ -51,44 +27,38 @@
 export default {
   data () {
     return {
-      motor_gang: require('../assets/images/motorgang.jpg'),
-      gold_car: require('../assets/images/gold-car.jpg'),
-      frontside_black_car: require('../assets/images/frontside-black-car.jpg'),
-      green_electric_scooter: require('../assets/images/green-electric-scooter.jpg'),
-      grey_scooter: require('../assets/images/grey-scooter.jpg'),
-      black_scooter: require('../assets/images/black-scooter.jpg'),
-      red_scooter: require('../assets/images/red-scooter.jpg'),
-      blue_scooter: require('../assets/images/darkblue-scooter.jpg'),
-      orange_scooter: require('../assets/images/orange-scooter.jpg'),
-      pickabrand: 'Pick a brand:',
-      availability: 'Availability:',
-      photo_galery: 'Photo gallery:',
-      tours: 'City tours:',
-      tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.',
       places: [
         'Leidseplein',
         'Rembrandtplein',
         'Centraal Station'
-      ]
-    }
-  },
-
-  methods: {
-    placeholdNumbers () {
-      return Math.round(Math.random() * 5)
+      ],
+      images: [
+        require('../assets/images/motorgang.jpg'), require('../assets/images/gold-car.jpg'),
+        require('../assets/images/frontside-black-car.jpg'), require('../assets/images/green-electric-scooter.jpg'),
+        require('../assets/images/grey-scooter.jpg'), require('../assets/images/black-scooter.jpg'),
+        require('../assets/images/red-scooter.jpg'), require('../assets/images/darkblue-scooter.jpg'),
+        require('../assets/images/orange-scooter.jpg')
+      ],
+      pickabrand: 'Pick a brand:',
+      availability: 'Availability:',
+      photo_galery: 'Photo gallery:',
+      tours: 'City tours:',
+      centraal_station: 'Centraal Station',
+      leidseplein: 'Leidseplein',
+      rembrandtplein: 'Rembrandtplein',
+      tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the ' +
+        'Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.'
     }
   }
-
 }
 </script>
 
 <style scoped>
-
 .content {
   background-color: grey;
   padding: 15px;
   margin-top: 10px;
-  min-height: 85vh;
+  min-height: 200%;
 }
 
 #content-2 {
@@ -101,19 +71,15 @@ export default {
 
 .columns {
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto;
+  grid-template-columns: 275px auto 400px;
+  grid-column-start: auto;
 }
 
 img {
   max-height: 300px;
   max-width: 300px;
-  margin-top: 10px;
-}
-
-.fotos {
-  display: inline;
-  margin: 10px;
+  margin: 1%;
+  text-align: center;
 }
 
 h1 {
