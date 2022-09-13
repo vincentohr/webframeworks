@@ -7,7 +7,7 @@
       </select>
       <h1>{{ availability }}</h1>
       <ul id="list">
-        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}</li>
+        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}: {{placeholdNumbers()}}</li>
       </ul>
     </div>
     <div class="content" id="content-2">
@@ -48,6 +48,11 @@ export default {
       rembrandtplein: 'Rembrandtplein',
       tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the ' +
         'Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.'
+    }
+  },
+  methods: {
+    placeholdNumbers () {
+      return Math.round(Math.random() * 5)
     }
   }
 }
