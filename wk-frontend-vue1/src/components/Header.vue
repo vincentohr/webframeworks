@@ -40,13 +40,14 @@ export default {
   top: 7%;
   padding-right: 15%;
   font-size: 200%;
-  margin: auto;
+  margin-left: 8%;
+  margin-right: 2%;
 }
 
 #title {
   position: relative;
   text-align: center;
-  font-size: 400%;
+  font-size: 375%;
   top: 20%;
 }
 
@@ -54,13 +55,14 @@ export default {
   position: relative;
   max-width: 50px;
   max-height: 170px;
-  bottom: 107%;
+  bottom: 123%;
+  right: 0;
 }
 
 #logo2 {
   position: relative;
   max-width: 50px;
-  bottom: 210%;
+  bottom: 225%;
   left: 85%;
 }
 
