@@ -1,7 +1,7 @@
 <template>
   <div id="content">
-    <h1 id="title">{{ header }}</h1>
-    <h3 id="subtitle">{{ subheader }}</h3>
+    <h1 id="title">{{ title }}</h1>
+    <h3 id="subtitle">{{ subtitle }}</h3>
     <div class="logo" id="logo">
       <img v-bind:src="logo">
     </div>
@@ -16,8 +16,8 @@
 export default {
   data () {
     return {
-      header: 'E-scooters Amsterdam!',
-      subheader: 'Get your kicks on Route 66!',
+      title: 'E-scooters Amsterdam!',
+      subtitle: 'Get your kicks on Route 66!',
       logo: require('../assets/images/blue-scooter.png'),
       logo2: require('../assets/images/yellow-scooter.png')
     }
@@ -27,14 +27,8 @@ export default {
 
 <style scoped>
 
-* {
-  color: white;
-  border-color: aliceblue;
-  margin: auto;
-}
-
 #content {
-  height: 15vh;
+  height: 125pt;
   background-image: url("../assets/images/night-sky.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -43,8 +37,8 @@ export default {
 #subtitle {
   position: relative;
   text-align: right;
-  top: 25%;
-  padding-right: 20%;
+  top: 7%;
+  padding-right: 15%;
   font-size: 200%;
   margin: auto;
 }
@@ -56,16 +50,18 @@ export default {
   top: 20%;
 }
 
-.logo {
-  position: absolute;
-  top: -2%;
-  margin-top: 0px;
-  margin-left: 10px;
+#logo {
+  position: relative;
+  max-width: 50px;
+  max-height: 170px;
+  bottom: 107%;
 }
 
 #logo2 {
-  right: 5px;
-  margin-right: 10px;
+  position: relative;
+  max-width: 50px;
+  bottom: 210%;
+  left: 85%;
 }
 
 </style>

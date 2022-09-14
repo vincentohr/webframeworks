@@ -43,9 +43,6 @@ export default {
       availability: 'Availability:',
       photo_galery: 'Photo gallery:',
       tours: 'City tours:',
-      centraal_station: 'Centraal Station',
-      leidseplein: 'Leidseplein',
-      rembrandtplein: 'Rembrandtplein',
       tour_info: 'Enjoy one of our city tours with your E-scooter. Go shopping in the nine streets, visit the ' +
         'Albert Cuyp market or the museum square. It is also allowed to take a moped onto the sub-way.'
     }
@@ -63,7 +60,7 @@ export default {
   background-color: grey;
   padding: 15px;
   margin-top: 10px;
-  min-height: 200%;
+  min-height: 100%;
 }
 
 #content-2 {
@@ -87,14 +84,9 @@ img {
   text-align: center;
 }
 
-h1 {
-  color: white;
-}
-
 li {
   display: table;
   margin-bottom: 20px;
   list-style-type: none;
 }
-
 </style>
