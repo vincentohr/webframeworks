@@ -76,7 +76,7 @@ export default {
 
 .columns {
   display: grid;
-  grid-template-columns: 275px auto 400px;
+  grid-template-columns: 300px auto 300px;
   grid-column-start: auto;
 }
 

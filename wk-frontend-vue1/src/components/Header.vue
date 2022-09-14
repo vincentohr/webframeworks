@@ -59,12 +59,13 @@ export default {
 .logo {
   position: absolute;
   top: -2%;
-  margin-top: 19px
+  margin-top: 0px;
+  margin-left: 10px;
 }
 
 #logo2 {
   right: 5px;
-  margin-left: 2em;
+  margin-right: 10px;
 }
 
 </style>
