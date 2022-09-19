@@ -3,49 +3,59 @@
   <table>
     <tr>
       <th>Id:</th>
-      <th>Tag:</th>
+      <th @click="showTags">Tag:</th>
       <th>Status:</th>
       <th>Battery Charge:</th>
       <th>GPSLocation:</th>
       <th>Mileage:</th>
     </tr>
-    <tr v-for="scooter in scooters" :key="scooter">
-      <td>t1</td>
-      <td>t2</td>
-      <td>t3</td>
-      <td>t4</td>
-      <td>t5</td>
-      <td>t6</td>
+    <tr v-for="scooter in scooters" :key="scooter.id">
+      <td>{{scooter.id}}</td>
+      <td>{{scooter.tag}}</td>
+      <td>{{scooter.status}}</td>
+      <td>{{scooter.batteryCharge}}</td>
+      <td>{{scooter.gpsLocation}}</td>
+      <td>{{scooter.mileage}}</td>
     </tr>
   </table>
+  <Overview32 scooters="scooters"
+  ></Overview32>
+<!--  <Overview32 v-if="visible"></Overview32>-->
   <button id="addScootie" @click="onNewScooter">New Scooter</button>
 </template>
 
 <script>
 import { Scooter } from '@/models/scooter'
+import Overview32 from '@/components/scooters/Overview32'
 
 export default {
   name: 'ScootersOverview31',
+  components: { Overview32 },
   created () {
-    this.lastId = 30000
+    this.lastId = 30_000
     for (let i = 0; i < 8; i++) {
       this.scooters.push(
-        Scooter.createSampleScooter(this.lastId)
+        Scooter.createSampleScooter(this.lastId++)
       )
     }
   },
   data () {
     return {
+      visible: false,
       pId: this.lastId,
       scooters: []
     }
   },
   methods: {
     onNewScooter (pId) {
-      pId += 1
+      pId = this.lastId
+      this.lastId++
       this.scooters.push(
-        Scooter.createSampleScooter(this.pId)
+        Scooter.createSampleScooter(pId)
       )
+    },
+    showTags () {
+      this.visible = !this.visible
     }
   }
 }
