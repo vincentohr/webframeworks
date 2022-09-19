@@ -19,14 +19,12 @@
 import { Scooter } from '@/models/scooter'
 
 export default {
-  props: {
-    scooters: Array
-  },
+  props: ['scooters'],
   data () {
     return {
       count: 0,
       selectedScooter: null,
-      tags: this.scooters
+      tags: ['td1', 'td2', 'td3', 'td4', 'td5', 'td6']
     }
   },
   methods: {
