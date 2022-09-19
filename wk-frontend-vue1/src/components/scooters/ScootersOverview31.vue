@@ -3,7 +3,7 @@
   <table>
     <tr>
       <th>Id:</th>
-      <th @click="showTags">Tag:</th>
+      <th>Tag:</th>
       <th>Status:</th>
       <th>Battery Charge:</th>
       <th>GPSLocation:</th>
@@ -18,8 +18,7 @@
       <td>{{scooter.mileage}}</td>
     </tr>
   </table>
-  <Overview32 scooters="scooters"
-  ></Overview32>
+<!--  <Overview32 :scooters="scooters" ></Overview32>-->
 <!--  <Overview32 v-if="visible"></Overview32>-->
   <button id="addScootie" @click="onNewScooter">New Scooter</button>
 </template>
@@ -30,7 +29,7 @@ import Overview32 from '@/components/scooters/Overview32'
 
 export default {
   name: 'ScootersOverview31',
-  components: { Overview32 },
+  // components: { Overview32 },
   created () {
     this.lastId = 30_000
     for (let i = 0; i < 8; i++) {
@@ -41,7 +40,6 @@ export default {
   },
   data () {
     return {
-      visible: false,
       pId: this.lastId,
       scooters: []
     }
@@ -53,9 +51,6 @@ export default {
       this.scooters.push(
         Scooter.createSampleScooter(pId)
       )
-    },
-    showTags () {
-      this.visible = !this.visible
     }
   }
 }
