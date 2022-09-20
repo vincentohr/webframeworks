@@ -12,6 +12,7 @@ import Welcome from './components/Welcome.vue'
 import NavBar from '@/components/NavBar'
 import ScootersOverview31 from '@/components/scooters/ScootersOverview31'
 import Overview32 from '@/components/scooters/Overview32'
+import Detail32 from '@/components/scooters/Detail32'
 
 export default {
   name: 'App31',
@@ -20,6 +21,7 @@ export default {
     NavBar,
     Overview32,
     Header
+    // eslint-disable-next-line vue/no-unused-components
     // Welcome
   }
 }
