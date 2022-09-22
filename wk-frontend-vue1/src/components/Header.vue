@@ -29,7 +29,7 @@ export default {
       const date = new Date()
       const year = date.getFullYear()
       let day = date.getDay()
-      let month = date.getMonth()
+      let month = date.getMonth() + 1
       const ndate = date.toLocaleDateString()
       const nday = ndate.substring(0, ndate.indexOf('-'))
 

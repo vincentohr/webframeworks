@@ -1,81 +1,76 @@
 <template>
   <div id="content">
-    <table>
-      <tr>
-        <th>
-          Tag:
-        </th>
-      </tr>
-      <tr v-for="(tag, index) in tags" :key="index" @click="selected (index)">
-        <td :class="activeTagClass" @click="selectTag">{{ tag }}</td>
-      </tr>
-    </table>
-    <button @click="newTag">New Scooter</button>
+    <div id="table">
+      <table>
+        <tr>
+          <th>
+            Tag:
+          </th>
+        </tr>
+        <tr v-for="(scooter, index) in scooters" :key="index" @click="selected (scooter)">
+          <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter.tag }}</td>
+        </tr>
+      </table>
+      <button @click="onNewScooter">New Scooter</button>
+    </div>
   </div>
-  <p>{{ text }}</p>
-  <Detail32
-    v-model:selected-scooter="selectedScooter"
-    v-model:status="status"
-    v-model:battery-charge="batteryCharge"
-    v-model:gps-location="gpsLocation"
-    v-model:mileage="mileage"
-    v-model:id="id"
-  >
-  </Detail32>
+  <div id="text">
+    <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
+  </div>
+  <div id="detail">
+    <app-scooter-detail @delete-scooter="remove()" :selected-scooter="selectedScooter"></app-scooter-detail>
+  </div>
 </template>
 
 <script>
-import Detail32 from '@/components/scooters/Detail32'
 import { Scooter } from '@/models/scooter'
+import Detail32 from '@/components/scooters/Detail32'
 
 export default {
-  components: { Detail32 },
+  name: 'Overview32',
+  created () {
+    this.lastId = 30_000
+    for (let i = 0; i < 8; i++) {
+      this.scooters.push(
+        Scooter.createSampleScooter(this.lastId++)
+      )
+    }
+  },
+  components: {
+    'app-scooter-detail': Detail32
+  },
   data () {
     return {
-      id: '',
-      number: '',
-      count: '',
-      text: 'Select a scooter',
+      pId: this.lastId,
+      scooters: [],
       selectedScooter: null,
-      scooter: '',
-      tags: [],
-      status: '',
-      batteryCharge: '',
-      gpsLocation: '',
-      mileage: '',
       isActive: false
     }
   },
   methods: {
-    selected (index) {
-      // this.count++
-      // this.text = ''
-      // if (index === this.number && this.count >= 2) {
-      //   this.selectedScooter = null
-      //   this.count = 0
-      // }
-      this.selectedScooter = this.tags.at(index)
-      this.number = index
-      this.status = Scooter.createSampleScooter(index).status
-      this.batteryCharge = Scooter.createSampleScooter(index).batteryCharge
-      this.gpsLocation = Scooter.createSampleScooter(index).gpsLocation
-      this.mileage = Scooter.createSampleScooter(index).mileage
-      this.id = Scooter.createSampleScooter(index).id
-    },
-    newTag (pId) {
+    onNewScooter (pId) {
       pId = this.lastId
       this.lastId++
-      this.tags.push(
-        Scooter.createSampleScooter(pId).tag
+      this.scooters.push(
+        Scooter.createSampleScooter(pId)
       )
+      this.selectedScooter = this.scooters.at(this.scooters.length - 1)
     },
-    selectTag () {
-      this.isActive = !this.isActive
-    }
-  },
-  computed: {
-    activeTagClass () {
-      return { activeTag: this.isActive }
+    selected (scooter) {
+      this.isActive = true
+      if (this.selectedScooter !== scooter) {
+        this.selectedScooter = scooter
+      } else {
+        this.selectedScooter = null
+        this.isActive = false
+      }
+    },
+    remove () {
+      const index = this.scooters.indexOf(this.selectedScooter.id)
+      this.scooters.splice(index, 1)
+      this.selectedScooter = null
+      this.isActive = false
+      alert('Helaas nog niet werkend, verwijderd de verkeerde scooter.')
     }
   }
 }
@@ -83,11 +78,30 @@ export default {
 
 <style scoped>
 
+div {
+  display: inline;
+  position: absolute;
+}
+
+#detail {
+  margin-left: 60%;
+  width: 200px;
+}
+
+#table {
+  margin-left: 20px;
+}
+
+#text {
+  position: absolute;
+  margin-left: 40%
+}
+
 table {
   margin-top: 3%;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 30%;
+  width: 500px;
 }
 
 th {
@@ -105,6 +119,6 @@ tr:nth-child(even) {
 }
 
 .activeTag {
-  background-color: goldenrod;
+  background-color: darkblue;
 }
 </style>

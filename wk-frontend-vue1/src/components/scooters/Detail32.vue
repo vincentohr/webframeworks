@@ -1,40 +1,42 @@
 <template>
-  <div id="content">
+  <div v-if="selectedScooter !== null">
     <table>
       <tr>
-        <th id="head">Scooter details (id = {{id}} )</th>
+        <th>Scooter id = {{ selectedScooter.id }}</th>
       </tr>
       <tr>
-        <td>{{tagText}}</td>
-        <td><input type="text" v-model="selectedScooter"></td>
+        <td>{{ tagText }}</td>
+        <td><input v-model="selectedScooter.tag"></td>
       </tr>
       <tr>
-        <td>{{statusText}}</td>
-        <td><select v-model="status">
-          <option selected v-for="state in statusArr" :key="state">{{ state }}</option>
+        <td>{{ statusText }}</td>
+        <td><select v-model="selectedScooter.status" @change="selectedScooter.status">
+          <option selected v-for="state in ScooterStatus" :key="state">{{ state }}</option>
         </select></td>
       </tr>
       <tr>
-        <td>{{batteryChargeText}}</td>
-        <td><input type="text" v-model="batteryCharge"></td>
+        <td>{{ batteryChargeText }}</td>
+        <td><input v-model="selectedScooter.batteryCharge"></td>
       </tr>
       <tr>
-        <td>{{gpsLocationText}}</td>
-        <td><input type="text" v-model="gpsLocation"></td>
+        <td>{{ gpsLocationText }}</td>
+        <td><input v-model="selectedScooter.gpsLocation"></td>
       </tr>
       <tr>
-        <td>{{mileageText}}</td>
-        <td><input type="text" v-model="mileage"></td>
+        <td>{{ mileageText }}</td>
+        <td><input v-model="selectedScooter.mileage"></td>
       </tr>
     </table>
-    <button id="deleteScooter">Delete</button>
+    <button v-show="true" @click="onDelete()">Delete</button>
   </div>
 </template>
 
 <script>
 import { Scooter } from '@/models/scooter'
+
 export default {
-  props: ['selectedScooter', 'status', 'batteryCharge', 'gpsLocation', 'mileage', 'id'],
+  name: 'ScootersDetail32',
+  props: ['selectedScooter'],
   emits: ['delete-scooter'],
   data () {
     return {
@@ -43,7 +45,12 @@ export default {
       batteryChargeText: 'Battery Charge (%):',
       gpsLocationText: 'GPS Location:',
       mileageText: 'Total Mileage (km):',
-      statusArr: Scooter.statusArray
+      ScooterStatus: Scooter.Status
+    }
+  },
+  methods: {
+    onDelete () {
+      this.$emit('delete-scooter')
     }
   }
 }
@@ -51,11 +58,13 @@ export default {
 
 <style scoped>
 table {
+  margin-top: 2%;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 30%;
+  width: 700px;
 }
-th{
+
+th {
   background-color: goldenrod;
   text-align: center;
 }
@@ -69,10 +78,11 @@ tr:nth-child(even) {
   background-color: grey;
 }
 
-input{
+input {
   width: 95%;
 }
-#deleteScooter{
+
+#deleteScooter {
   display: block;
   margin-left: 25%;
   margin-right: auto;
