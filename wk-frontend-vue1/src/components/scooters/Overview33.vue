@@ -18,7 +18,7 @@
     <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
   </div>
   <div id="detail">
-    <router-view @delete-scooter="remove()" :selected-scooter="selectedScooter"></router-view>
+    <Detail32 @delete-scooter="remove()" :selected-scooter="selectedScooter"></Detail32>
   </div>
 </template>
 
@@ -44,6 +44,9 @@ export default {
       isActive: false
     }
   },
+  components: {
+    Detail32
+  },
   methods: {
     onNewScooter (pId) {
       pId = this.lastId
@@ -68,6 +71,18 @@ export default {
       this.selectedScooter = null
       this.isActive = false
       alert('Helaas nog niet werkend, verwijderd de verkeerde scooter.')
+    },
+    onSelect (scooter) {
+      if (scooter != null && scooter !== this.selectedScooter) {
+        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+      } else if (this.selectedScooter != null) {
+        // TODO
+      }
+    }
+  },
+  watch: {
+    '$route' () {
+      this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
     }
   }
 }
