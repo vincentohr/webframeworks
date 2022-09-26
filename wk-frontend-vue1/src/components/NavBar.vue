@@ -1,6 +1,10 @@
 <template>
   <div class="navbar">
-    <a href="#">Home</a>
+<!--    <a href="#">Home</a>-->
+    <router-link to="/home">Home</router-link>
+    <router-link to="/overview31">Scooter Overview</router-link>
+    <router-link to="/overview32">Scooter Details</router-link>
+
     <div class="dropdown">
       <button class="scooters">Scooters
       </button>
@@ -8,10 +12,11 @@
         <a v-for="(subject, index) in scooterssubjects" v-bind:key="index" href="#">{{ subject }}</a>
       </div>
     </div>
-    <a href="#mytrips">My Trips</a>
-    <a href="#myaccount">My account</a>
-    <a href="#login" class="right">Log in</a>
-    <a href="#signup" class="right">Sign up</a>
+<!--    <a href="#mytrips">My Trips</a>-->
+<!--    <a href="#myaccount">My account</a>-->
+<!--    <a href="#login" class="right">Log in</a>-->
+<!--    <a href="#signup" class="right">Sign up</a>-->
+    <router-link class="right" to="/sign-up">Sign up</router-link>
   </div>
 </template>
 
@@ -48,7 +53,9 @@ export default {
 }
 
 .navbar a:hover {
-background-color: darkgray;
+  color: #ffffff;
+  border-color: #f1a80a;
+  background-color: #b68c01;
 }
 
 .dropdown {
@@ -68,7 +75,9 @@ background-color: darkgray;
 }
 
 .dropdown:hover {
-  background-color: darkgray;
+  color: #ffffff;
+  border-color: #f1a80a;
+  background-color: #a27e02;
 }
 
 .scooters-content {
@@ -88,10 +97,18 @@ background-color: darkgray;
 }
 
 .scooters-content a:hover {
-  background-color: gray;
+  color: #ffffff;
+  border-color: #f1a80a;
+  background-color: #a27e02;
 }
 
 .dropdown:hover .scooters-content {
   display: block;
+}
+
+a.active {
+  color: #ffffff;
+  border-color: #f1a80a;
+  background-color: #ce9e02;
 }
 </style>
