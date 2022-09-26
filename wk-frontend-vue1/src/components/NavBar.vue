@@ -9,7 +9,10 @@
       <button class="scooters">Scooters
       </button>
       <div class="scooters-content">
-        <a v-for="(subject, index) in scooterssubjects" v-bind:key="index" href="#">{{ subject }}</a>
+        <router-link to="/overview31">All Scooters Overview</router-link>
+        <router-link to="/overview32">Scooters edit (comp)</router-link>
+        <router-link to="/scooters/overview33">Scooters edit (router)</router-link>
+        <router-link to="/">Abandoned Scooters</router-link>
       </div>
     </div>
 <!--    <a href="#mytrips">My Trips</a>-->
@@ -24,13 +27,7 @@
 export default {
   data () {
     return {
-      name: 'NavBar',
-      scooterssubjects: [
-        'Scooters overview',
-        'Scooters details',
-        'Available scooters',
-        'Abandonned scooters'
-      ]
+      name: 'NavBar'
     }
   }
 }
