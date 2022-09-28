@@ -20,7 +20,7 @@
   </table>
 <!--  <Overview32 :scooters="scooters" ></Overview32>-->
 <!--  <Overview32 v-if="visible"></Overview32>-->
-  <button id="addScootie" @click="onNewScooter">New Scooter</button>
+  <button id="addScootie" @click="onNewScooter"><b>New Scooter</b></button>
 </template>
 
 <script>
@@ -60,10 +60,11 @@ export default {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
 }
 th{
-  background-color: goldenrod;
+  background-color: #11bd11;
   text-align: center;
 }
 
@@ -73,11 +74,19 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: grey;
+}
+tr:nth-child(odd) {
+  background-color: darkgray;
 }
 #addScootie {
   display: block;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 5%;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #11bd11;
+  color: white;
+  padding: 10px;
 }
 </style>

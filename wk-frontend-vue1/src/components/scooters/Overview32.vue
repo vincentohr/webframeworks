@@ -11,7 +11,7 @@
           <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter.tag }}</td>
         </tr>
       </table>
-      <button @click="onNewScooter">New Scooter</button>
+      <button id="button" @click="onNewScooter">New Scooter</button>
     </div>
   </div>
   <div id="text">
@@ -105,7 +105,7 @@ table {
 }
 
 th {
-  background-color: goldenrod;
+  background-color: #11bd11;
   text-align: center;
 }
 
@@ -117,8 +117,20 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
-
+tr:nth-child(odd) {
+  background-color: darkgray;
+}
 .activeTag {
-  background-color: darkblue;
+  background-color: #11bd11;
+}
+
+#button{
+  display: block;
+  margin-left: auto;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #11bd11;
+  color: white;
+  padding: 10px;
 }
 </style>

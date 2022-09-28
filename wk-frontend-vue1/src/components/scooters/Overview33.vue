@@ -7,18 +7,19 @@
             Tag:
           </th>
         </tr>
-        <tr v-for="(scooter, index) in scooters" :key="index" @click="selected (scooter)">
+        <tr v-for="(scooter, index) in scooters" :key="index" @click="onSelect (scooter)">
           <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter.tag }}</td>
         </tr>
       </table>
-      <button @click="onNewScooter">New Scooter</button>
+      <button id="button" @click="onNewScooter">New Scooter</button>
     </div>
   </div>
   <div id="text">
     <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
   </div>
   <div id="detail">
-    <Detail32 @delete-scooter="remove()" :selected-scooter="selectedScooter"></Detail32>
+    <router-view> </router-view>
+    <!--    <Detail32 @delete-scooter="remove()" :selected-scooter="selectedScooter"></Detail32>-->
   </div>
 </template>
 
@@ -44,9 +45,6 @@ export default {
       isActive: false
     }
   },
-  components: {
-    Detail32
-  },
   methods: {
     onNewScooter (pId) {
       pId = this.lastId
@@ -56,13 +54,18 @@ export default {
       )
       this.selectedScooter = this.scooters.at(this.scooters.length - 1)
     },
-    selected (scooter) {
+    onSelect (scooter) {
       this.isActive = true
       if (this.selectedScooter !== scooter) {
         this.selectedScooter = scooter
       } else {
         this.selectedScooter = null
         this.isActive = false
+      }
+      if (scooter != null && scooter !== this.selectedScooter) {
+        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+      } else if (this.selectedScooter != null) {
+        // TODO
       }
     },
     remove () {
@@ -71,13 +74,6 @@ export default {
       this.selectedScooter = null
       this.isActive = false
       alert('Helaas nog niet werkend, verwijderd de verkeerde scooter.')
-    },
-    onSelect (scooter) {
-      if (scooter != null && scooter !== this.selectedScooter) {
-        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
-      } else if (this.selectedScooter != null) {
-        // TODO
-      }
     }
   },
   watch: {
@@ -117,7 +113,7 @@ table {
 }
 
 th {
-  background-color: goldenrod;
+  background-color: #11bd11;
   text-align: center;
 }
 
@@ -129,8 +125,20 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
-
+tr:nth-child(odd) {
+  background-color: darkgray;
+}
 .activeTag {
-  background-color: darkblue;
+  background-color: #11bd11;
+}
+
+#button{
+  display: block;
+  margin-left: auto;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #11bd11;
+  color: white;
+  padding: 10px;
 }
 </style>

@@ -27,7 +27,7 @@
         <td><input v-model="selectedScooter.mileage"></td>
       </tr>
     </table>
-    <button v-show="true" @click="onDelete()">Delete</button>
+    <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>
   </div>
 </template>
 
@@ -65,7 +65,7 @@ table {
 }
 
 th {
-  background-color: goldenrod;
+  background-color: #11bd11;
   text-align: center;
 }
 
@@ -77,6 +77,9 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
+tr:nth-child(odd) {
+  background-color: darkgray;
+}
 
 input {
   width: 95%;
@@ -84,7 +87,11 @@ input {
 
 #deleteScooter {
   display: block;
-  margin-left: 25%;
+  border-style: none;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  padding: 10px;
   margin-right: auto;
 }
 

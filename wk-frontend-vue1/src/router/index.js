@@ -24,7 +24,7 @@ const routes = [
     component: Overview32
   },
   {
-    path: '/scooters/overview33/',
+    path: '/scooters/overview33',
     name: 'overview33',
     component: Overview33,
     children: [
