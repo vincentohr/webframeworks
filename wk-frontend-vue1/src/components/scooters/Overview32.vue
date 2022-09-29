@@ -60,17 +60,18 @@ export default {
       this.isActive = true
       if (this.selectedScooter !== scooter) {
         this.selectedScooter = scooter
+        console.log(this.selectedScooter.id - 30000)
       } else {
         this.selectedScooter = null
         this.isActive = false
       }
     },
     remove () {
-      const index = this.scooters.indexOf(this.selectedScooter.id)
-      this.scooters.splice(index, 1)
+      console.log(this.selectedScooter.id - 30000)
+      this.scooters.splice(this.selectedScooter.id - 30000, 1)
+      this.scooters.filter(scooter => scooter.id === (this.selectedScooter.id - 30000))
       this.selectedScooter = null
       this.isActive = false
-      alert('Helaas nog niet werkend, verwijderd de verkeerde scooter.')
     }
   }
 }

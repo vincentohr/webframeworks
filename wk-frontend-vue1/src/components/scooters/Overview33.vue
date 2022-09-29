@@ -19,7 +19,7 @@
   </div>
   <div id="detail">
     <router-view> </router-view>
-    <!--    <Detail32 @delete-scooter="remove()" :selected-scooter="selectedScooter"></Detail32>-->
+<!--        <Detail32 @delete-scooter="remove()" :selected-scooter="selectedScooter"></Detail32>-->
   </div>
 </template>
 
@@ -62,11 +62,11 @@ export default {
         this.selectedScooter = null
         this.isActive = false
       }
-      if (scooter != null && scooter !== this.selectedScooter) {
-        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
-      } else if (this.selectedScooter != null) {
-        // TODO
-      }
+      // if (scooter != null && scooter !== this.selectedScooter) {
+      //   this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+      // } else if (this.selectedScooter != null) {
+      //   // TODO stay where you are
+      // }
     },
     remove () {
       const index = this.scooters.indexOf(this.selectedScooter.id)
@@ -75,12 +75,12 @@ export default {
       this.isActive = false
       alert('Helaas nog niet werkend, verwijderd de verkeerde scooter.')
     }
-  },
-  watch: {
-    '$route' () {
-      this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
-    }
   }
+  // watch: {
+  //   '$route' () {
+  //     this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
+  //   }
+  // }
 }
 </script>
 

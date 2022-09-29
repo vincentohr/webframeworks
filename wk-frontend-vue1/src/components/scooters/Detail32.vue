@@ -29,6 +29,7 @@
     </table>
     <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>
   </div>
+  <router-view></router-view>
 </template>
 
 <script>

@@ -28,7 +28,7 @@ const routes = [
     name: 'overview33',
     component: Overview33,
     children: [
-      { name: 'test', path: ':id', component: Detail32, props: true }
+      { name: 'overview33', path: ':id', component: Detail32, props: true }
     ]
   },
   { path: '/:youCanRightWhatYouWant(.*)', component: UnknownRoute }
