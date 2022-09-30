@@ -121,6 +121,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: darkgray;
 }
+h3{
+  color: black;
+}
 .activeTag {
   background-color: #11bd11;
 }

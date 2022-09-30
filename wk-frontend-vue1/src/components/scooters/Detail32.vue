@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <td>{{ statusText }}</td>
-        <td><select v-model="selectedScooter.status" @change="selectedScooter.status">
+        <td><select v-model="status">
           <option selected v-for="state in ScooterStatus" :key="state">{{ state }}</option>
         </select></td>
       </tr>
@@ -29,7 +29,6 @@
     </table>
     <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>
   </div>
-  <router-view></router-view>
 </template>
 
 <script>
@@ -37,7 +36,7 @@ import { Scooter } from '@/models/scooter'
 
 export default {
   name: 'ScootersDetail32',
-  props: ['selectedScooter'],
+  props: ['selectedScooter', 'status'],
   emits: ['delete-scooter'],
   data () {
     return {

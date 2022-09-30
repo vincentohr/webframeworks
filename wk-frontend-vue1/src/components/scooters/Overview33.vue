@@ -60,6 +60,7 @@ export default {
       this.isActive = true
       if (this.selectedScooter !== scooter) {
         this.selectedScooter = scooter
+        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
       } else {
         this.selectedScooter = null
         this.isActive = false
@@ -129,6 +130,9 @@ tr:nth-child(even) {
 }
 tr:nth-child(odd) {
   background-color: darkgray;
+}
+h3{
+  color: black;
 }
 .activeTag {
   background-color: #11bd11;
