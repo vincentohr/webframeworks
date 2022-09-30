@@ -23,15 +23,15 @@ const routes = [
     name: 'overview32',
     component: Overview32
   },
+  { path: '/:youCanRightWhatYouWant(.*)', component: UnknownRoute },
   {
     path: '/scooters/overview33',
     name: 'overview33',
     component: Overview33,
     children: [
-      { name: 'overview33', path: ':id', component: Detail32, props: true }
+      { name: 'overview33', path: '/scooters/overview33/:id', component: Detail32, props: true }
     ]
-  },
-  { path: '/:youCanRightWhatYouWant(.*)', component: UnknownRoute }
+  }
 
 ]
 
