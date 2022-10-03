@@ -43,6 +43,15 @@ export default {
       isActive: false
     }
   },
+  // watch: {
+  //   selectedScooter (newValue, oldValue) {
+  //     if (newValue !== oldValue) {
+  //       oldValue = newValue
+  //       newValue = null
+  //     }
+  //   }
+  // },
+  // Geen idee of dit werkt, niet zo lang aan gezeten.
   methods: {
     onNewScooter (pId) {
       pId = this.lastId

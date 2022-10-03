@@ -1,5 +1,5 @@
 <template>
-    <div v-if="selectedScooter !== null">
+  <div v-if="selectedScooter !== null">
     <table>
       <tr>
         <th>Scooter id = {{ selectedScooter.id }}</th>
@@ -27,7 +27,11 @@
         <td><input v-model="selectedScooter.mileage"></td>
       </tr>
     </table>
-    <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>
+    <button class="button" disabled v-show="true" @click="onDelete()">Delete</button>
+    <button class="button" v-show="true">Clear</button>
+    <button class="button" disabled>Reset</button>
+    <button class="button" v-show="true">Cancel</button>
+    <button class="button" disabled v-show="true">Save</button>
   </div>
 </template>
 
@@ -38,6 +42,9 @@ export default {
   name: 'ScootersDetail32',
   props: ['selectedScooter', 'status'],
   emits: ['delete-scooter'],
+  created () {
+    Scooter.copyConstructor(this.selectedScooter)
+  },
   data () {
     return {
       tagText: 'Tag',
@@ -85,14 +92,14 @@ input {
   width: 95%;
 }
 
-#deleteScooter {
-  display: block;
+.button {
+  display: inline;
   border-style: none;
   border-radius: 5px;
-  background-color: red;
-  color: white;
+  /*background-color: red;*/
+  /*color: white;*/
   padding: 10px;
-  margin-right: auto;
+  margin-right: 5%;
 }
 
 </style>
