@@ -2,11 +2,11 @@
   <div v-if="selectedScooter !== null">
     <table>
       <tr>
-        <th>Scooter id = {{ selectedScooter.id }}</th>
+        <th>Scooter id = {{ selectedScooter._id }}</th>
       </tr>
       <tr>
         <td>{{ tagText }}</td>
-        <td><input v-model="selectedScooter.tag"></td>
+        <td><input v-model="selectedScooter._tag"></td>
       </tr>
       <tr>
         <td>{{ statusText }}</td>
@@ -16,22 +16,22 @@
       </tr>
       <tr>
         <td>{{ batteryChargeText }}</td>
-        <td><input v-model="selectedScooter.batteryCharge"></td>
+        <td><input v-model="selectedScooter._batteryCharge" @change="enabled(selectedScooter._batteryCharge)"></td>
       </tr>
       <tr>
         <td>{{ gpsLocationText }}</td>
-        <td><input v-model="selectedScooter.gpsLocation"></td>
+        <td><input v-model="selectedScooter._gpsLocation"></td>
       </tr>
       <tr>
         <td>{{ mileageText }}</td>
-        <td><input v-model="selectedScooter.mileage"></td>
+        <td><input v-model="selectedScooter._mileage"></td>
       </tr>
     </table>
-    <button class="button" disabled v-show="true" @click="onDelete()">Delete</button>
-    <button class="button" v-show="true">Clear</button>
-    <button class="button" disabled>Reset</button>
+    <button class="button" :disabled="enabledValue === false" v-show="true" @click="onDelete()">Delete</button>
+    <button class="button" v-show="true" @click="onClear()">Clear</button>
+    <button class="button" v-show="true" @click="onReset()">Reset</button>
     <button class="button" v-show="true">Cancel</button>
-    <button class="button" disabled v-show="true">Save</button>
+    <button class="button" :disabled="enabledValue === false" v-show="true">Save</button>
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
   emits: ['delete-scooter'],
   created () {
     Scooter.copyConstructor(this.selectedScooter)
+    console.log(Scooter.copyConstructor(this.selectedScooter))
   },
   data () {
     return {
@@ -52,12 +53,37 @@ export default {
       batteryChargeText: 'Battery Charge (%):',
       gpsLocationText: 'GPS Location:',
       mileageText: 'Total Mileage (km):',
-      ScooterStatus: Scooter.Status
+      ScooterStatus: Scooter.Status,
+      enabledValue: false
+    }
+  },
+  watch: {
+    selectedScooter (newValue, oldValue) {
+      console.log(newValue)
+      console.log(oldValue)
     }
   },
   methods: {
     onDelete () {
       this.$emit('delete-scooter')
+    },
+    onClear () {
+      this.selectedScooter._id = ''
+      this.selectedScooter._tag = ''
+      this.selectedScooter._batteryCharge = ''
+      this.selectedScooter._gpsLocation = ''
+      this.selectedScooter._mileage = ''
+    },
+    onReset () {
+      this.selectedScooter = this.copy
+    },
+    enabled (change) {
+      if (this.test !== change) {
+        console.log(change)
+        console.log(this.test)
+        this.enabledValue = true
+        console.log(this.enabledValue)
+      }
     }
   }
 }

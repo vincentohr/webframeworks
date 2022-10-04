@@ -8,7 +8,7 @@
           </th>
         </tr>
         <tr v-for="(scooter, index) in scooters" :key="index" @click="selected (scooter)">
-          <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter.tag }}</td>
+          <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter._tag }}</td>
         </tr>
       </table>
       <button id="button" @click="onNewScooter">New Scooter</button>

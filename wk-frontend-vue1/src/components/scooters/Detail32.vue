@@ -2,11 +2,11 @@
     <div v-if="selectedScooter !== null">
     <table>
       <tr>
-        <th>Scooter id = {{ selectedScooter.id }}</th>
+        <th>Scooter id = {{ selectedScooter._id }}</th>
       </tr>
       <tr>
         <td>{{ tagText }}</td>
-        <td><input v-model="selectedScooter.tag"></td>
+        <td><input v-model="selectedScooter._tag"></td>
       </tr>
       <tr>
         <td>{{ statusText }}</td>
@@ -16,15 +16,15 @@
       </tr>
       <tr>
         <td>{{ batteryChargeText }}</td>
-        <td><input v-model="selectedScooter.batteryCharge"></td>
+        <td><input v-model="selectedScooter._batteryCharge"></td>
       </tr>
       <tr>
         <td>{{ gpsLocationText }}</td>
-        <td><input v-model="selectedScooter.gpsLocation"></td>
+        <td><input v-model="selectedScooter._gpsLocation"></td>
       </tr>
       <tr>
         <td>{{ mileageText }}</td>
-        <td><input v-model="selectedScooter.mileage"></td>
+        <td><input v-model="selectedScooter._mileage"></td>
       </tr>
     </table>
     <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>

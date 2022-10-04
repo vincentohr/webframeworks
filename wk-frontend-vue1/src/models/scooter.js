@@ -23,34 +23,7 @@ export class Scooter {
   }
 
   static copyConstructor (scooter) {
-    if (scooter === null || scooter === undefined) {
-      return null
-    } else {
-      return Object.assign(new Scooter(0), scooter)
-    }
-  }
-
-  get id () {
-    return this._id
-  }
-
-  get tag () {
-    return this._tag
-  }
-
-  get status () {
-    return this._status
-  }
-
-  get gpsLocation () {
-    return this._gpsLocation
-  }
-
-  get mileage () {
-    return this._mileage
-  }
-
-  get batteryCharge () {
-    return this._batteryCharge
+    if (scooter === null || scooter === undefined) return null
+    return Object.assign(new Scooter(0), scooter)
   }
 }

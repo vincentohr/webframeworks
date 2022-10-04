@@ -9,13 +9,13 @@
       <th>GPSLocation:</th>
       <th>Mileage:</th>
     </tr>
-    <tr v-for="scooter in scooters" :key="scooter.id">
-      <td>{{scooter.id}}</td>
-      <td>{{scooter.tag}}</td>
-      <td>{{scooter.status}}</td>
-      <td>{{scooter.batteryCharge}}</td>
-      <td>{{scooter.gpsLocation}}</td>
-      <td>{{scooter.mileage}}</td>
+    <tr v-for="scooter in scooters" :key="scooter._id">
+      <td>{{scooter._id}}</td>
+      <td>{{scooter._tag}}</td>
+      <td>{{scooter._status}}</td>
+      <td>{{scooter._batteryCharge}}</td>
+      <td>{{scooter._gpsLocation}}</td>
+      <td>{{scooter._mileage}}</td>
     </tr>
   </table>
 <!--  <Overview32 :scooters="scooters" ></Overview32>-->
