@@ -44,7 +44,7 @@ export default {
   emits: ['delete-scooter', 'deselect-scooter'],
   created () {
     this.copy = Scooter.copyConstructor(this.selectedScooter)
-    console.log(this.copy)
+    // console.log(this.copy)
   },
   data () {
     return {
@@ -60,8 +60,12 @@ export default {
   },
   watch: {
     selectedScooter (newValue, oldValue) {
-      console.log(newValue)
-      console.log(oldValue)
+      // console.log(this.copy)
+      this.copy = Scooter.copyConstructor(this.selectedScooter)
+      console.log(this.copy)
+      this.temp = this.copy
+      // console.log(newValue)
+      // console.log(oldValue)
     }
   },
   methods: {
@@ -77,7 +81,15 @@ export default {
     },
     onReset () {
       console.log(this.copy)
-      this.selectedScooter = this.copy
+      // const test = this.copy
+      console.log(this.selectedScooter)
+      // // this.selectedScooter = ''
+      // // this.selectedScooter = this.copy
+      // this.selectedScooter._id = ''
+      this.selectedScooter._tag = this.copy._tag
+      this.selectedScooter._batteryCharge = this.copy._batteryCharge
+      this.selectedScooter._gpsLocation = this.copy._gpsLocation
+      this.selectedScooter._mileage = this.copy._mileage
     },
     onCancel () {
       this.$router.push(this.$route.matched[0].path)

@@ -41,7 +41,7 @@ const routes = [
       { name: 'overview34', path: '/scooters/overview34/:id', component: Detail34, props: true }
     ]
   },
-  { path: '/:youCanRightWhatYouWant(.*)', component: UnknownRoute }
+  { path: '/:notFound(.*)', component: UnknownRoute }
 ]
 
 export const router = createRouter({
