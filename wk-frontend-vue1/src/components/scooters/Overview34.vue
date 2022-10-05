@@ -56,8 +56,8 @@ export default {
     onSelect (scooter) {
       this.isActive = true
       if (this.selectedScooter !== scooter) {
-        this.selectedScooter = scooter
         this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+        this.selectedScooter = scooter
       } else {
         this.selectedScooter = null
         this.isActive = false
@@ -72,6 +72,7 @@ export default {
     },
     deselect () {
       this.selectedScooter = null
+      this.isActive = false
     },
     findSelectedFromRouteParam (route) {
       const scooterId = route.params.id
