@@ -1,5 +1,6 @@
 export class Scooter {
   static Status = ['IDLE', 'INUSE', 'MAINTENANCE']
+
   constructor (id, tag, status, gpsLocation, mileage, batteryCharge) {
     this._id = id
     this._tag = tag
@@ -23,7 +24,10 @@ export class Scooter {
   }
 
   static copyConstructor (scooter) {
-    if (scooter === null || scooter === undefined) return null
-    return Object.assign(new Scooter(0), scooter)
+    if (scooter === null || scooter === undefined) {
+      return null
+    } else {
+      return Object.assign(new Scooter(0), scooter)
+    }
   }
 }

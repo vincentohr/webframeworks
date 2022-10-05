@@ -18,7 +18,7 @@
     <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
   </div>
   <div id="detail">
-    <router-view @delete-scooter="remove()" :selected-scooter="selectedScooter"></router-view>
+    <router-view @delete-scooter="remove()" @deselect-scooter="deselect()" :selected-scooter="selectedScooter"></router-view>
   </div>
 </template>
 
@@ -62,12 +62,6 @@ export default {
         this.selectedScooter = null
         this.isActive = false
       }
-      // if (scooter != null && scooter !== this.selectedScooter) {
-      //   console.log(this.$route.path)
-      //   this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
-      // } else if (this.selectedScooter != null) {
-      //   this.$router.push(this.$route.matched[0].path + '/')
-      // }
     },
     remove () {
       console.log(this.selectedScooter.id - 30000)
@@ -75,13 +69,26 @@ export default {
       this.scooters.filter(scooter => scooter.id === (this.selectedScooter.id - 30000))
       this.selectedScooter = null
       this.isActive = false
+    },
+    deselect () {
+      this.selectedScooter = null
+    },
+    findSelectedFromRouteParam (route) {
+      const scooterId = route.params.id
+      const foundScooter = this.scooters.find(scooter => scooter.id === scooterId)
+      if (foundScooter !== undefined) {
+        return foundScooter
+      } else {
+        return null
+      }
+    }
+  },
+  watch: {
+    // Updates the selected scooter for every change in the path
+    '$route' () {
+      this.selectedScooter = this.findSelectedFromRouteParam(this.$route)
     }
   }
-  // watch: {
-  //   '$route' () {
-  //     this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
-  //   }
-  // }
 }
 </script>
 

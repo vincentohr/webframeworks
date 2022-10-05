@@ -6,7 +6,7 @@
       </tr>
       <tr>
         <td>{{ tagText }}</td>
-        <td><input v-model="selectedScooter._tag"></td>
+        <td><input type="text" v-model="selectedScooter._tag"></td>
       </tr>
       <tr>
         <td>{{ statusText }}</td>
@@ -16,7 +16,7 @@
       </tr>
       <tr>
         <td>{{ batteryChargeText }}</td>
-        <td><input v-model="selectedScooter._batteryCharge" @change="enabled(selectedScooter._batteryCharge)"></td>
+        <td><input type="number" v-model="selectedScooter._batteryCharge" @change="enabled(selectedScooter._batteryCharge)"></td>
       </tr>
       <tr>
         <td>{{ gpsLocationText }}</td>
@@ -30,7 +30,7 @@
     <button class="button" :disabled="enabledValue === false" v-show="true" @click="onDelete()">Delete</button>
     <button class="button" v-show="true" @click="onClear()">Clear</button>
     <button class="button" v-show="true" @click="onReset()">Reset</button>
-    <button class="button" v-show="true">Cancel</button>
+    <button class="button" v-show="true" @click="onCancel()">Cancel</button>
     <button class="button" :disabled="enabledValue === false" v-show="true">Save</button>
   </div>
 </template>
@@ -41,10 +41,10 @@ import { Scooter } from '@/models/scooter'
 export default {
   name: 'ScootersDetail32',
   props: ['selectedScooter', 'status'],
-  emits: ['delete-scooter'],
+  emits: ['delete-scooter', 'deselect-scooter'],
   created () {
-    Scooter.copyConstructor(this.selectedScooter)
-    console.log(Scooter.copyConstructor(this.selectedScooter))
+    this.copy = Scooter.copyConstructor(this.selectedScooter)
+    console.log(this.copy)
   },
   data () {
     return {
@@ -54,7 +54,8 @@ export default {
       gpsLocationText: 'GPS Location:',
       mileageText: 'Total Mileage (km):',
       ScooterStatus: Scooter.Status,
-      enabledValue: false
+      enabledValue: false,
+      copy: ''
     }
   },
   watch: {
@@ -75,7 +76,12 @@ export default {
       this.selectedScooter._mileage = ''
     },
     onReset () {
+      console.log(this.copy)
       this.selectedScooter = this.copy
+    },
+    onCancel () {
+      this.$router.push(this.$route.matched[0].path)
+      this.$emit('deselect-scooter')
     },
     enabled (change) {
       if (this.test !== change) {

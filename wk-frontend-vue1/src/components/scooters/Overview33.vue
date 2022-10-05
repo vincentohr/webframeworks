@@ -56,7 +56,7 @@ export default {
       this.isActive = true
       if (this.selectedScooter !== scooter) {
         this.selectedScooter = scooter
-        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+        this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
       } else {
         this.selectedScooter = null
         this.isActive = false
