@@ -54,12 +54,11 @@ export default {
     },
     onSelect (scooter) {
       this.isActive = true
-      if (this.selectedScooter !== scooter) {
-        this.selectedScooter = scooter
+      if (scooter !== null && scooter !== this.selectedScooter) {
         this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
-      } else {
-        this.selectedScooter = null
-        this.isActive = false
+        this.selectedScooter = scooter
+      } else if (this.selectedScooter != null) {
+        this.$router.push(this.$route.matched[0].path + '/')
       }
       // if (scooter != null && scooter !== this.selectedScooter) {
       //   console.log(this.$route.path)
@@ -74,13 +73,22 @@ export default {
       this.scooters.filter(scooter => scooter.id === (this.selectedScooter.id - 30000))
       this.selectedScooter = null
       this.isActive = false
+    },
+    findSelectedFromRouteParams (route) {
+      const id = route.params.id
+      const scooter = this.scooters.find(scooter => scooter._id === id)
+      if (scooter !== undefined) {
+        return scooter
+      } else {
+        return null
+      }
+    }
+  },
+  watch: {
+    '$route' () {
+      this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
     }
   }
-  // watch: {
-  //   '$route' () {
-  //     this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
-  //   }
-  // }
 }
 </script>
 

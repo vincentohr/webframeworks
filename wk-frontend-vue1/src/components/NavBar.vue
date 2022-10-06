@@ -20,6 +20,7 @@
 <!--    <a href="#myaccount">My account</a>-->
 <!--    <a href="#login" class="right">Log in</a>-->
 <!--    <a href="#signup" class="right">Sign up</a>-->
+    <router-link class="right" to="/log-in">Log in</router-link>
     <router-link class="right" to="/sign-up">Sign up</router-link>
   </div>
 </template>

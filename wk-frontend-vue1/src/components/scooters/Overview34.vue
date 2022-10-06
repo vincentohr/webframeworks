@@ -55,13 +55,19 @@ export default {
     },
     onSelect (scooter) {
       this.isActive = true
-      if (this.selectedScooter !== scooter) {
-        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
+      if (scooter !== null && scooter !== this.selectedScooter) {
+        this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
         this.selectedScooter = scooter
-      } else {
-        this.selectedScooter = null
-        this.isActive = false
+      } else if (this.selectedScooter != null) {
+        this.$router.push(this.$route.matched[0].path + '/')
       }
+      // if (this.selectedScooter !== scooter) {
+      //   // this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
+      //   this.selectedScooter = scooter
+      // } else {
+      //   this.selectedScooter = null
+      //   this.isActive = false
+      // }
     },
     remove () {
       console.log(this.selectedScooter.id - 30000)
@@ -74,11 +80,11 @@ export default {
       this.selectedScooter = null
       this.isActive = false
     },
-    findSelectedFromRouteParam (route) {
-      const scooterId = route.params.id
-      const foundScooter = this.scooters.find(scooter => scooter.id === scooterId)
-      if (foundScooter !== undefined) {
-        return foundScooter
+    findSelectedFromRouteParams (route) {
+      const id = route.params.id
+      const scooter = this.scooters.find(scooter => scooter._id === id)
+      if (scooter !== undefined) {
+        return scooter
       } else {
         return null
       }
@@ -87,7 +93,7 @@ export default {
   watch: {
     // Updates the selected scooter for every change in the path
     '$route' () {
-      this.selectedScooter = this.findSelectedFromRouteParam(this.$route)
+      this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
     }
   }
 }

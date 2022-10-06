@@ -65,8 +65,6 @@ export default {
       this.copy = Scooter.copyConstructor(this.selectedScooter)
       this.enabledValue = false
       this.enabledValuedelete = true
-      console.log(this.copy)
-      this.temp = this.copy
     }
   },
   methods: {
