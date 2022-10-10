@@ -3,10 +3,10 @@
     <h1 id="title">{{ title }}</h1>
     <h3 id="subtitle">{{ subtitle }}</h3>
     <p> today is {{ datenow() }}</p>
-    <div class="logo" id="logo">
+    <div id="logo" class="logo">
       <img v-bind:src="logo">
     </div>
-    <div class="logo" id="logo2">
+    <div id="logo2" class="logo">
       <img v-bind:src="logo2">
     </div>
   </div>
@@ -103,11 +103,12 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
   position: absolute;
   top: 13%;
   margin-left: 20%;
 }
+
 #content {
   height: 125pt;
   background-image: url("../assets/images/night-sky.jpg");

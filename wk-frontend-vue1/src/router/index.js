@@ -9,7 +9,10 @@ import Detail32 from '@/components/scooters/Detail32'
 import Detail34 from '@/components/scooters/Detail34'
 
 const routes = [
-  { path: '/', redirect: '/home' },
+  {
+    path: '/',
+    redirect: '/home'
+  },
   {
     name: 'home',
     path: '/home',
@@ -30,7 +33,12 @@ const routes = [
     name: 'overview33',
     component: Overview33,
     children: [
-      { name: 'overview33', path: '/scooters/overview33/:id', component: Detail32, props: true }
+      {
+        name: 'overview33',
+        path: '/scooters/overview33/:id',
+        component: Detail32,
+        props: true
+      }
     ]
   },
   {
@@ -38,10 +46,18 @@ const routes = [
     name: 'overview34',
     component: Overview34,
     children: [
-      { name: 'overview34', path: '/scooters/overview34/:id', component: Detail34, props: true }
+      {
+        name: 'overview34',
+        path: '/scooters/overview34/:id',
+        component: Detail34,
+        props: true
+      }
     ]
   },
-  { path: '/:notFound(.*)', component: UnknownRoute }
+  {
+    path: '/:notFound(.*)',
+    component: UnknownRoute
+  }
 ]
 
 export const router = createRouter({

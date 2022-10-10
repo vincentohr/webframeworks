@@ -2,7 +2,8 @@
   <h2>
     Not found go back to
     <router-link :to="goToHomePage">Welcome Page</router-link>
-  </h2></template>
+  </h2>
+</template>
 
 <script>
 export default {
@@ -17,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
-h2{
+h2 {
   color: orangered;
 }
 </style>

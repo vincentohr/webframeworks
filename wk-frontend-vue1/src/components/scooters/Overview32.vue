@@ -18,7 +18,7 @@
     <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
   </div>
   <div id="detail">
-    <app-scooter-detail @delete-scooter="remove()" :selected-scooter="selectedScooter"></app-scooter-detail>
+    <app-scooter-detail :selected-scooter="selectedScooter" @delete-scooter="remove()"></app-scooter-detail>
   </div>
 </template>
 
@@ -118,17 +118,20 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
+
 tr:nth-child(odd) {
   background-color: darkgray;
 }
-h3{
+
+h3 {
   color: black;
 }
+
 .activeTag {
   background-color: #11bd11;
 }
 
-#button{
+#button {
   display: block;
   margin-left: auto;
   border-style: none;

@@ -1,22 +1,22 @@
 <template>
   <div class="columns">
-    <div class="content" id="content-1">
+    <div id="content-1" class="content">
       <h1>{{ pickabrand }}</h1>
       <select name="brand">
         <option value="Lime-S">Lime-S</option>
       </select>
       <h1>{{ availability }}</h1>
       <ul id="list">
-        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}: {{placeholdNumbers()}}</li>
+        <li v-for="(place, index) in places" v-bind:key="index">{{ place }}: {{ placeholdNumbers() }}</li>
       </ul>
     </div>
-    <div class="content" id="content-2">
+    <div id="content-2" class="content">
       <h1>{{ photo_galery }}</h1>
       <div>
-        <img v-for="(image, index) in images" v-bind:src="image" v-bind:key="index">
+        <img v-for="(image, index) in images" v-bind:key="index" v-bind:src="image">
       </div>
     </div>
-    <div class="content" id="content-3">
+    <div id="content-3" class="content">
       <h1>{{ tours }}</h1>
       <p>{{ tour_info }}</p>
     </div>

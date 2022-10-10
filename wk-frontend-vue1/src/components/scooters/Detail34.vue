@@ -6,17 +6,18 @@
       </tr>
       <tr>
         <td>{{ tagText }}</td>
-        <td><input type="text" v-model="selectedScooter._tag" @change="enabled(selectedScooter._tag)"></td>
+        <td><input v-model="selectedScooter._tag" type="text" @change="enabled(selectedScooter._tag)"></td>
       </tr>
       <tr>
         <td>{{ statusText }}</td>
         <td><select v-model="status">
-          <option selected v-for="state in ScooterStatus " :key="state">{{ state }}</option>
+          <option v-for="state in ScooterStatus " :key="state" selected>{{ state }}</option>
         </select></td>
       </tr>
       <tr>
         <td>{{ batteryChargeText }}</td>
-        <td><input type="number" v-model="selectedScooter._batteryCharge" @change="enabled(selectedScooter._batteryCharge)"></td>
+        <td><input v-model="selectedScooter._batteryCharge" type="number"
+                   @change="enabled(selectedScooter._batteryCharge)"></td>
       </tr>
       <tr>
         <td>{{ gpsLocationText }}</td>
@@ -24,14 +25,14 @@
       </tr>
       <tr>
         <td>{{ mileageText }}</td>
-        <td><input type="number" v-model="selectedScooter._mileage" @change="enabled(selectedScooter._mileage)"></td>
+        <td><input v-model="selectedScooter._mileage" type="number" @change="enabled(selectedScooter._mileage)"></td>
       </tr>
     </table>
-    <button class="button" :disabled="enabledValuedelete === false" v-show="true" @click="onDelete()">Delete</button>
-    <button class="button" v-show="true" @click="onClear()">Clear</button>
-    <button class="button" :disabled="enabledValue === false" v-show="true" @click="onReset()">Reset</button>
-    <button class="button" v-show="true" @click="onCancel()">Cancel</button>
-    <button class="button" :disabled="enabledValue === false" v-show="true" @click="onSave()">Save</button>
+    <button v-show="true" :disabled="enabledValuedelete === false" class="button" @click="onDelete()">Delete</button>
+    <button v-show="true" class="button" @click="onClear()">Clear</button>
+    <button v-show="true" :disabled="enabledValue === false" class="button" @click="onReset()">Reset</button>
+    <button v-show="true" class="button" @click="onCancel()">Cancel</button>
+    <button v-show="true" :disabled="enabledValue === false" class="button" @click="onSave()">Save</button>
   </div>
 </template>
 
@@ -138,6 +139,7 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
+
 tr:nth-child(odd) {
   background-color: darkgray;
 }

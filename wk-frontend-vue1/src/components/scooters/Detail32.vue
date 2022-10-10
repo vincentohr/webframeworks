@@ -1,5 +1,5 @@
 <template>
-    <div v-if="selectedScooter !== null">
+  <div v-if="selectedScooter !== null">
     <table>
       <tr>
         <th>Scooter id = {{ selectedScooter._id }}</th>
@@ -11,7 +11,7 @@
       <tr>
         <td>{{ statusText }}</td>
         <td><select v-model="status">
-          <option selected v-for="state in ScooterStatus" :key="state">{{ state }}</option>
+          <option v-for="state in ScooterStatus" :key="state" selected>{{ state }}</option>
         </select></td>
       </tr>
       <tr>
@@ -27,7 +27,7 @@
         <td><input v-model="selectedScooter._mileage"></td>
       </tr>
     </table>
-    <button id="deleteScooter" v-show="true" @click="onDelete()">Delete</button>
+    <button v-show="true" id="deleteScooter" @click="onDelete()">Delete</button>
   </div>
 </template>
 
@@ -77,6 +77,7 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
+
 tr:nth-child(odd) {
   background-color: darkgray;
 }

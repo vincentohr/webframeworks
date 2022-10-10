@@ -1,6 +1,6 @@
 <template>
-<app-header></app-header>
-<app-nav-bar></app-nav-bar>
+  <app-header></app-header>
+  <app-nav-bar></app-nav-bar>
   <router-view></router-view>
 </template>
 

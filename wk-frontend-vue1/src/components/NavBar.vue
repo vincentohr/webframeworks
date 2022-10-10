@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-<!--    <a href="#">Home</a>-->
+    <!--    <a href="#">Home</a>-->
     <router-link to="/home">Home</router-link>
     <router-link to="/overview31">Scooter Overview</router-link>
     <router-link to="/overview32">Scooter Details</router-link>
@@ -16,10 +16,10 @@
         <router-link to="/">Abandoned Scooters</router-link>
       </div>
     </div>
-<!--    <a href="#mytrips">My Trips</a>-->
-<!--    <a href="#myaccount">My account</a>-->
-<!--    <a href="#login" class="right">Log in</a>-->
-<!--    <a href="#signup" class="right">Sign up</a>-->
+    <!--    <a href="#mytrips">My Trips</a>-->
+    <!--    <a href="#myaccount">My account</a>-->
+    <!--    <a href="#login" class="right">Log in</a>-->
+    <!--    <a href="#signup" class="right">Sign up</a>-->
     <router-link class="right" to="/log-in">Log in</router-link>
     <router-link class="right" to="/sign-up">Sign up</router-link>
   </div>
@@ -40,9 +40,11 @@ export default {
   overflow: hidden;
   background-color: gray;
 }
-.navbar .right{
+
+.navbar .right {
   float: right;
 }
+
 .navbar a {
   float: left;
   color: white;

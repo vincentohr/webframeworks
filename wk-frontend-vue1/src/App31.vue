@@ -1,10 +1,10 @@
 <template>
   <App33></App33>
-<!--  <Header></Header>-->
-<!--  <NavBar></Navbar>-->
-<!--&lt;!&ndash;  <Welcome msg=""/>&ndash;&gt;-->
-<!--&lt;!&ndash;  <ScootersOverview31></ScootersOverview31>&ndash;&gt;-->
-<!--  <Overview32></Overview32>-->
+  <!--  <Header></Header>-->
+  <!--  <NavBar></Navbar>-->
+  <!--&lt;!&ndash;  <Welcome msg=""/>&ndash;&gt;-->
+  <!--&lt;!&ndash;  <ScootersOverview31></ScootersOverview31>&ndash;&gt;-->
+  <!--  <Overview32></Overview32>-->
 </template>
 
 <script>
@@ -20,10 +20,10 @@ export default {
   name: 'App31',
   components: {
     App33
-  //   ScootersOverview31,
-  //   NavBar,
-  //   Overview32,
-  //   Header
+    //   ScootersOverview31,
+    //   NavBar,
+    //   Overview32,
+    //   Header
     // eslint-disable-next-line vue/no-unused-components
     // Welcome
   }

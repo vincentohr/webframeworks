@@ -10,16 +10,16 @@
       <th>Mileage:</th>
     </tr>
     <tr v-for="scooter in scooters" :key="scooter._id">
-      <td>{{scooter._id}}</td>
-      <td>{{scooter._tag}}</td>
-      <td>{{scooter._status}}</td>
-      <td>{{scooter._batteryCharge}}</td>
-      <td>{{scooter._gpsLocation}}</td>
-      <td>{{scooter._mileage}}</td>
+      <td>{{ scooter._id }}</td>
+      <td>{{ scooter._tag }}</td>
+      <td>{{ scooter._status }}</td>
+      <td>{{ scooter._batteryCharge }}</td>
+      <td>{{ scooter._gpsLocation }}</td>
+      <td>{{ scooter._mileage }}</td>
     </tr>
   </table>
-<!--  <Overview32 :scooters="scooters" ></Overview32>-->
-<!--  <Overview32 v-if="visible"></Overview32>-->
+  <!--  <Overview32 :scooters="scooters" ></Overview32>-->
+  <!--  <Overview32 v-if="visible"></Overview32>-->
   <button id="addScootie" @click="onNewScooter"><b>New Scooter</b></button>
 </template>
 
@@ -63,7 +63,8 @@ table {
   width: 90%;
   margin-left: 5%;
 }
-th{
+
+th {
   background-color: #11bd11;
   text-align: center;
 }
@@ -76,9 +77,11 @@ td, th {
 tr:nth-child(even) {
   background-color: grey;
 }
+
 tr:nth-child(odd) {
   background-color: darkgray;
 }
+
 #addScootie {
   display: block;
   margin-left: auto;
