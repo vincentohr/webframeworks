@@ -1,14 +1,27 @@
 package app.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.web.servlet.View;
+
 import java.util.Random;
 
 public class Scooter {
-    public long id;
-    public String tag;
-    public String status;
-    public String gpsLocation;
-    public double mileage;
-    public int batteryCharge;
+    @JsonView(View.class)
+    private long id;
+
+    @JsonView(View.class)
+    private String tag;
+
+    @JsonView(View.class)
+    private String status;
+
+    private String gpsLocation;
+    private double mileage;
+
+    @JsonView(View.class)
+    private int batteryCharge;
 
     public Scooter(String tag) {
         id = 0;
@@ -18,9 +31,12 @@ public class Scooter {
         batteryCharge = 0;
         mileage = 0.0;
     }
-    public Scooter(long id){
+
+    @JsonCreator
+    public Scooter(@JsonProperty long id){
         this.id = id;
     }
+
     public static Scooter createSampleScooter(long id){
         String[] statusArray = {"IDLE", "INUSE", "MAINENANCE"};
         Scooter scooter = new Scooter(id);
@@ -48,6 +64,55 @@ public class Scooter {
         }
         return builder.toString();
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setGpsLocation(String gpsLocation) {
+        this.gpsLocation = gpsLocation;
+    }
+
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
+    }
+
+    public void setBatteryCharge(int batteryCharge) {
+        this.batteryCharge = batteryCharge;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getGpsLocation() {
+        return gpsLocation;
+    }
+
+    public double getMileage() {
+        return mileage;
+    }
+
+    public int getBatteryCharge() {
+        return batteryCharge;
+    }
+
     @Override
     public String toString() {
         return "Scooter{" +
