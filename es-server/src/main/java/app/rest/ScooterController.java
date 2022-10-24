@@ -4,6 +4,7 @@ import app.models.Scooter;
 import app.repositories.ScooterRepository;
 import app.repositories.ScootersRepositoryMock;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("/scooters")
 public class ScooterController {
 
+    @Autowired
     ScooterRepository scooterRepository = new ScootersRepositoryMock();
 
     @GetMapping("/test")
