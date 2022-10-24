@@ -3,34 +3,30 @@ package app.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.View;
 
 import java.util.Random;
 
 public class Scooter {
     @JsonView(View.class)
-    @Autowired
     private long id;
-
     @JsonView(View.class)
-    @Autowired
     private String tag;
-
     @JsonView(View.class)
-    @Autowired
     private String status;
-
-    @Autowired
     private String gpsLocation;
-    @Autowired
     private double mileage;
-
     @JsonView(View.class)
-    @Autowired
     private int batteryCharge;
 
-
+    public Scooter(String tag) {
+        id = 0;
+        this.tag = tag;
+        status = null;
+        gpsLocation = null ;
+        batteryCharge = 0;
+        mileage = 0.0;
+    }
     @JsonCreator
     public Scooter(@JsonProperty long id){
         this.id = id;
