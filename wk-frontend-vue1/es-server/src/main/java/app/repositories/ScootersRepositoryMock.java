@@ -10,13 +10,12 @@ import java.util.List;
 
 @Component
 public class ScootersRepositoryMock implements ScooterRepository {
-    private Scooter[] scooters;
     private List<Scooter> scootersList;
     private int count = 0;
 
     public ScootersRepositoryMock() {
-        scooters = new Scooter[7];
         scootersList = new ArrayList<>();
+//        scootersList.addAll(getRandomScooters());
     }
 
     @Bean
@@ -26,19 +25,23 @@ public class ScootersRepositoryMock implements ScooterRepository {
 
     public List<Scooter> getRandomScooters() {
         long id = 30000;
-        for (int i = 0; i < scooters.length; i++) {
-            scooters[i] = Scooter.createSampleScooter(id);
+        for (int i = 0; i < 7; i++) {
+            Scooter scooter;
+            scooter = Scooter.createSampleScooter(id);
+            scootersList.add(scooter);
             id++;
         }
-
-        return Arrays.asList(scooters);
+        return scootersList;
     }
 
     @Override
     public List<Scooter> findAll() {
-        if (count == 0)
-            scootersList.addAll(getRandomScooters());
+        if(count == 0)
+            scootersList = getRandomScooters();
         count++;
+//        if(count == 0)
+//            scootersList.addAll(getRandomScooters());
+//        count++;
         return scootersList;
     }
 
@@ -54,8 +57,8 @@ public class ScootersRepositoryMock implements ScooterRepository {
 
     @Override
     public Scooter save(Scooter scooter) {
-        if(scooter.getId() == 0){
-            scooter.setId((int)(Math.random() * 1000) + 30000);
+        if (scooter.getId() == 0) {
+            scooter.setId((int) (Math.random() * 1000) + 30000);
         }
         scootersList.add(scooter);
         return scooter;
@@ -63,10 +66,9 @@ public class ScootersRepositoryMock implements ScooterRepository {
 
     @Override
     public Scooter deleteById(Long id) {
-        for (int i = 0; i < scooters.length; i++) {
-            if(scooters[i].getId() == id){
-                scootersList.remove(scooters[i]);
-                scooters[i] = null;
+        for (int i = 0; i < scootersList.size(); i++) {
+            if (scootersList.get(i).getId() == id) {
+                scootersList.remove(scootersList.get(i));
             }
         }
         return null;
