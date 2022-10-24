@@ -1,6 +1,7 @@
 package app.repositories;
 
 import app.models.Scooter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -9,14 +10,10 @@ import java.util.List;
 
 @Component
 public class ScootersRepositoryMock implements ScooterRepository {
-    private Scooter[] scooters;
-    private List<Scooter> scootersList;
+    @Autowired
+    private List<Scooter>  scootersList = new ArrayList<>();;
     private int count = 0;
 
-    public ScootersRepositoryMock() {
-        scooters = new Scooter[7];
-        scootersList = new ArrayList<>();
-    }
     @Bean
     public List<Scooter> getTestScooters() {
         return null;
@@ -35,9 +32,10 @@ public class ScootersRepositoryMock implements ScooterRepository {
 
     @Override
     public List<Scooter> findAll() {
-//        if (count == 0)
-//            scootersList.addAll(getRandomScooters());
-//        count++;
+        if(count == 0){
+            scootersList = getRandomScooters();
+        }
+        count++;
         return scootersList;
     }
 

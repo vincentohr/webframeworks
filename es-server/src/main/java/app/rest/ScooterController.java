@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/scooters")
 public class ScooterController {
 
-    @Autowired
     ScooterRepository scooterRepository = new ScootersRepositoryMock();
 
     @GetMapping("/test")
