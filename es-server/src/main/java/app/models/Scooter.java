@@ -10,12 +10,16 @@ import java.util.Random;
 public class Scooter {
     @JsonView(View.class)
     private long id;
+
     @JsonView(View.class)
     private String tag;
+
     @JsonView(View.class)
     private String status;
+
     private String gpsLocation;
     private double mileage;
+
     @JsonView(View.class)
     private int batteryCharge;
 
