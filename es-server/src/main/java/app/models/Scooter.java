@@ -3,6 +3,7 @@ package app.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.View;
 
 import java.util.Random;

@@ -10,8 +10,7 @@ import java.util.List;
 
 @Component
 public class ScootersRepositoryMock implements ScooterRepository {
-    @Autowired
-    private List<Scooter>  scootersList = new ArrayList<>();;
+    private List<Scooter>  scootersList = new ArrayList<>();
     private int count = 0;
 
     @Bean
@@ -21,7 +20,8 @@ public class ScootersRepositoryMock implements ScooterRepository {
 
     public List<Scooter> getRandomScooters() {
         long id = 30000;
-        for (int i = 0; i < 7; i++) {
+        int amtRandomScooters = 7;
+        for (int i = 0; i < amtRandomScooters; i++) {
             Scooter scooter;
             scooter = Scooter.createSampleScooter(id);
             scootersList.add(scooter);
