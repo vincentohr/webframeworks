@@ -7,8 +7,11 @@ import app.models.Scooter;
 import app.repositories.ScooterRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -44,9 +47,18 @@ public class ScooterController {
         }
     }
 
-    @PostMapping()
-    public void createScooter(@RequestBody Scooter scooter) {
+    @PostMapping("")
+    public ResponseEntity<Object> createScooter(@RequestBody Scooter scooter) {
         Scooter savedScooter = scooterRepository.save(scooter);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedScooter.getId()).toUri();
+
+        return  ResponseEntity
+                .created(location)
+                .header("Nieuwe Scooter aangemaakt!")
+                .body(scooterRepository.findById(savedScooter.getId()));
     }
 
     @PutMapping("{id}")
