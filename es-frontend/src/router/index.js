@@ -7,6 +7,8 @@ import Overview33 from '@/components/scooters/Overview33'
 import Overview34 from '@/components/scooters/Overview34'
 import Detail32 from '@/components/scooters/Detail32'
 import Detail34 from '@/components/scooters/Detail34'
+import Overview37 from '@/components/scooters/Overview37'
+import Detail37 from '@/components/scooters/Detail37'
 
 const routes = [
   {
@@ -47,9 +49,22 @@ const routes = [
     component: Overview34,
     children: [
       {
-        name: 'overview34',
+        name: 'detail34',
         path: '/scooters/overview34/:id',
         component: Detail34,
+        props: true
+      }
+    ]
+  },
+  {
+    path: '/scooters/overview37',
+    name: 'overview37',
+    component: Overview37,
+    children: [
+      {
+        name: 'detail37',
+        path: '/scooters/overview37/:id',
+        component: Detail37,
         props: true
       }
     ]

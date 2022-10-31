@@ -13,6 +13,7 @@
         <router-link to="/overview32">Scooters edit (comp)</router-link>
         <router-link to="/scooters/overview33">Scooters edit (router)</router-link>
         <router-link to="/scooters/overview34">Scooters edit (managed)</router-link>
+        <router-link to="/scooters/overview37">Scooters edit (FETCH)</router-link>
         <router-link to="/">Abandoned Scooters</router-link>
       </div>
     </div>
