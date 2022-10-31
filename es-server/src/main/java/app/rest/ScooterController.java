@@ -57,7 +57,10 @@ public class ScooterController {
 
         return  ResponseEntity
                 .created(location)
-                .header("Nieuwe Scooter aangemaakt!", "Joli-Coeur: 'Be Humble'" )
+                .header(
+                        "Nieuwe scooter aangemaakt!",
+                        "Je hebt een scooter aangemaakt en er is niks fout gegaan."
+                )
                 .body(scooterRepository.findById(savedScooter.getId()));
     }
 
