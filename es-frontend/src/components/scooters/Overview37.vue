@@ -26,13 +26,15 @@
 <script>
 import { Scooter } from '@/models/scooter'
 import { ScooterAdaptor } from '@/models/ScooterAdaptor'
+import CONFIG from '@/app-config'
 
 export default {
   name: 'Overview37',
   inject: ['scootersService'],
   async created () {
-    this.scooterService = new ScooterAdaptor(ScooterAdaptor.constructor)
-    this.scooters = await this.scooterService.asyncFindAll()
+    console.log(new ScooterAdaptor())
+    this.scootersService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+    this.scooters = await this.scootersService.asyncFindAll()
     // this.lastId = 30_000
     // for (let i = 0; i < 8; i++) {
     //   this.scooters.push(

@@ -7,7 +7,8 @@
 <script>
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
-import {ScooterAdaptor} from '@/models/ScooterAdaptor'
+import { ScooterAdaptor } from '@/models/ScooterAdaptor'
+import CONFIG from '@/app-config'
 
 export default {
   name: 'App37',
@@ -19,7 +20,7 @@ export default {
   },
   provide () {
     return {
-      scooterService: new ScooterAdaptor(ScooterAdaptor.constructor + '/scooters')
+      scooterService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
     }
   }
 }
