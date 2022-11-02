@@ -18,11 +18,15 @@ export default {
     'app-header': Header,
     'app-nav-bar': NavBar
   },
-  provide () {
-    return {
-      scooterService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
-    }
+  provide: {
+    scooterService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
   }
+  // provide() {
+  //   // use function syntax so that we can access `this`
+  //   return {
+  //     scooterService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+  //   }
+  // }
 }
 </script>
 

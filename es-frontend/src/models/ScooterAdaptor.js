@@ -33,7 +33,16 @@ export class ScooterAdaptor {
 
   async asyncSave (scooter) {
     console.log('ScooterAdaptor.asyncSave()...')
-    // test
+    const scooterlist = this.fetchJson(this.resourcesUrl)
+    if (scooterlist.indexOf(scooter) >= 0) {
+      return this.fetchJson(this.resourcesUrl + '/', {
+        method: 'PUT'
+      })
+    } else {
+      return this.fetchJson(this.resourcesUrl + '/', {
+        method: 'POST'
+      })
+    }
   }
 
   async asyncDeleteById (id) {

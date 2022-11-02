@@ -70,7 +70,7 @@ export default {
   methods: {
     async onDelete () {
       if (confirm(`are you sure to delete\n ${this.selectedScooter.type} book` +
-      `(id=${this.selectedScooter.id})?`)) {
+        `(id=${this.selectedScooter.id})?`)) {
         await this.scooterService.asyncDeleteById(this.selectedScooter.id)
         this.copy = null
         this.$emit('refresh')

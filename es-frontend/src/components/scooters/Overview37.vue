@@ -30,11 +30,11 @@ import CONFIG from '@/app-config'
 
 export default {
   name: 'Overview37',
-  inject: ['scootersService'],
+  inject: ['scooterService'],
   async created () {
     console.log(new ScooterAdaptor())
-    this.scootersService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
-    this.scooters = await this.scootersService.asyncFindAll()
+    this.scooterService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+    this.scooters = await this.scooterService.asyncFindAll()
     // this.lastId = 30_000
     // for (let i = 0; i < 8; i++) {
     //   this.scooters.push(
