@@ -8,7 +8,7 @@
           </th>
         </tr>
         <tr v-for="(scooter, index) in scooters" :key="index" @click="onSelect (scooter)">
-          <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter._tag }}</td>
+          <td :class="{'activeTag': selectedScooter === scooter}">{{ scooter.tag }}</td>
         </tr>
       </table>
       <button id="button" @click="onNewScooter">New Scooter</button>
@@ -32,15 +32,7 @@ export default {
   name: 'Overview37',
   inject: ['scooterService'],
   async created () {
-    // console.log(new ScooterAdaptor())
-    // this.scooterService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
     this.scooters = await this.scooterService.asyncFindAll()
-    // this.lastId = 30_000
-    // for (let i = 0; i < 8; i++) {
-    //   this.scooters.push(
-    //     Scooter.createSampleScooter(this.lastId++)
-    //   )
-    // }
   },
   data () {
     return {
@@ -56,7 +48,7 @@ export default {
       pId = this.lastId
       this.lastId++
       this.scooters.push(
-        Scooter.createSampleScooter(pId)
+        this.scooterService.asyncSave(this.selectedScooter)
       )
       this.selectedScooter = this.scooters.at(this.scooters.length - 1)
     },

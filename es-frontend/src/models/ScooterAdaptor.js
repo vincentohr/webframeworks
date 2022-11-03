@@ -2,6 +2,7 @@ import { Scooter } from '@/models/scooter'
 
 export class ScooterAdaptor {
   resourcesUrl;
+
   constructor (resourcesURL) {
     this.resourcesUrl = resourcesURL
     console.log('Created Scooteradaptor for: ' + resourcesURL)
@@ -20,7 +21,8 @@ export class ScooterAdaptor {
   async asyncFindAll () {
     console.log('ScooterAdaptor.asyncFindAll()...')
     const scooters = await this.fetchJson(this.resourcesUrl)
-    return scooters?.map(s => Scooter.copyConstructor(s))
+    console.log(scooters.map(s => Scooter.copyConstructor(s)))
+    return scooters.map(s => Scooter.copyConstructor(s))
   }
 
   async asyncFindById (id) {
@@ -31,18 +33,27 @@ export class ScooterAdaptor {
     // test
   }
 
+  async asyncAddNewScooter () {
+    console.log('ScooterAdaptor.addScootie()...')
+    return this.fetchJson(this.resourcesUrl + '/', {
+      method: 'POST'
+    })
+    // test
+  }
+
   async asyncSave (scooter) {
     console.log('ScooterAdaptor.asyncSave()...')
-    const scooterlist = this.fetchJson(this.resourcesUrl)
-    if (scooterlist.indexOf(scooter) >= 0) {
-      return this.fetchJson(this.resourcesUrl + '/', {
-        method: 'PUT'
-      })
-    } else {
-      return this.fetchJson(this.resourcesUrl + '/', {
-        method: 'POST'
-      })
-    }
+    // const scooterlist = this.fetchJson(this.resourcesUrl)
+    // if (scooterlist.indexOf(scooter) >= 0) {
+    //   return this.fetchJson(this.resourcesUrl + '/' + scooter.id, {
+    //     method: 'PUT'
+    //   })
+    // } else {
+    return this.fetchJson(this.resourcesUrl + '/', {
+      method: 'POST',
+      body: JSON.stringify(scooter)
+    })
+    // }
   }
 
   async asyncDeleteById (id) {
@@ -50,6 +61,5 @@ export class ScooterAdaptor {
     return this.fetchJson(this.resourcesUrl + '/' + id, {
       method: 'DELETE'
     })
-    // test
   }
 }

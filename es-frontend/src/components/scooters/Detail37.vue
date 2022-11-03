@@ -2,11 +2,11 @@
   <div v-if="selectedScooter !== null">
     <table>
       <tr>
-        <th>Scooter id = {{ selectedScooter._id }}</th>
+        <th>Scooter id = {{ selectedScooter.id }}</th>
       </tr>
       <tr>
         <td>{{ tagText }}</td>
-        <td><input v-model="selectedScooter._tag" type="text" @change="enabled()"></td>
+        <td><input v-model="selectedScooter.tag" type="text" @change="enabled()"></td>
       </tr>
       <tr>
         <td>{{ statusText }}</td>
@@ -16,23 +16,23 @@
       </tr>
       <tr>
         <td>{{ batteryChargeText }}</td>
-        <td><input v-model="selectedScooter._batteryCharge" type="number"
+        <td><input v-model="selectedScooter.batteryCharge" type="number"
                    @change="enabled()"></td>
       </tr>
       <tr>
         <td>{{ gpsLocationText }}</td>
-        <td><input v-model="selectedScooter._gpsLocation" @change="enabled()"></td>
+        <td><input v-model="selectedScooter.gpsLocation" @change="enabled()"></td>
       </tr>
       <tr>
         <td>{{ mileageText }}</td>
-        <td><input v-model="selectedScooter._mileage" type="number" @change="enabled()"></td>
+        <td><input v-model="selectedScooter.mileage" type="number" @change="enabled()"></td>
       </tr>
     </table>
     <button v-show="true" :disabled="enabledValue === true" class="button" @click="onDelete()">Delete</button>
     <button v-show="true" class="button" @click="onClear()">Clear</button>
     <button v-show="true" :disabled="enabledValue === false" class="button" @click="onReset()">Reset</button>
     <button v-show="true" class="button" @click="onCancel()">Cancel</button>
-    <button v-show="true" :disabled="enabledValue === false" class="button" @click="onSave()">Save</button>
+    <button v-show="true" :disabled="enabledValue === true" class="button" @click="onSave()">Save</button>
   </div>
 </template>
 
@@ -80,17 +80,17 @@ export default {
       if (this.saved === false) {
         this.onReset()
       }
-      this.selectedScooter._tag = ''
-      this.selectedScooter._batteryCharge = ''
-      this.selectedScooter._gpsLocation = ''
-      this.selectedScooter._mileage = ''
+      this.selectedScooter.tag = ''
+      this.selectedScooter.batteryCharge = ''
+      this.selectedScooter.gpsLocation = ''
+      this.selectedScooter.mileage = ''
       this.enabledValue = true
     },
     onReset () {
-      this.selectedScooter._tag = this.copy._tag
-      this.selectedScooter._batteryCharge = this.copy._batteryCharge
-      this.selectedScooter._gpsLocation = this.copy._gpsLocation
-      this.selectedScooter._mileage = this.copy._mileage
+      this.selectedScooter.tag = this.copy.tag
+      this.selectedScooter.batteryCharge = this.copy.batteryCharge
+      this.selectedScooter.gpsLocation = this.copy.gpsLocation
+      this.selectedScooter.mileage = this.copy.mileage
       this.enabledValue = false
     },
     onCancel () {
@@ -101,8 +101,11 @@ export default {
       this.$router.push(this.$route.matched[0].path)
     },
     onSave () {
+      // todo ff checken
+      this.scooterService.asyncSave(this.selectedScooter)
       this.saved = true
       this.onCancel()
+      this.$emit('refresh')
     },
     enabled () {
       this.enabledValue = true
