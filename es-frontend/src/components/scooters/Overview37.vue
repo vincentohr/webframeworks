@@ -32,8 +32,8 @@ export default {
   name: 'Overview37',
   inject: ['scooterService'],
   async created () {
-    console.log(new ScooterAdaptor())
-    this.scooterService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+    // console.log(new ScooterAdaptor())
+    // this.scooterService = new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
     this.scooters = await this.scooterService.asyncFindAll()
     // this.lastId = 30_000
     // for (let i = 0; i < 8; i++) {
