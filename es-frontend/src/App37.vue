@@ -12,8 +12,6 @@ import CONFIG from '@/app-config'
 
 export default {
   name: 'App37',
-  data () {
-  },
   components: {
     'app-header': Header,
     'app-nav-bar': NavBar
