@@ -16,8 +16,10 @@ export default {
     'app-header': Header,
     'app-nav-bar': NavBar
   },
-  provide: {
-    scooterService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+  provide () {
+    return {
+      scootersService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters')
+    }
   }
   // provide() {
   //   // use function syntax so that we can access `this`

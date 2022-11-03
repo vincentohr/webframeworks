@@ -30,9 +30,9 @@ import CONFIG from '@/app-config'
 
 export default {
   name: 'Overview37',
-  inject: ['scooterService'],
+  inject: ['scootersService'],
   async created () {
-    this.scooters = await this.scooterService.asyncFindAll()
+    this.scooters = await this.scootersService.asyncFindAll()
   },
   data () {
     return {
@@ -48,7 +48,7 @@ export default {
       pId = this.lastId
       this.lastId++
       this.scooters.push(
-        this.scooterService.asyncSave(this.selectedScooter)
+        this.scootersService.asyncSave(this.selectedScooter)
       )
       this.selectedScooter = this.scooters.at(this.scooters.length - 1)
     },

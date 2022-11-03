@@ -51,6 +51,9 @@ export class ScooterAdaptor {
     // } else {
     return this.fetchJson(this.resourcesUrl + '/', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(scooter)
     })
     // }

@@ -32,7 +32,7 @@
     <button v-show="true" class="button" @click="onClear()">Clear</button>
     <button v-show="true" :disabled="enabledValue === false" class="button" @click="onReset()">Reset</button>
     <button v-show="true" class="button" @click="onCancel()">Cancel</button>
-    <button v-show="true" :disabled="enabledValue === true" class="button" @click="onSave()">Save</button>
+    <button v-show="true" :disabled="enabledValue === false" class="button" @click="onSave()">Save</button>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
   name: 'ScootersDetail37',
   props: ['selectedScooter', 'status'],
   emits: ['delete-scooter', 'deselect-scooter'],
-  inject: ['scooterService'],
+  inject: ['scootersService'],
   created () {
     this.copy = Scooter.copyConstructor(this.selectedScooter)
     // console.log(this.copy)
@@ -71,7 +71,7 @@ export default {
     async onDelete () {
       if (confirm(`are you sure to delete\n ${this.selectedScooter.type} book` +
         `(id=${this.selectedScooter.id})?`)) {
-        await this.scooterService.asyncDeleteById(this.selectedScooter.id)
+        await this.scootersService.asyncDeleteById(this.selectedScooter.id)
         this.copy = null
         this.$emit('refresh')
       }
@@ -102,7 +102,7 @@ export default {
     },
     onSave () {
       // todo ff checken
-      this.scooterService.asyncSave(this.selectedScooter)
+      this.scootersService.asyncSave(this.selectedScooter)
       this.saved = true
       this.onCancel()
       this.$emit('refresh')
