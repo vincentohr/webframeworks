@@ -22,7 +22,8 @@ public class Scooter {
 
     @JsonView(value = { IView.SummaryView.class })
     private int batteryCharge;
-    public Scooter() {
+
+    public Scooter (){
 
     }
     public Scooter(String tag) {

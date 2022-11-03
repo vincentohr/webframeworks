@@ -19,7 +19,7 @@
   </div>
   <div id="detail">
     <router-view :selected-scooter="selectedScooter" @delete-scooter="remove()"
-                 @deselect-scooter="deselect()"></router-view>
+                 @deselect-scooter="deselect()" @refresh="refresh()"></router-view>
   </div>
 </template>
 
@@ -44,6 +44,9 @@ export default {
   },
   // Geen idee of dit werkt, niet zo lang aan gezeten.
   methods: {
+    refresh () {
+      window.location.reload()
+    },
     onNewScooter (pId) {
       pId = this.lastId
       this.lastId++
@@ -55,9 +58,9 @@ export default {
     onSelect (scooter) {
       this.isActive = true
       if (scooter !== null && scooter !== this.selectedScooter) {
-        this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
+        this.$router.push(this.$route.matched[0].path + '/' + scooter.id)
         this.selectedScooter = scooter
-      } else if (this.selectedScooter != null) {
+      } else if (this.selectedScooter !== null) {
         this.$router.push(this.$route.matched[0].path + '/')
       }
       // if (this.selectedScooter !== scooter) {
