@@ -2,13 +2,18 @@ package app.models;
 
 import app.Views.IView;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import javax.persistence.*;
 import java.util.Random;
 
+@Entity
 public class Scooter {
     @JsonView(value = { IView.SummaryView.class })
+    @Id
+    @GeneratedValue
     private long id;
 
     @JsonView(value = { IView.SummaryView.class })
@@ -22,6 +27,10 @@ public class Scooter {
 
     @JsonView(value = { IView.SummaryView.class })
     private int batteryCharge;
+
+    @ManyToOne
+    @JsonManagedReference
+    private Trip trip;
 
     public Scooter (){
 
@@ -65,6 +74,27 @@ public class Scooter {
             builder.append((char) randomLimitedInt);
         }
         return builder.toString();
+    }
+
+    public boolean associateTrip(Trip trip){
+        if(trip != null){
+            trip.associateScooter(this);
+            this.setTrip(trip);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean dissociateTrip(Trip trip){
+        return false;
+    }
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public void setId(long id) {

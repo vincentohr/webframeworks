@@ -4,7 +4,7 @@ import app.models.Scooter;
 
 import java.util.List;
 
-public interface ScooterRepository {
+public interface ScooterRepository{
     List<Scooter> findAll();
     Scooter findById(long id);
 
