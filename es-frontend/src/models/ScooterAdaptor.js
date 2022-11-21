@@ -43,12 +43,6 @@ export class ScooterAdaptor {
 
   async asyncSave (scooter) {
     console.log('ScooterAdaptor.asyncSave()...')
-    // const scooterlist = this.fetchJson(this.resourcesUrl)
-    // if (scooterlist.indexOf(scooter) >= 0) {
-    //   return this.fetchJson(this.resourcesUrl + '/' + scooter.id, {
-    //     method: 'PUT'
-    //   })
-    // } else {
     return this.fetchJson(this.resourcesUrl + '/', {
       method: 'POST',
       headers: {
@@ -62,7 +56,6 @@ export class ScooterAdaptor {
   async asyncDeleteById (id) {
     console.log('ScooterAdaptor.asyncDeleteById()...')
     return this.fetchJson(this.resourcesUrl + '/' + id, {
-      method: 'DELETE'
     })
   }
 }
