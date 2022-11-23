@@ -1,13 +1,13 @@
 package app.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,8 +16,10 @@ public class Trip {
     @GeneratedValue
     private long id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDateTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDateTime;
 
     private String startPosition;
@@ -41,27 +43,28 @@ public class Trip {
         this.endPosition = endPosition;
         this.mileage = mileage;
         this.cost = cost;
+        scooters = new HashSet<>();
     }
 
     public Trip(@JsonProperty long id) {
         this.id = id;
     }
 
-    public Trip(){
+    public Trip() {
 
     }
 
-    public static Trip createSampleTrip(long id){
+    public static Trip createSampleTrip(long id) {
         LocalDateTime[] localDateTime = {LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(6),
                 LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(5)};
         double latitude = 52.3702157;
         double longitude = 4.895167899999933;
 
         Trip trip = new Trip(id);
-        trip.mileage = (int)(Math.random() * 95) + 5;
-        trip.cost = (int)(Math.random() * 10_000);
-        trip.startDateTime = localDateTime[(int)(Math.random()*localDateTime.length-1)];
-        trip.endDateTime = localDateTime[(int)(Math.random()*localDateTime.length-1)].plusWeeks(2);
+        trip.mileage = (int) (Math.random() * 95) + 5;
+        trip.cost = (int) (Math.random() * 10_000);
+        trip.startDateTime = localDateTime[(int) (Math.random() * localDateTime.length - 1)];
+        trip.endDateTime = localDateTime[(int) (Math.random() * localDateTime.length - 1)].plusWeeks(2);
         trip.startPosition = latitude + " " + longitude;
         trip.endPosition = latitude + " " + longitude;
         return trip;

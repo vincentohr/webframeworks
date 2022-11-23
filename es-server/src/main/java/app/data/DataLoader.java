@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -43,7 +44,7 @@ public class DataLoader implements CommandLineRunner {
         List<Trip> trips = this.tripRepository.findAll();
         if (trips.size() > 0)
             return;
-        System.out.println("Configuring some initial scooters in the repository");
+        System.out.println("Configuring some initial trips in the repository");
         for (int i = 0; i < 10; i++) {
             this.tripRepository.save(Trip.createSampleTrip(0));
         }

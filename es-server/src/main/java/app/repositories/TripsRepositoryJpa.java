@@ -1,6 +1,5 @@
 package app.repositories;
 
-import app.models.Scooter;
 import app.models.Trip;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;

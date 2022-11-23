@@ -1,12 +1,10 @@
 package app.models;
 
 import app.Views.IView;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Random;
 
 @Entity
@@ -29,7 +27,6 @@ public class Scooter {
     private int batteryCharge;
 
     @ManyToOne
-    @JsonManagedReference
     private Trip trip;
 
     public Scooter (){
@@ -49,7 +46,7 @@ public class Scooter {
     }
 
     public static Scooter createSampleScooter(long id){
-        String[] statusArray = {"IDLE", "INUSE", "MAINENANCE"};
+        String[] statusArray = {"IDLE", "INUSE", "MAINTENANCE"};
         Scooter scooter = new Scooter(id);
         scooter.batteryCharge = (int)(Math.random() * 95) + 5;
         scooter.mileage = (int)(Math.random() * 10_000);
@@ -79,7 +76,7 @@ public class Scooter {
     public boolean associateTrip(Trip trip){
         if(trip != null){
             trip.associateScooter(this);
-            this.setTrip(trip);
+            System.out.println(trip);
             return true;
         }
         return false;
