@@ -2,7 +2,6 @@ package app.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -16,10 +15,10 @@ public class Trip {
     @GeneratedValue
     private long id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDateTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDateTime;
 
     private String startPosition;
@@ -30,9 +29,8 @@ public class Trip {
 
     private double cost;
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonBackReference
-    private Set<Scooter> scooters;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Scooter scooter;
 
     public Trip(long id, LocalDateTime startDateTime, LocalDateTime endDateTime, String startPosition,
                 String endPosition, double mileage, double cost) {
@@ -43,16 +41,13 @@ public class Trip {
         this.endPosition = endPosition;
         this.mileage = mileage;
         this.cost = cost;
-        scooters = new HashSet<>();
     }
 
     public Trip(@JsonProperty long id) {
         this.id = id;
-        scooters = new HashSet<>();
     }
 
     public Trip() {
-        scooters = new HashSet<>();
     }
 
     public static Trip createSampleTrip(long id) {
@@ -72,22 +67,25 @@ public class Trip {
     }
 
     public boolean associateScooter(Scooter scooter) {
-        if (scooter != null && scooter.getTrip() == null) {
-            return this.getScooters().add(scooter) && scooter.associateTrip(this);
+        if(scooter != null){
+            scooter.associateTrip(this);
+            return true;
         }
         return false;
     }
+
+
 
     public boolean dissociateTrip(Trip trip) {
         return false;
     }
 
-    public Set<Scooter> getScooters() {
-        return scooters;
+    public long getId() {
+        return id;
     }
 
-    public void setScooters(Set<Scooter> scooters) {
-        this.scooters = scooters;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public LocalDateTime getStartDateTime() {
@@ -136,5 +134,13 @@ public class Trip {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public Scooter getScooter() {
+        return scooter;
+    }
+
+    public void setScooter(Scooter scooter) {
+        this.scooter = scooter;
     }
 }

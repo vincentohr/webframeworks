@@ -4,8 +4,8 @@ import app.Views.IView;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.Random;
+import java.util.Set;
 
 @Entity
 public class Scooter {
@@ -26,8 +26,10 @@ public class Scooter {
     @JsonView(value = { IView.SummaryView.class })
     private int batteryCharge;
 
-    @ManyToOne
-    private Trip trip;
+    @OneToMany(mappedBy = "scooter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Sc", nullable = false)
+    @JsonBackReference
+    private Set<Trip> trips;
 
     public Scooter (){
 
@@ -56,7 +58,6 @@ public class Scooter {
         double longitude = 4.895167899999933;
         scooter.gpsLocation = latitude + " " + longitude;
         scooter.tag = scooter.generateRandomTag();
-        scooter.associateTrip(new Trip());
 
         return scooter;
     }
@@ -77,82 +78,65 @@ public class Scooter {
     }
 
     public boolean associateTrip(Trip trip){
-        if(trip != null){
-            trip.associateScooter(this);
-            System.out.println(trip);
-            return true;
+        if(trip != null && trip.getScooter() == null){
+            return this.getTrips().add(trip) && trip.associateScooter(this);
         }
         return false;
-    }
-
-    public boolean dissociateTrip(Trip trip){
-        return false;
-    }
-
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setGpsLocation(String gpsLocation) {
-        this.gpsLocation = gpsLocation;
-    }
-
-    public void setMileage(double mileage) {
-        this.mileage = mileage;
-    }
-
-    public void setBatteryCharge(int batteryCharge) {
-        this.batteryCharge = batteryCharge;
     }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getTag() {
         return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getGpsLocation() {
         return gpsLocation;
+    }
+
+    public void setGpsLocation(String gpsLocation) {
+        this.gpsLocation = gpsLocation;
     }
 
     public double getMileage() {
         return mileage;
     }
 
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
+    }
+
     public int getBatteryCharge() {
         return batteryCharge;
     }
 
-    @Override
-    public String toString() {
-        return "Scooter{" +
-                "id=" + id +
-                ", tag='" + tag + '\'' +
-                ", gpsLocation='" + gpsLocation + '\'' +
-                ", mileage='" + mileage + '\'' +
-                ", batteryCharge=" + batteryCharge +
-                '}';
+    public void setBatteryCharge(int batteryCharge) {
+        this.batteryCharge = batteryCharge;
+    }
+
+    public Set<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Set<Trip> trips) {
+        this.trips = trips;
     }
 }

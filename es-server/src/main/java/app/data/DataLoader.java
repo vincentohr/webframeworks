@@ -3,7 +3,9 @@ package app.data;
 import app.models.Scooter;
 import app.models.Trip;
 import app.repositories.ScooterRepository;
+import app.repositories.ScooterRepositoryJpa;
 import app.repositories.TripRepository;
+import app.repositories.TripsRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,10 +26,10 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Autowired
-    private ScooterRepository scooterRepository;
+    private ScooterRepositoryJpa scooterRepository;
 
     @Autowired
-    private TripRepository tripRepository;
+    private TripsRepositoryJpa tripRepository;
 
 
     private void createInitialScooters() {

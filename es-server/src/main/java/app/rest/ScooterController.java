@@ -112,7 +112,7 @@ public class ScooterController {
             updateScooter.setBatteryCharge(scooterDetails.getBatteryCharge());
             updateScooter.setStatus(scooterDetails.getStatus());
             updateScooter.setGpsLocation(scooterDetails.getGpsLocation());
-            updateScooter.setMileage(scooterDetails.getMileage());
+//            updateScooter.setMileage(scooterDetails.getMileage());
             scooterRepository.save(updateScooter);
         }
     }
