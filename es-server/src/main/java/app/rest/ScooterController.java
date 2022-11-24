@@ -79,7 +79,7 @@ public class ScooterController {
 
 
     // todo localDateTimeFormat check trip.java
-    @PostMapping("{scooterId}/trips")
+    @PostMapping("{scooterId}/trip")
     public void addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) throws Exception {
         Scooter scooterDetail = scooterRepository.findById(scooterId);
 

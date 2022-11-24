@@ -30,7 +30,7 @@ public class Trip {
 
     private double cost;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JsonBackReference
     private Set<Scooter> scooters;
 
@@ -48,10 +48,11 @@ public class Trip {
 
     public Trip(@JsonProperty long id) {
         this.id = id;
+        scooters = new HashSet<>();
     }
 
     public Trip() {
-
+        scooters = new HashSet<>();
     }
 
     public static Trip createSampleTrip(long id) {

@@ -40,6 +40,7 @@ public class Scooter {
         batteryCharge = 0;
         mileage = 0.0;
     }
+
     @JsonCreator
     public Scooter(@JsonProperty long id){
         this.id = id;
@@ -55,6 +56,8 @@ public class Scooter {
         double longitude = 4.895167899999933;
         scooter.gpsLocation = latitude + " " + longitude;
         scooter.tag = scooter.generateRandomTag();
+        scooter.associateTrip(new Trip());
+
         return scooter;
     }
 
