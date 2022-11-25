@@ -3,9 +3,6 @@ package app.repositories;
 import app.models.Trip;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,10 +10,11 @@ import java.util.List;
 @Repository
 @Transactional
 @Primary
-public class TripsRepositoryJpa implements TripRepository{
+public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip>{
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    public TripsRepositoryJpa() {
+        super(Trip.class);
+    }
 
     @Override
     public List<Trip> findAll() {
@@ -39,7 +37,7 @@ public class TripsRepositoryJpa implements TripRepository{
     }
 
     @Override
-    public Trip deleteById(Long id) {
+    public Trip deleteById(long id) {
         return null;
     }
 }

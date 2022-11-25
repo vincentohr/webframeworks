@@ -4,8 +4,6 @@ import app.models.Scooter;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,10 +11,11 @@ import java.util.List;
 @Repository
 @Transactional
 @Primary
-public class ScooterRepositoryJpa implements ScooterRepository{
+public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    public ScooterRepositoryJpa() {
+        super(Scooter.class);
+    }
 
     @Override
     public List<Scooter> findAll() {
@@ -43,7 +42,7 @@ public class ScooterRepositoryJpa implements ScooterRepository{
     }
 
     @Override
-    public Scooter deleteById(Long id) {
+    public Scooter deleteById(long id) {
         return null;
     }
 }

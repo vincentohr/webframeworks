@@ -5,8 +5,7 @@ import app.Exceptions.ResourceNotFoundException;
 import app.Views.IView;
 import app.models.Scooter;
 import app.models.Trip;
-import app.repositories.ScooterRepository;
-import app.repositories.TripRepository;
+import app.repositories.EntityRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +22,11 @@ import java.util.List;
 @RequestMapping("/scooters")
 public class ScooterController {
 
-    @Autowired
-    private ScooterRepository scooterRepository;
+    @Autowired // injects an implementation of ScooterRepository here.
+    private EntityRepository<Scooter> scooterRepository;
 
-    @Autowired
-    private TripRepository tripRepository;
+    @Autowired // injects an implementation of TripRepository here.
+    private EntityRepository<Trip> tripRepository;
 
     @GetMapping("/test")
     public List<Scooter> getTestScooters() {

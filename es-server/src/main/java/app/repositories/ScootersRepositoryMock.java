@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ScootersRepositoryMock implements ScooterRepository {
+public class ScootersRepositoryMock implements EntityRepository<Scooter> {
     private List<Scooter> scootersList = new ArrayList<>();
     private int count = 0;
 
@@ -67,7 +67,7 @@ public class ScootersRepositoryMock implements ScooterRepository {
     }
 
     @Override
-    public Scooter deleteById(Long id) {
+    public Scooter deleteById(long id) {
         for (int i = 0; i < scootersList.size(); i++) {
             if (scootersList.get(i).getId() == id) {
                 scootersList.remove(scootersList.get(i));

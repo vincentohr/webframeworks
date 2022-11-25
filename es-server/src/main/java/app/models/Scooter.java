@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 @Entity
-public class Scooter {
+public class Scooter implements Identifiable {
     @JsonView(value = { IView.SummaryView.class })
     @Id
     @GeneratedValue

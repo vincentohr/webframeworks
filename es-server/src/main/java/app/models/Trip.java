@@ -1,16 +1,13 @@
 package app.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-public class Trip {
+public class Trip implements Identifiable {
     @Id
     @GeneratedValue
     private long id;
