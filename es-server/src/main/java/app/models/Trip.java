@@ -63,22 +63,28 @@ public class Trip {
         trip.endDateTime = localDateTime[(int) (Math.random() * localDateTime.length - 1)].plusWeeks(2);
         trip.startPosition = latitude + " " + longitude;
         trip.endPosition = latitude + " " + longitude;
+        trip.setScooter(Scooter.createSampleScooter(0));
         return trip;
     }
 
     public boolean associateScooter(Scooter scooter) {
-        if(scooter != null){
-            scooter.associateTrip(this);
-            return true;
+        if(scooter == null || this.getScooter().getId() != scooter.getId()){
+            return false;
         }
-        return false;
+        this.setScooter(scooter);
+        scooter.associateTrip(this);
+        return true;
     }
 
 
 
-    public boolean dissociateTrip(Trip trip) {
-        return false;
-    }
+//    public boolean dissociateScooter(Scooter scooter) {
+//        if(scooter != null || this.getScooter().getId() == scooter.getId()) {
+//            scooter.dissociateTrip(this);
+//            return true;
+//        }
+//        return false;
+//    }
 
     public long getId() {
         return id;

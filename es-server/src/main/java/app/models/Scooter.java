@@ -27,7 +27,7 @@ public class Scooter {
     private int batteryCharge;
 
     @OneToMany(mappedBy = "scooter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Sc", nullable = false)
+//    @JoinColumn(name = "Sc", nullable = false)
     @JsonBackReference
     private Set<Trip> trips;
 
@@ -78,11 +78,21 @@ public class Scooter {
     }
 
     public boolean associateTrip(Trip trip){
-        if(trip != null && trip.getScooter() == null){
-            return this.getTrips().add(trip) && trip.associateScooter(this);
+        if(trip == null || this.getTrips().contains(trip)){
+            return false;
         }
-        return false;
+        this.getTrips().add(trip);
+        trip.associateScooter(this);
+        return true;
     }
+//    public boolean dissociateTrip(Trip trip) {
+//        if(trip != null || this.getTrips().contains(trip)){
+//            this.getTrips();
+//            trip.dissociateScooter(this);
+//            return true;
+//        }
+//        return false;
+//    }
 
     public long getId() {
         return id;

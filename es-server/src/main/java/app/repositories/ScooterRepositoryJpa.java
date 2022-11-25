@@ -29,7 +29,11 @@ public class ScooterRepositoryJpa implements ScooterRepository{
 
     @Override
     public Scooter findById(long id) {
-        return null;
+        TypedQuery<Scooter> query =
+                this.entityManager.createQuery(
+                        "SELECT s FROM Scooter s WHERE s.id = ?1", Scooter.class
+                );
+        return query.setParameter(1, id).getSingleResult();
     }
 
     @Override

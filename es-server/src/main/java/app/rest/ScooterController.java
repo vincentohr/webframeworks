@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -79,6 +80,7 @@ public class ScooterController {
 
 
     // todo localDateTimeFormat check trip.java
+    @Transactional
     @PostMapping("{scooterId}/trip")
     public void addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) throws Exception {
         Scooter scooterDetail = scooterRepository.findById(scooterId);
