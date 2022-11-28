@@ -60,37 +60,27 @@ public class ScooterController {
         }
     }
 
-    @GetMapping("?status={status}")
-    public List<Scooter> getScooterByStatus(@PathVariable long status) throws Exception {
-        List<Scooter> scooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
+    @GetMapping("/qStatus")
+    public List<Scooter> getScooterByStatus(@RequestParam("status") String status) {
 
-        if (scooters != null) {
-            return scooters;
-        } else {
-            throw new ResourceNotFoundException(status);
-        }
+        List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
+        if (statusScooters != null) {
+            return statusScooters;
+        } //todo
+//        else {
+//            throw new ResourceNotFoundException()
+//        }
+        return null;
     }
 
-    @GetMapping("?battery={maximum}")
-    public List<Scooter> getScooterByBattery(@PathVariable long maximum) throws Exception {
-        List<Scooter> scooters = scooterRepository.findByQuery("Scooter_find_by_battery", maximum);
+    @GetMapping("/qBattery")
+    public List<Scooter> getScooterByBattery(@RequestParam("battery") int batteryCharge) {
 
-        if (scooters != null) {
-            return scooters;
-        } else {
-            throw new ResourceNotFoundException(maximum);
+        List<Scooter> batteryScooters = scooterRepository.findByQuery("Scooter_find_by_battery", batteryCharge);
+        if (batteryScooters != null) {
+            return batteryScooters;
         }
-    }
-
-    @GetMapping("{maximum}")
-    public List<Scooter> getScooterByPeriod(@PathVariable long maximum) throws Exception {
-        List<Scooter> scooters = scooterRepository.findByQuery("Trip_find_by_scooterId_and_period", maximum);
-
-        if (scooters != null) {
-            return scooters;
-        } else {
-            throw new ResourceNotFoundException(maximum);
-        }
+        return null;
     }
 
     @PostMapping("")

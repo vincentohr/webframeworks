@@ -4,6 +4,7 @@ import app.models.Scooter;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -45,8 +46,12 @@ public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
     public Scooter deleteById(long id) {
         return null;
     }
+
     @Override
     public List<Scooter> findByQuery(String jpqlName, Object params) {
-        return null;
+        Query query = entityManager.createNamedQuery(jpqlName);
+        query.setParameter(1, params);
+
+        return query.getResultList();
     }
 }

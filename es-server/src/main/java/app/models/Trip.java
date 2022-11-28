@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @NamedQuery(name = "Trip_find_by_scooterId_and_period",
-        query = "SELECT t FROM Trip t WHERE Scooter.id BETWEEN ?1 AND ?2")
+        query = "SELECT t FROM Trip t WHERE t.id BETWEEN ?1 AND ?2")
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue
@@ -137,7 +137,7 @@ public class Trip implements Identifiable {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void  setCost(double cost) {
         this.cost = cost;
     }
 
