@@ -8,22 +8,28 @@ import java.util.Random;
 import java.util.Set;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Scooter_find_by_status",
+                query = "SELECT s FROM Scooter s WHERE s.status = ?1"),
+        @NamedQuery(name = "Scooter_find_by_battery",
+                query = "SELECT s FROM Scooter s WHERE s.batteryCharge < ?1")
+})
 public class Scooter implements Identifiable {
-    @JsonView(value = { IView.SummaryView.class })
+    @JsonView(value = {IView.SummaryView.class})
     @Id
     @GeneratedValue
     private long id;
 
-    @JsonView(value = { IView.SummaryView.class })
+    @JsonView(value = {IView.SummaryView.class})
     private String tag;
 
-    @JsonView(value = { IView.SummaryView.class })
+    @JsonView(value = {IView.SummaryView.class})
     private String status;
 
     private String gpsLocation;
     private double mileage;
 
-    @JsonView(value = { IView.SummaryView.class })
+    @JsonView(value = {IView.SummaryView.class})
     private int batteryCharge;
 
     @OneToMany(mappedBy = "scooter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -31,29 +37,30 @@ public class Scooter implements Identifiable {
     @JsonBackReference
     private Set<Trip> trips;
 
-    public Scooter (){
+    public Scooter() {
 
     }
+
     public Scooter(String tag) {
         id = 0;
         this.tag = tag;
         status = null;
-        gpsLocation = null ;
+        gpsLocation = null;
         batteryCharge = 0;
         mileage = 0.0;
     }
 
     @JsonCreator
-    public Scooter(@JsonProperty long id){
+    public Scooter(@JsonProperty long id) {
         this.id = id;
     }
 
-    public static Scooter createSampleScooter(long id){
+    public static Scooter createSampleScooter(long id) {
         String[] statusArray = {"IDLE", "INUSE", "MAINTENANCE"};
         Scooter scooter = new Scooter(id);
-        scooter.batteryCharge = (int)(Math.random() * 95) + 5;
-        scooter.mileage = (int)(Math.random() * 10_000);
-        scooter.status = statusArray[(int)(Math.random()*3)];
+        scooter.batteryCharge = (int) (Math.random() * 95) + 5;
+        scooter.mileage = (int) (Math.random() * 10_000);
+        scooter.status = statusArray[(int) (Math.random() * 3)];
         double latitude = 52.3702157;
         double longitude = 4.895167899999933;
         scooter.gpsLocation = latitude + " " + longitude;
@@ -63,7 +70,7 @@ public class Scooter implements Identifiable {
     }
 
     // Generating an 8 character long String
-    public String generateRandomTag(){
+    public String generateRandomTag() {
         int leftLimit = 97;
         int rightLimit = 122;
         int targetStringLength = 8;
@@ -77,8 +84,8 @@ public class Scooter implements Identifiable {
         return builder.toString();
     }
 
-    public boolean associateTrip(Trip trip){
-        if(trip == null || this.getTrips().contains(trip)){
+    public boolean associateTrip(Trip trip) {
+        if (trip == null || this.getTrips().contains(trip)) {
             return false;
         }
         this.getTrips().add(trip);

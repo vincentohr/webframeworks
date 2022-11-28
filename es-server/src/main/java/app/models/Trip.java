@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NamedQuery(name = "Trip_find_by_scooterId_and_period",
+        query = "SELECT t FROM Trip t WHERE Scooter.id BETWEEN ?1 AND ?2")
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue

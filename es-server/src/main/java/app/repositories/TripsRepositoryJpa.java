@@ -40,4 +40,9 @@ public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip>{
     public Trip deleteById(long id) {
         return null;
     }
+
+    @Override
+    public List<Trip> findByQuery(String jpqlName, Object params) {
+            return null;
+    }
 }

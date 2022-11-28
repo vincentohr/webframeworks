@@ -45,4 +45,8 @@ public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
     public Scooter deleteById(long id) {
         return null;
     }
+    @Override
+    public List<Scooter> findByQuery(String jpqlName, Object params) {
+        return null;
+    }
 }

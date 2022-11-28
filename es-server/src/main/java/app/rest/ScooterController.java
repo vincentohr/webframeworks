@@ -45,7 +45,7 @@ public class ScooterController {
 
     //test
     @GetMapping("/trips")
-    public List<Trip> getAllTrips(){
+    public List<Trip> getAllTrips() {
         return tripRepository.findAll();
     }
 
@@ -57,6 +57,39 @@ public class ScooterController {
             return scooterRepository.findById(id);
         else {
             throw new ResourceNotFoundException(id);
+        }
+    }
+
+    @GetMapping("?status={status}")
+    public List<Scooter> getScooterByStatus(@PathVariable long status) throws Exception {
+        List<Scooter> scooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
+
+        if (scooters != null) {
+            return scooters;
+        } else {
+            throw new ResourceNotFoundException(status);
+        }
+    }
+
+    @GetMapping("?battery={maximum}")
+    public List<Scooter> getScooterByBattery(@PathVariable long maximum) throws Exception {
+        List<Scooter> scooters = scooterRepository.findByQuery("Scooter_find_by_battery", maximum);
+
+        if (scooters != null) {
+            return scooters;
+        } else {
+            throw new ResourceNotFoundException(maximum);
+        }
+    }
+
+    @GetMapping("{maximum}")
+    public List<Scooter> getScooterByPeriod(@PathVariable long maximum) throws Exception {
+        List<Scooter> scooters = scooterRepository.findByQuery("Trip_find_by_scooterId_and_period", maximum);
+
+        if (scooters != null) {
+            return scooters;
+        } else {
+            throw new ResourceNotFoundException(maximum);
         }
     }
 
@@ -84,7 +117,7 @@ public class ScooterController {
     public void addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) throws Exception {
         Scooter scooterDetail = scooterRepository.findById(scooterId);
 
-        if(scooterDetail == null){
+        if (scooterDetail == null) {
             throw new ResourceNotFoundException(scooterId);
         }
 
