@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -61,17 +62,24 @@ public class ScooterController {
     }
 
     @GetMapping("/qStatus")
-    public List<Scooter> getScooterByStatus(@RequestParam("status") String status) {
+    public List<Scooter> getScooterByStatus(@RequestParam("status") String status) throws Exception {
 
         List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
-        if (statusScooters != null) {
+        if (statusScooters != null && Objects.equals(status, "IDLE")) {
             return statusScooters;
-        } //todo
-//        else {
-//            throw new ResourceNotFoundException()
-//        }
-        return null;
+        } else {
+            throw new ResourceNotFoundException(status);
+        }
     }
+    //todo misschien werkt dit wel, zou je ff moeten testen.
+//    public ResponseEntity<List<Scooter>> getScooterByStatus(@RequestParam("status") String status) {
+//
+//        List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
+//        if (statusScooters != null && Objects.equals(status, "IDLE")) {
+//            return ResponseEntity.ok(statusScooters);
+//        } else {
+//            return ResponseEntity.badRequest().build().;
+//        }
 
     @GetMapping("/qBattery")
     public List<Scooter> getScooterByBattery(@RequestParam("battery") int batteryCharge) {
