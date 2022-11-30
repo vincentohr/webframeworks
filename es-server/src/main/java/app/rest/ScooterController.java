@@ -3,11 +3,13 @@ package app.rest;
 import app.Exceptions.PreConditionFailedException;
 import app.Exceptions.ResourceNotFoundException;
 import app.Views.IView;
+import app.error.ApiError;
 import app.models.Scooter;
 import app.models.Trip;
 import app.repositories.EntityRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,7 +18,6 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -40,11 +41,29 @@ public class ScooterController {
     }
 
     @GetMapping("")
-    public List<Scooter> getAllScooters() {
-        return scooterRepository.findAll();
+    public ResponseEntity<Object> getAllScooters(@RequestParam(required = false) String status,
+                                                 @RequestParam(required = false) Integer batteryCharge) {
+        List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
+        List<Scooter> batteryScooters = scooterRepository.findByQuery("Scooter_find_by_battery", batteryCharge);
+
+        URI locationStatus = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .build(status);
+
+        if (status == null && batteryCharge == null) {
+            return ResponseEntity.ok(scooterRepository.findAll());
+        } else if (status != null && batteryCharge == null) {
+            if (!statusScooters.isEmpty()) {
+                return ResponseEntity.ok(statusScooters);
+            }
+        } else if (status == null) {
+            return ResponseEntity.ok(batteryScooters);
+        }
+        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST,
+                new ResourceNotFoundException(status), locationStatus.getPath()));
+
     }
 
-    //test
     @GetMapping("/trips")
     public List<Trip> getAllTrips() {
         return tripRepository.findAll();
@@ -61,32 +80,25 @@ public class ScooterController {
         }
     }
 
-    @GetMapping("/qStatus")
-    public List<Scooter> getScooterByStatus(@RequestParam("status") String status) throws Exception {
-
-        List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
-        if (statusScooters != null && Objects.equals(status, "IDLE")) {
-            return statusScooters;
-        } else {
-            throw new ResourceNotFoundException(status);
-        }
+    @JsonView(value = {IView.SummaryView.class})
+    @GetMapping("/summary")
+    public List<Scooter> getScootersSummary() {
+        return scooterRepository.findAll();
     }
-    //todo misschien werkt dit wel, zou je ff moeten testen.
-//    public ResponseEntity<List<Scooter>> getScooterByStatus(@RequestParam("status") String status) {
-//
-//        List<Scooter> statusScooters = scooterRepository.findByQuery("Scooter_find_by_status", status);
-//        if (statusScooters != null && Objects.equals(status, "IDLE")) {
-//            return ResponseEntity.ok(statusScooters);
-//        } else {
-//            return ResponseEntity.badRequest().build().;
-//        }
 
-    @GetMapping("/qBattery")
-    public List<Scooter> getScooterByBattery(@RequestParam("battery") int batteryCharge) {
+    @GetMapping("{scooterId}/trips")
+    public ResponseEntity<Object> getTripsDateTime(@PathVariable long scooterId,
+                                                   @RequestParam LocalDateTime from,
+                                                   @RequestParam LocalDateTime to) throws Exception {
+        List<Trip> fromToDate = tripRepository.findByQuery("Trip_find_by_scooterId_and_period", from, to);
 
-        List<Scooter> batteryScooters = scooterRepository.findByQuery("Scooter_find_by_battery", batteryCharge);
-        if (batteryScooters != null) {
-            return batteryScooters;
+        Scooter scooterDetail = scooterRepository.findById(scooterId);
+        if (scooterDetail == null) {
+            throw new ResourceNotFoundException(scooterId);
+        }
+
+        if (!fromToDate.isEmpty()) {
+            return ResponseEntity.ok(fromToDate);
         }
         return null;
     }
@@ -109,7 +121,6 @@ public class ScooterController {
     }
 
 
-    // todo localDateTimeFormat check trip.java
     @Transactional
     @PostMapping("{scooterId}/trip")
     public void addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) throws Exception {
@@ -144,7 +155,7 @@ public class ScooterController {
             updateScooter.setBatteryCharge(scooterDetails.getBatteryCharge());
             updateScooter.setStatus(scooterDetails.getStatus());
             updateScooter.setGpsLocation(scooterDetails.getGpsLocation());
-//            updateScooter.setMileage(scooterDetails.getMileage());
+            updateScooter.setMileage(scooterDetails.getMileage());
             scooterRepository.save(updateScooter);
         }
     }
@@ -159,10 +170,9 @@ public class ScooterController {
         }
     }
 
-    @JsonView(value = {IView.SummaryView.class})
-    @GetMapping("/summary")
-    public List<Scooter> getScootersSummary() {
-        return scooterRepository.findAll();
+
+    private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
+        return new ResponseEntity<>(apiError, apiError.getError());
     }
 }
 

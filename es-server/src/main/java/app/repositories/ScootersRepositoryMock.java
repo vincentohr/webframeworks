@@ -77,7 +77,7 @@ public class ScootersRepositoryMock implements EntityRepository<Scooter> {
     }
 
     @Override
-    public List<Scooter> findByQuery(String jpqlName, Object params) {
+    public List<Scooter> findByQuery(String jpqlName, Object... params) {
         return null;
     }
 }

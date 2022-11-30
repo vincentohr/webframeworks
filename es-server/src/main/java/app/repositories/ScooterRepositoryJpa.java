@@ -48,9 +48,9 @@ public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
     }
 
     @Override
-    public List<Scooter> findByQuery(String jpqlName, Object params) {
+    public List<Scooter> findByQuery(String jpqlName, Object... params) {
         Query query = entityManager.createNamedQuery(jpqlName);
-        query.setParameter(1, params);
+        query.setParameter(1, params[0]);
 
         return query.getResultList();
     }

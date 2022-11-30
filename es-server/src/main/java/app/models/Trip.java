@@ -6,9 +6,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+// todo Scooter.id = ?1, NULL pointer maak jij maar af. Ik kan het niet testen door die nullpointer
+// Dit werkt in mySql(regel in comments) en krijg de juiste ouput
+// Het werkt niet in spring, vandaar dat ik een dubbele between heb gebruikt
+// Krijg je opeens ook een null pointer gebruik dan de onderste in namedQuery en update de repo
+// SELECT * FROM trip where idtrip =1  and startdate and enddate between "2022-04-01" and "2022-08-01"
 @Entity
 @NamedQuery(name = "Trip_find_by_scooterId_and_period",
-        query = "SELECT t FROM Trip t WHERE t.id BETWEEN ?1 AND ?2")
+//        query = "SELECT t FROM Trip t WHERE (Scooter.id = ?1) AND t.startDateTime BETWEEN ?2 AND ?3 and t.endDateTime BETWEEN ?2 AND ?3 "
+        query = "SELECT t FROM Trip t WHERE t.startDateTime BETWEEN ?2 AND ?3 and t.endDateTime BETWEEN ?2 AND ?3 "
+
+)
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue
@@ -67,14 +75,13 @@ public class Trip implements Identifiable {
     }
 
     public boolean associateScooter(Scooter scooter) {
-        if(scooter == null || this.getScooter().getId() != scooter.getId()){
+        if (scooter == null || this.getScooter().getId() != scooter.getId()) {
             return false;
         }
         this.setScooter(scooter);
         scooter.associateTrip(this);
         return true;
     }
-
 
 
 //    public boolean dissociateScooter(Scooter scooter) {
@@ -137,7 +144,7 @@ public class Trip implements Identifiable {
         return cost;
     }
 
-    public void  setCost(double cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
