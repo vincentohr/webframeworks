@@ -1,6 +1,5 @@
 package app.repositories;
 
-import app.models.Scooter;
 import app.models.Trip;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -47,7 +46,6 @@ public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip> {
     @Override
     public List<Trip> findByQuery(String jpqlName, Object... params) {
         Query query = entityManager.createNamedQuery(jpqlName);
-//        query.setParameter(1, params[0]);
         query.setParameter(2, params[0]);
         query.setParameter(3, params[1]);
 

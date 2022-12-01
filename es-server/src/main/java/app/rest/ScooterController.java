@@ -9,6 +9,7 @@ import app.models.Trip;
 import app.repositories.EntityRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -88,8 +89,10 @@ public class ScooterController {
 
     @GetMapping("{scooterId}/trips")
     public ResponseEntity<Object> getTripsDateTime(@PathVariable long scooterId,
-                                                   @RequestParam LocalDateTime from,
-                                                   @RequestParam LocalDateTime to) throws Exception {
+                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                   LocalDateTime from,
+                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                   LocalDateTime to) throws Exception {
         List<Trip> fromToDate = tripRepository.findByQuery("Trip_find_by_scooterId_and_period", from, to);
 
         Scooter scooterDetail = scooterRepository.findById(scooterId);

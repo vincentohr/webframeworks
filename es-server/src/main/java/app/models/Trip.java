@@ -6,26 +6,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-// todo Scooter.id = ?1, NULL pointer maak jij maar af. Ik kan het niet testen door die nullpointer
-// Dit werkt in mySql(regel in comments) en krijg de juiste ouput
-// Het werkt niet in spring, vandaar dat ik een dubbele between heb gebruikt
-// Krijg je opeens ook een null pointer gebruik dan de onderste in namedQuery en update de repo
-// SELECT * FROM trip where idtrip =1  and startdate and enddate between "2022-04-01" and "2022-08-01"
 @Entity
 @NamedQuery(name = "Trip_find_by_scooterId_and_period",
-//        query = "SELECT t FROM Trip t WHERE (Scooter.id = ?1) AND t.startDateTime BETWEEN ?2 AND ?3 and t.endDateTime BETWEEN ?2 AND ?3 "
         query = "SELECT t FROM Trip t WHERE t.startDateTime BETWEEN ?2 AND ?3 and t.endDateTime BETWEEN ?2 AND ?3 "
-
 )
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue
     private long id;
 
-    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDateTime;
 
-    @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDateTime;
 
     private String startPosition;

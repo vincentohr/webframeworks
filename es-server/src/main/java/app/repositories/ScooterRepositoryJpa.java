@@ -4,6 +4,7 @@ import app.models.Scooter;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -33,6 +34,13 @@ public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
                 this.entityManager.createQuery(
                         "SELECT s FROM Scooter s WHERE s.id = ?1", Scooter.class
                 );
+        try {
+            query.setParameter(1, id).getSingleResult();
+        } catch (NoResultException ex) {
+            return null; // trigger ResourceNotFoundException
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
         return query.setParameter(1, id).getSingleResult();
     }
 
