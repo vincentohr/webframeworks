@@ -46,8 +46,9 @@ public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip> {
     @Override
     public List<Trip> findByQuery(String jpqlName, Object... params) {
         Query query = entityManager.createNamedQuery(jpqlName);
-        query.setParameter(2, params[0]);
-        query.setParameter(3, params[1]);
+        query.setParameter(1, params[0]);
+        query.setParameter(2, params[1]);
+        query.setParameter(3, params[2]);
 
         return query.getResultList();
     }

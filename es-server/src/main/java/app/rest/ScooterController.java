@@ -62,7 +62,6 @@ public class ScooterController {
         }
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST,
                 new ResourceNotFoundException(status), locationStatus.getPath()));
-
     }
 
     @GetMapping("/trips")
@@ -93,7 +92,7 @@ public class ScooterController {
                                                    LocalDateTime from,
                                                    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                                    LocalDateTime to) throws Exception {
-        List<Trip> fromToDate = tripRepository.findByQuery("Trip_find_by_scooterId_and_period", from, to);
+        List<Trip> fromToDate = tripRepository.findByQuery("Trip_find_by_scooterId_and_period", scooterId, from, to);
 
         Scooter scooterDetail = scooterRepository.findById(scooterId);
         if (scooterDetail == null) {

@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @NamedQuery(name = "Trip_find_by_scooterId_and_period",
-        query = "SELECT t FROM Trip t WHERE t.startDateTime BETWEEN ?2 AND ?3 and t.endDateTime BETWEEN ?2 AND ?3 "
+        query = "SELECT t FROM Scooter s JOIN s.trips t WHERE s.id = ?1 AND " +
+                "t.startDateTime BETWEEN ?2 AND ?3 AND t.endDateTime BETWEEN ?2 AND ?3"
 )
 public class Trip implements Identifiable {
     @Id
