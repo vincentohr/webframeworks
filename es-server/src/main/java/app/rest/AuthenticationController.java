@@ -10,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/authentication")
@@ -18,6 +20,7 @@ public class AuthenticationController {
     @Autowired
     APIConfig apiConfig;
 
+    @Transactional
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody ObjectNode login) {
         String email = login.get("email").asText();

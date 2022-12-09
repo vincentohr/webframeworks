@@ -26,7 +26,7 @@ public class APIConfig implements WebMvcConfigurer {
     @Value("${jwt.passphrase:This is very secret information for my private encryption key.}")
     private String passphrase;
 
-    @Value("${jwt.duration-of-validity:1200}") // default 20 minutes;
+    @Value("${jwt.duration-of-validity:12000000}")
     private int tokenDurationOfValidity;
 
     @Override
