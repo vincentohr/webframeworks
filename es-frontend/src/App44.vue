@@ -1,0 +1,40 @@
+<template>
+  <app-header></app-header>
+  <app-nav-bar></app-nav-bar>
+  <router-view></router-view>
+</template>
+
+<script>
+import { SessionSbService } from '@/SessionSbService.js'
+import { reactive, shallowReactive } from 'vue'
+import Header from '@/components/Header.vue'
+import NavBar from '@/components/NavBar.vue'
+import { ScooterAdaptor } from '@/models/ScooterAdaptor'
+import CONFIG from '@/app-config'
+import HeaderSb from '@/components/HeaderSb'
+import NavBarSb from '@/components/NavBarSb'
+
+export default {
+  name: 'App44',
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    'app-header': HeaderSb,
+    // eslint-disable-next-line vue/no-unused-components
+    'app-nav-bar': NavBarSb
+  },
+  provide () {
+    this.theSessionService = shallowReactive(
+      new SessionSbService(CONFIG.BACKEND_URL + '/authentication', CONFIG.JWT_STORAGE_ITEM)
+    )
+    return {
+      scootersService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters'),
+      sessionService: this.theSessionService
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+
+</style>

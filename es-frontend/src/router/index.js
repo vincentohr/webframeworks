@@ -9,6 +9,7 @@ import Detail32 from '@/components/scooters/Detail32'
 import Detail34 from '@/components/scooters/Detail34'
 import Overview37 from '@/components/scooters/Overview37'
 import Detail37 from '@/components/scooters/Detail37'
+import SignIn from '@/components/SignIn'
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     name: 'home',
     path: '/home',
     component: Welcome
+  },
+  {
+    name: 'sign_in',
+    path: '/sign-in',
+    component: SignIn
   },
   {
     path: '/overview31',
