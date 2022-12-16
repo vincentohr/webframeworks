@@ -15,12 +15,13 @@ export class FetchInterceptor {
     this.session = session
     this.router = router
 
-    console.log('FetchInterceptor has been registered; current token = ',
-      FetchInterceptor.theInstance.sessionService.currentToken)
+    // console.log('FetchInterceptor has been registered; current token = ',
+    //   FetchInterceptor.theInstance.sessionService.currentToken)
   }
 
   request (url, options) {
-    const token = FetchInterceptor.theInstance.sessionService.currentToken
+    const token = null
+    // const token = FetchInterceptor.theInstance.sessionService.currentToken
     // console.log("FetchInterceptor request: ", url, options, token);
 
     if (token == null) {
