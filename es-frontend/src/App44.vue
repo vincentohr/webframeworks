@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { SessionSbService } from '@/SessionSbService.js'
+import { SessionSbService } from '@/SessionSbService'
 import { reactive, shallowReactive } from 'vue'
 import Header from '@/components/Header.vue'
 import NavBar from '@/components/NavBar.vue'
@@ -13,6 +13,7 @@ import { ScooterAdaptor } from '@/models/ScooterAdaptor'
 import CONFIG from '@/app-config'
 import HeaderSb from '@/components/HeaderSb'
 import NavBarSb from '@/components/NavBarSb'
+import { FetchInterceptor } from '@/FetchInterceptor'
 
 export default {
   name: 'App44',
@@ -26,10 +27,17 @@ export default {
     this.theSessionService = shallowReactive(
       new SessionSbService(CONFIG.BACKEND_URL + '/authentication', CONFIG.JWT_STORAGE_ITEM)
     )
+    this.theFetchInterceptor =
+      new FetchInterceptor(this.theSessionService, this.$router)
+
     return {
       scootersService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters'),
       sessionService: this.theSessionService
     }
+  },
+  unmounted () {
+    console.log('App.unmounted() has been called')
+    this.theFetchInterceptor.unregister()
   }
 
 }

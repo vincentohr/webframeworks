@@ -16,17 +16,4 @@ public class EsServerApplication {
         SpringApplication.run(EsServerApplication.class, args);
     }
 
-    @Configuration
-    @EnableWebMvc
-    public static class WebConfig implements WebMvcConfigurer {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**");
-//            .getHostIPAddressPattern()
-        }
-        public String getHostIpAddressPattern(){
-            return null;
-        }
-    }
-
 }

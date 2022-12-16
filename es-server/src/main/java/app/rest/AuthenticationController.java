@@ -14,14 +14,14 @@ import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin
-//@RequestMapping("/authentication")
+@RequestMapping("/authentication")
 public class AuthenticationController {
 
     @Autowired
     APIConfig apiConfig;
 
-//    @Transactional
-    @PostMapping("/authentication/login")
+    @Transactional
+    @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody ObjectNode login) {
         String email = login.get("email").asText();
         String password = login.get("password").asText();

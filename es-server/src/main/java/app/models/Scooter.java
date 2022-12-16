@@ -56,13 +56,14 @@ public class Scooter implements Identifiable {
     }
 
     public static Scooter createSampleScooter(long id) {
+        double randomLocation = Math.random() * 0.05;
         String[] statusArray = {"IDLE", "INUSE", "MAINTENANCE"};
         Scooter scooter = new Scooter(id);
         scooter.batteryCharge = (int) (Math.random() * 95) + 5;
         scooter.mileage = (int) (Math.random() * 10_000);
         scooter.status = statusArray[(int) (Math.random() * 3)];
-        double latitude = 52.3702157;
-        double longitude = 4.895167899999933;
+        double latitude = 52.3702157 * randomLocation;
+        double longitude = 4.895167899999933 * randomLocation;
         scooter.gpsLocation = latitude + " " + longitude;
         scooter.tag = scooter.generateRandomTag();
 
