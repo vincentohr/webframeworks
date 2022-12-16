@@ -9,7 +9,7 @@ export class SessionSbService {
     this._BROWSER_STORAGE_ITEM_NAME = browserStorageItemName
     this._RESOURCES_URL = resourcesUrl
     this._currentUser = null
-    this._currentToken = null
+    this._currentToken = 'TEST'
     // retrieve the current user info from browser storage,
     // e.g. after a page reload or when a new tab is opened.
     this.getTokenFromBrowserStorage()

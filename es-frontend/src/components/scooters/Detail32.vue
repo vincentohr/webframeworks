@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <td>{{ statusText }}</td>
-        <td><select v-model="status">
+        <td><select v-bind:value="status">
           <option v-for="state in ScooterStatus" :key="state" selected>{{ state }}</option>
         </select></td>
       </tr>

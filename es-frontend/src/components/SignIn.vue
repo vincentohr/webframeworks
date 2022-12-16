@@ -10,7 +10,8 @@
 <!--    </tr>-->
 <!--  </table>-->
 <h1>Please provide your login credentials:</h1>
-  <form method="POST" v-on:@submit.prevent="SignIn()">
+<!--  method="post" v-on:@submit.prevent="SignIn"-->
+  <form >
     <table>
       <tr>
         <th>User e-mail</th>
@@ -21,8 +22,11 @@
         <th><input type="password" v-model="password"></th>
       </tr>
     </table>
-    <input type="submit" value="Sign In">
+<!--    <input type="submit" value="Sign In">-->
+    <button @click="SignIn">click me!</button>
   </form>
+  <h3>Current token:</h3>
+  <div class="token-box">{{sessionService.currentToken}}</div>
 </template>
 
 <script>
@@ -38,7 +42,8 @@ export default {
   },
   methods: {
     async SignIn () {
-      await this.theSessionService.asyncSignIn(this.email, this.password)
+      console.log('TEST')
+      await this.sessionService.asyncSignIn(this.email, this.password)
     }
   }
 }
@@ -48,7 +53,7 @@ export default {
 form{
   color: black;
 }
-h1{
+h1, h3{
   color: black;
 }
 table,th,td {
@@ -58,5 +63,7 @@ table{
     display: table;
     color: black;
 }
-
+.token-box{
+  color: black;
+}
 </style>

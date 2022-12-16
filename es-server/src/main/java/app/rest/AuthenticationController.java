@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/authentication")
+@CrossOrigin
+//@RequestMapping("/authentication")
 public class AuthenticationController {
 
     @Autowired
     APIConfig apiConfig;
 
-    @Transactional
-    @PostMapping("/login")
+//    @Transactional
+    @PostMapping("/authentication/login")
     public ResponseEntity<Object> login(@RequestBody ObjectNode login) {
         String email = login.get("email").asText();
         String password = login.get("password").asText();
