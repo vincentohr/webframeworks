@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:*")
 @RequestMapping("/scooters")
 public class ScooterController {
 
