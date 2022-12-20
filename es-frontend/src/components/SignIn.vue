@@ -10,7 +10,6 @@
 <!--    </tr>-->
 <!--  </table>-->
 <h1>Please provide your login credentials:</h1>
-<!--  method="post" v-on:@submit.prevent="SignIn"-->
   <form >
     <table>
       <tr>
@@ -23,7 +22,7 @@
       </tr>
     </table>
 <!--    <input type="submit" value="Sign In">-->
-    <button @click="SignIn">click me!</button>
+    <button @click.prevent="SignIn">click me!</button>
   </form>
   <h3>Current token:</h3>
   <div class="token-box">{{sessionService.currentToken}}</div>

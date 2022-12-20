@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/authentication")
 public class AuthenticationController {
 

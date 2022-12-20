@@ -1,7 +1,10 @@
 package app.models;
 
+import app.Views.IView;
+import app.serialize.CustomJson;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,11 +17,14 @@ import java.time.LocalDateTime;
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue
+    @JsonView(value = {CustomJson.Summary.class})
     private long id;
 
+    @JsonView(value = {CustomJson.Summary.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDateTime;
 
+    @JsonView(value = {CustomJson.Summary.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDateTime;
 
@@ -77,8 +83,13 @@ public class Trip implements Identifiable {
         return true;
     }
 
+    @Transient
+    public boolean isActive() {
+        return associateScooter(scooter);
+    }
 
-//    public boolean dissociateScooter(Scooter scooter) {
+
+    //    public boolean dissociateScooter(Scooter scooter) {
 //        if(scooter != null || this.getScooter().getId() == scooter.getId()) {
 //            scooter.dissociateTrip(this);
 //            return true;
