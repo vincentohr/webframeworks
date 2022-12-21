@@ -4,25 +4,21 @@ export class FetchInterceptor {
   static theInstance; // the singleton instance that has been registered
   sessionService; // the sessionService which tracks the token
   unregister; // callback function to unregister this instance at shutdown
-  session;
   router;
 
-  constructor (session, router, sessionService) {
+  constructor (session, router) {
     FetchInterceptor.theInstance = this
-    this.sessionService = sessionService
+    this.sessionService = session
     // fetchIntercept does not register the object closure, only the methods as functions
     this.unregister = fetchIntercept.register(this)
-    this.session = session
     this.router = router
 
-    // console.log('FetchInterceptor has been registered; current token = ',
-    //   FetchInterceptor.theInstance.sessionService.currentToken)
+    console.log('FetchInterceptor has been registered; current token = ',
+      FetchInterceptor.theInstance.sessionService.currentToken)
   }
 
   request (url, options) {
-    const token = null
-    // const token = FetchInterceptor.theInstance.sessionService.currentToken
-    // console.log("FetchInterceptor request: ", url, options, token);
+    const token = FetchInterceptor.theInstance.sessionService.currentToken
 
     if (token == null) {
       return [url, options]
@@ -30,9 +26,10 @@ export class FetchInterceptor {
       return [url, { headers: { Authorization: token } }]
     } else {
       const newOptions = { ...options }
-      // TODO combine existing headers with new Authorization header
-
-      // console.log("FetchInterceptor request: ", url, newOptions);
+      const modifiedHeaders = new Headers(newOptions.headers)
+      modifiedHeaders.append('Authorization', token)
+      newOptions.headers = modifiedHeaders
+      console.log('FetchInterceptor request: ', url, newOptions)
       return [url, newOptions]
     }
   }

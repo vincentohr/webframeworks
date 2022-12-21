@@ -22,6 +22,7 @@
     <!--    <a href="#login" class="right">Log in</a>-->
     <!--    <a href="#signup" class="right">Sign up</a>-->
     <router-link class="right" to="/sign-in">Log in</router-link>
+    <button class="right" @click.prevent="signOut">Log in</button>
     <router-link class="right" to="/sign-up">Sign up</router-link>
   </div>
 </template>

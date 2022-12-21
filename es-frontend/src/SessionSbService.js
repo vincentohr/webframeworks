@@ -22,8 +22,6 @@ export class SessionSbService {
       email: email,
       password: password
     })
-    console.log(this._RESOURCES_URL + '/login')
-    console.log(this)
     const response = await fetch(this._RESOURCES_URL + '/login',
       {
         method: 'POST',

@@ -14,7 +14,7 @@ public class APIConfig implements WebMvcConfigurer {
 
     // path prefixes that will be protected by the authentication filter
     public Set<String> SECURED_PATHS =
-            Set.of("/authentication", "/h2-console", "/favicon.ico");
+            Set.of("/authentication", "/h2-console", "/favicon.ico", "/scooters");
 
     // a variable reboot signature can be used as an additional security layer in authentication tokens.
     private static final double REBOOT_CODE = 63.0427; // Math.random();
