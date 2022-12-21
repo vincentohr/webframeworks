@@ -42,7 +42,6 @@ export class FetchInterceptor {
 
   response (response) {
     // console.log("FetchInterceptor response: ", response);
-    FetchInterceptor.theInstance.tryRecoverNewJWToken(response)
     if (response.status >= 400 && response.status < 600) {
       FetchInterceptor.theInstance.handleErrorInResponse(response)
     }
@@ -58,13 +57,6 @@ export class FetchInterceptor {
   async handleErrorInResponse (response) {
     if (response.status === 401) {
       this.router.push({ path: '/sign-out' }) // vue-router
-    } else if (response.status !== 406) {
-      // TODO handle any other error
     }
-  }
-
-  tryRecoverNewJWToken (response) {
-    // TODO check the response on availability of a JWT
-    //  and request the session service to save that
   }
 }

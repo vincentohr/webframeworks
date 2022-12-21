@@ -10,6 +10,7 @@ import Detail34 from '@/components/scooters/Detail34'
 import Overview37 from '@/components/scooters/Overview37'
 import Detail37 from '@/components/scooters/Detail37'
 import SignIn from '@/components/SignIn'
+import Overview45 from '@/components/trips/Overview45';
 
 const routes = [
   {
@@ -74,6 +75,11 @@ const routes = [
         props: true
       }
     ]
+  },
+  {
+    path: '/scooters/overview45',
+    name: 'overview45',
+    component: Overview45
   },
   {
     path: '/:notFound(.*)',
