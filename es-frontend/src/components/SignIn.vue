@@ -44,6 +44,12 @@ export default {
       console.log('TEST')
       await this.sessionService.asyncSignIn(this.email, this.password)
     }
+  },
+  created () {
+    if (this.$route.query.signOut) {
+      this.sessionService.signOut()
+      this.$router.push(this.$route.path)
+    }
   }
 }
 </script>

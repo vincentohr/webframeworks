@@ -4,13 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.util.Converter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
-
+@JsonComponent
 public class CustomJson {
     public static class Shallow{}
     public static class Summary extends Shallow{}
@@ -27,7 +25,7 @@ public class CustomJson {
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
             mapper.setConfig(mapper.getSerializationConfig())
-                    .writerWithView(CustomJson.Shallow.class);
+                    .readerWithView(CustomJson.Shallow.class);
 
             jsonGenerator.setCodec(mapper);
             jsonGenerator.writeObject(object);

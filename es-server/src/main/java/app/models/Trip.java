@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 @NamedQuery(name = "Trip_find_by_scooterId_and_period",
@@ -17,14 +19,11 @@ import java.time.LocalDateTime;
 public class Trip implements Identifiable {
     @Id
     @GeneratedValue
-    @JsonView(value = {CustomJson.Summary.class})
     private long id;
 
-    @JsonView(value = {CustomJson.Summary.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDateTime;
 
-    @JsonView(value = {CustomJson.Summary.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDateTime;
 
@@ -58,16 +57,14 @@ public class Trip implements Identifiable {
     }
 
     public static Trip createSampleTrip(long id) {
-        LocalDateTime[] localDateTime = {LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(6),
-                LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(5)};
         double latitude = 52.3702157;
         double longitude = 4.895167899999933;
 
         Trip trip = new Trip(id);
         trip.mileage = (int) (Math.random() * 95) + 5;
         trip.cost = (int) (Math.random() * 10_000);
-        trip.startDateTime = localDateTime[(int) (Math.random() * localDateTime.length - 1)];
-        trip.endDateTime = localDateTime[(int) (Math.random() * localDateTime.length - 1)].plusWeeks(2);
+        trip.startDateTime = randomDate().atStartOfDay();
+        trip.endDateTime = trip.startDateTime.plusWeeks(4);
         trip.startPosition = latitude + " " + longitude;
         trip.endPosition = latitude + " " + longitude;
         trip.setScooter(Scooter.createSampleScooter(0));
@@ -85,6 +82,10 @@ public class Trip implements Identifiable {
 
     @Transient
     public boolean isActive() {
+        if(LocalDateTime.now().isAfter(endDateTime) ||
+                LocalDateTime.now().isBefore(startDateTime)){
+            return false;
+        }
         return associateScooter(scooter);
     }
 
@@ -96,6 +97,14 @@ public class Trip implements Identifiable {
 //        }
 //        return false;
 //    }
+
+    public static LocalDate randomDate() {
+        int fiftyDays = 75;
+        int dateSinceEpochDay = LocalDate.now().getYear() - LocalDate.EPOCH.getYear();
+        System.out.println(dateSinceEpochDay);
+        return LocalDate.ofEpochDay(ThreadLocalRandom
+                .current().nextInt(-fiftyDays, fiftyDays)).plusYears(dateSinceEpochDay + 1);
+    }
 
     public long getId() {
         return id;

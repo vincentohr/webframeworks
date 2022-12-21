@@ -32,6 +32,11 @@ export default {
     return {
       name: 'NavBar'
     }
+  },
+  methods: {
+    signOut () {
+      this.$router.push({ path: '/sign-in', query: { signOut: true } })
+    }
   }
 }
 </script>
