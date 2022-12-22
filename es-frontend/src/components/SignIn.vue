@@ -46,10 +46,10 @@ export default {
     }
   },
   created () {
-    if (this.$route.query.signOut) {
+    if (this.$route.query.signOut === 'true') {
       this.sessionService.signOut()
-      this.$router.push(this.$route.path)
     }
+    this.$router.push(this.$route.path)
   }
 }
 </script>

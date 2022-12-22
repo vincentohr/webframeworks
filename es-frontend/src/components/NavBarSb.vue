@@ -29,28 +29,58 @@
     <!--    <a href="#myaccount">My account</a>-->
     <!--    <a href="#login" class="right">Log in</a>-->
     <!--    <a href="#signup" class="right">Sign up</a>-->
-    <router-link class="right" to="/sign-in">Log in</router-link>
-    <button class="right" @click.prevent="signOut">Log in</button>
-    <router-link class="right" to="/sign-up">Sign up</router-link>
+    <router-link v-if="!loggedIn" class="right" @click="signIn" to="/sign-in">Log in</router-link>
+    <a v-if="loggedIn" id="signOut" class="right" @click.prevent="signOut">Log out</a>
+    <router-link class="right" v-if="!loggedIn" to="/sign-up">Sign up</router-link>
   </div>
 </template>
 
 <script>
 export default {
+  inject: ['sessionService'],
+  created () {
+    this.sessionService.isAuthenticated().then((result) => {
+      this.data = result
+      console.log('NavBarSb: ' + this.data)
+      if (this.data === true) {
+        this.loggedIn = this.data
+        console.log('NavBarSb: ' + this.loggedIn)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
   data () {
     return {
-      name: 'NavBar'
+      name: 'NavBar',
+      loggedIn: false
     }
   },
   methods: {
     signOut () {
       this.$router.push({ path: '/sign-in', query: { signOut: true } })
+      this.loggedIn = false
+    },
+    signIn () {
+      this.$router.push('/sign-in')
+      this.loggedIn = true
     }
   }
 }
 </script>
 
 <style scoped>
+#signOut{
+  background-color: gray;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+#signOut:hover{
+  border-color: #f1a80a;
+  background-color: #b68c01;
+}
 .navbar {
   overflow: hidden;
   background-color: gray;

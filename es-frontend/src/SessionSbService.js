@@ -40,6 +40,15 @@ export class SessionSbService {
     }
   }
 
+  async isAuthenticated () {
+    if (this._currentToken == null) {
+      return false
+    } else {
+      return true
+    }
+    return this._currentUser != null
+  }
+
   signOut () {
     this.saveTokenIntoBrowserStorage(null, null)
   }
