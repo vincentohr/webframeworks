@@ -14,6 +14,7 @@ import CONFIG from '@/app-config'
 import HeaderSb from '@/components/HeaderSb'
 import NavBarSb from '@/components/NavBarSb'
 import { FetchInterceptor } from '@/FetchInterceptor'
+import { RESTAdaptorInterface } from '@/models/RESTAdaptorInterface'
 
 export default {
   name: 'App44',
@@ -32,6 +33,7 @@ export default {
 
     return {
       scootersService: new ScooterAdaptor(CONFIG.BACKEND_URL + '/scooters'),
+      tripsService: new RESTAdaptorInterface(CONFIG.BACKEND_URL + '/trips'),
       sessionService: this.theSessionService
     }
   },

@@ -17,6 +17,14 @@
         <router-link to="/">Abandoned Scooters</router-link>
       </div>
     </div>
+    <div class="dropdown">
+      <div class="scooters">Trips
+        <div class="scooters-content">
+          <router-link to="/trips/overview45">Trips (Overview45)</router-link>
+          <router-link to="/trips/overview45">History</router-link>
+        </div>
+      </div>
+    </div>
     <!--    <a href="#mytrips">My Trips</a>-->
     <!--    <a href="#myaccount">My account</a>-->
     <!--    <a href="#login" class="right">Log in</a>-->

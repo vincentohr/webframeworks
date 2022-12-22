@@ -99,11 +99,11 @@ public class Trip implements Identifiable {
 //    }
 
     public static LocalDate randomDate() {
-        int fiftyDays = 75;
+        int days = 75;
         int dateSinceEpochDay = LocalDate.now().getYear() - LocalDate.EPOCH.getYear();
         System.out.println(dateSinceEpochDay);
         return LocalDate.ofEpochDay(ThreadLocalRandom
-                .current().nextInt(-fiftyDays, fiftyDays)).plusYears(dateSinceEpochDay + 1);
+                .current().nextInt(-days, days)).plusYears(dateSinceEpochDay + 1);
     }
 
     public long getId() {
