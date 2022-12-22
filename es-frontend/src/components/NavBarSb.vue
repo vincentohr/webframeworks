@@ -62,7 +62,7 @@ export default {
       this.loggedIn = false
     },
     signIn () {
-      this.$router.push('/sign-in')
+      this.$router.push({ path: '/sign-in', query: { signOut: false } })
       this.loggedIn = true
     }
   }
