@@ -4,11 +4,11 @@
       <table>
         <tr>
           <th>
-            Tag:
+            Trip Id:
           </th>
         </tr>
         <tr v-for="(trip, index) in trips" :key="index" @click="onSelect (trip)">
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.tag }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.id }}</td>
         </tr>
       </table>
       <button id="button" @click="onNewScooter">New Trip</button>
@@ -53,12 +53,12 @@ export default {
     },
     onSelect (trip) {
       this.isActive = true
-      if (trip !== null && trip !== this.selectedTrip) {
-        this.$router.push(this.$route.matched[0].path + '/' + trip.id)
-        this.selectedTrip = trip
-      } else if (this.selectedTrip !== null) {
-        this.$router.push(this.$route.matched[0].path + '/')
-      }
+      // if (trip !== null && trip !== this.selectedTrip) {
+      //   this.$router.push(this.$route.matched[0].path + '/' + trip.id)
+      //   this.selectedTrip = trip
+      // } else if (this.selectedTrip !== null) {
+      //   this.$router.push(this.$route.matched[0].path + '/')
+      // }
       // if (this.selectedScooter !== scooter) {
       //   // this.$router.push(this.$route.matched[0].path + '/' + scooter._id)
       //   this.selectedScooter = scooter

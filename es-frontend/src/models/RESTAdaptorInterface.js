@@ -1,5 +1,3 @@
-import { Scooter } from '@/models/scooter'
-
 export class RESTAdaptorInterface {
   resourcesURL
   copyConstructor
@@ -7,7 +5,6 @@ export class RESTAdaptorInterface {
   constructor (resourcesURL) {
     this.resourcesURL = resourcesURL
     console.log('Created RESTAdaptorInterface for: ' + resourcesURL)
-    // this.copyConstructor = Object.assign(new Trip(0), scooter)
   }
 
   async fetchJson (url, options = null) {
@@ -21,13 +18,11 @@ export class RESTAdaptorInterface {
   }
 
   async asyncFindAll (queryParams = null) {
-    const url = this.fullURL('/trips', queryParams)
     console.log('RESTAdaptorInterface.asyncFindAll()...')
-    const scooters = await this.fetchJson(this.resourcesURL)
-    // console.log(scooters.map(s => this.copyConstructor(s)))
-    console.log(scooters)
-    // return scooters.map(s => Scooter.copyConstructor(s))
-    return null
+    const url = this.fullURL('/trips', queryParams)
+    const trips = await this.fetchJson(this.resourcesURL)
+    this.copyConstructor = Object.assign(trips)
+    return this.copyConstructor.map(s => s)
   }
 
   asyncFindById (queryParams = null) {
