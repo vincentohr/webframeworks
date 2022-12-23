@@ -20,7 +20,7 @@
     <div class="dropdown">
       <div class="scooters">Trips
         <div class="scooters-content">
-          <router-link to="/trips/overview45">Trips (Overview45)</router-link>
+          <router-link to="/trips/map45">Trips</router-link>
           <router-link to="/trips/overview45">History</router-link>
         </div>
       </div>

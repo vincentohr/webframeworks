@@ -18,7 +18,7 @@ export default {
   inject: ['sessionService'],
   created () {
     if (this.theSessionService != null) {
-      this.user = this.theSessionService
+      this.user = this.theSessionService._currentUser
     }
   },
   data () {

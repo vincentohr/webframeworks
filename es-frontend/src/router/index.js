@@ -11,6 +11,7 @@ import Overview37 from '@/components/scooters/Overview37'
 import Detail37 from '@/components/scooters/Detail37'
 import SignIn from '@/components/SignIn'
 import Overview45 from '@/components/trips/Overview45'
+import Map45 from '@/components/scooters/Map45'
 
 const routes = [
   {
@@ -80,6 +81,11 @@ const routes = [
     path: '/trips/overview45',
     name: 'overview45',
     component: Overview45
+  },
+  {
+    path: '/trips/map45',
+    name: 'Map45',
+    component: Map45
   },
   {
     path: '/:notFound(.*)',
