@@ -47,6 +47,7 @@ public class Trip implements Identifiable {
         this.endPosition = endPosition;
         this.mileage = mileage;
         this.cost = cost;
+        setScooter(Scooter.createSampleScooter(0));
     }
 
     public Trip(@JsonProperty long id) {
@@ -57,9 +58,9 @@ public class Trip implements Identifiable {
     }
 
     public static Trip createSampleTrip(long id) {
-        double latitude = 52.37021 * (1 + Math.random() * 0.05);
+        double latitude = 52.37021 * (1 + Math.random() * 0.005);
         double longitude = 4.89516 * (1 + Math.random() * 0.05);
-        double latitudeEnd = 52.37021 * (1 + Math.random() * 0.05);
+        double latitudeEnd = 52.37021 * (1 + Math.random() * 0.005);
         double longitudeEnd = 4.89516 * (1 + Math.random() * 0.05);
 
         Trip trip = new Trip(id);
@@ -69,9 +70,6 @@ public class Trip implements Identifiable {
         trip.endDateTime = trip.startDateTime.plusWeeks(4);
         trip.startPosition = String.format("%.5fN, %.5fE", latitude, longitude);
         trip.endPosition = String.format("%.5fN, %.5fE", latitudeEnd, longitudeEnd);
-
-        // todo
-        System.out.println(!trip.isActive());
         trip.setScooter(Scooter.createSampleScooter(0));
         return trip;
     }
@@ -87,21 +85,13 @@ public class Trip implements Identifiable {
 
     @Transient
     public boolean isActive() {
-        if(LocalDateTime.now().isAfter(endDateTime) ||
-                LocalDateTime.now().isBefore(startDateTime)){
-            return false;
-        }
-        return associateScooter(scooter);
-    }
-
-
-    //    public boolean dissociateScooter(Scooter scooter) {
-//        if(scooter != null || this.getScooter().getId() == scooter.getId()) {
-//            scooter.dissociateTrip(this);
-//            return true;
+//        if(LocalDateTime.now().isAfter(endDateTime) ||
+//                LocalDateTime.now().isBefore(startDateTime)){
+//            return false;
 //        }
-//        return false;
-//    }
+//        return associateScooter(scooter);
+        return endDateTime == null;
+    }
 
     public static LocalDate randomDate() {
         int days = 75;

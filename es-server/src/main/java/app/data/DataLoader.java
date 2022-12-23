@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -47,6 +48,9 @@ public class DataLoader implements CommandLineRunner {
         if (trips.size() > 0)
             return;
         System.out.println("Configuring some initial trips in the repository");
+
+        Trip trip = new Trip(0, LocalDateTime.now(), null, "52.37021N 4.89516E", null, 0, 0);
+        this.tripRepository.save(trip);
         for (int i = 0; i < 10; i++) {
             this.tripRepository.save(Trip.createSampleTrip(0));
         }

@@ -6,7 +6,6 @@ import app.models.Scooter;
 import app.models.Trip;
 import app.repositories.TripsRepositoryJpa;
 import app.serialize.CustomJson;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +25,25 @@ public class TripController {
         return tripRepository.findAll();
     }
 
-    @PutMapping("{id}")
-    public void updateScooter(@RequestParam(required = false) String status) throws Exception {
-
+    @PutMapping("{tripId}")
+    public void updateTrip(@RequestParam(required = false) boolean finish, @PathVariable long tripId,
+                           @RequestBody Trip tripDetails) throws Exception {
+        Trip updateTrip = tripRepository.findById(tripId);
+        if (!finish) {
+            return;
+        }
+        if (updateTrip == null) {
+            throw new ResourceNotFoundException(tripId);
+        } else if (tripId != tripDetails.getId() && tripDetails.getId() != 0) {
+            throw new PreConditionFailedException(tripId, tripDetails.getId());
+        } else {
+            updateTrip.setScooter(tripDetails.getScooter());
+            updateTrip.setStartDateTime(tripDetails.getStartDateTime());
+            updateTrip.setEndDateTime(tripDetails.getEndDateTime());
+            updateTrip.setStartPosition(tripDetails.getStartPosition());
+            updateTrip.setEndPosition(tripDetails.getEndPosition());
+            updateTrip.setMileage(tripDetails.getMileage());
+            tripRepository.save(updateTrip);
+        }
     }
 }

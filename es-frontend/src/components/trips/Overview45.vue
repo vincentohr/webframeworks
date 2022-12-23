@@ -20,14 +20,11 @@
           <td class="placeholder">{{ trip.active }}</td>
           <td class="placeholder">{{ trip.startPosition }}</td>
           <td class="placeholder">{{ trip.endPosition }}</td>
-          <td class="placeholder">{{ trip.mileage }}</td>
+          <td :class="{'finishRun': trip.mileage === 0}">{{ trip.mileage }}</td>
         </tr>
       </table>
     </div>
   </div>
-<!--  <div id="text">-->
-<!--    <h3 v-if="!this.isActive">Select a Trip</h3>-->
-<!--  </div>-->
   <div id="detail">
     <router-view :selected-scooter="selectedTrip" @delete-scooter="remove()"
                  @deselect-scooter="deselect()" @refresh="refresh()"></router-view>
@@ -49,18 +46,9 @@ export default {
       isActive: false
     }
   },
-  // Geen idee of dit werkt, niet zo lang aan gezeten.
   methods: {
     refresh () {
       window.location.reload()
-    },
-    onNewScooter (pId) {
-      pId = this.lastId
-      this.lastId++
-      this.trips.push(
-        this.tripsService.asyncSave(this.selectedTrip)
-      )
-      this.selectedTrip = this.scooters.at(this.scooters.length - 1)
     },
     onSelect (trip) {
       this.isActive = true
@@ -140,10 +128,6 @@ tr:nth-child(odd) {
   background-color: darkgray;
 }
 
-/*.activeTag {*/
-/*  background-color: #11bd11;*/
-/*}*/
-
 #button {
   display: block;
   margin-left: auto;
@@ -153,4 +137,8 @@ tr:nth-child(odd) {
   color: white;
   padding: 10px;
 }
+.finishRun {
+  content-visibility: hidden;
+}
+
 </style>
