@@ -57,16 +57,19 @@ public class Trip implements Identifiable {
     }
 
     public static Trip createSampleTrip(long id) {
-        double latitude = 52.3702157;
-        double longitude = 4.895167899999933;
+        double latitude = 52.37021 * (1 + Math.random() * 0.05);
+        double longitude = 4.89516 * (1 + Math.random() * 0.05);
+        double latitudeEnd = 52.37021 * (1 + Math.random() * 0.05);
+        double longitudeEnd = 4.89516 * (1 + Math.random() * 0.05);
 
         Trip trip = new Trip(id);
         trip.mileage = (int) (Math.random() * 95) + 5;
         trip.cost = (int) (Math.random() * 10_000);
         trip.startDateTime = randomDate().atStartOfDay();
         trip.endDateTime = trip.startDateTime.plusWeeks(4);
-        trip.startPosition = latitude + " " + longitude;
-        trip.endPosition = latitude + " " + longitude;
+        trip.startPosition = String.format("%.5fN, %.5fE", latitude, longitude);
+        trip.endPosition = String.format("%.5fN, %.5fE", latitudeEnd, longitudeEnd);;
+
         trip.setScooter(Scooter.createSampleScooter(0));
         return trip;
     }

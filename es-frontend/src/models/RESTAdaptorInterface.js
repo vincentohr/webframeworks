@@ -22,6 +22,7 @@ export class RESTAdaptorInterface {
     const url = this.fullURL('/trips', queryParams)
     const trips = await this.fetchJson(this.resourcesURL)
     this.copyConstructor = Object.assign(trips)
+    console.log(this.copyConstructor)
     return this.copyConstructor.map(s => s)
   }
 

@@ -3,20 +3,30 @@
     <div id="table">
       <table>
         <tr>
-          <th>
-            Trip Id:
-          </th>
+          <th>Trip Id:</th>
+          <th>Scooter Tag:</th>
+          <th>Start Date</th>
+          <th>Running:</th>
+          <th>Start Location:</th>
+          <th>End Location:</th>
+          <th>Mileage:</th>
         </tr>
         <tr v-for="(trip, index) in trips" :key="index" @click="onSelect (trip)">
           <td :class="{'activeTag': selectedTrip === trip}">{{ trip.id }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.scooter.tag }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.startDateTime }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.active }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.startPosition }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.endPosition }}</td>
+          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.mileage }}</td>
         </tr>
       </table>
       <button id="button" @click="onNewScooter">New Trip</button>
     </div>
   </div>
-  <div id="text">
-    <h3 v-if="!this.isActive">Select a scooter from the list at the left!</h3>
-  </div>
+<!--  <div id="text">-->
+<!--    <h3 v-if="!this.isActive">Select a Trip</h3>-->
+<!--  </div>-->
   <div id="detail">
     <router-view :selected-scooter="selectedTrip" @delete-scooter="remove()"
                  @deselect-scooter="deselect()" @refresh="refresh()"></router-view>
@@ -122,7 +132,7 @@ table {
   margin-top: 3%;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 500px;
+  width: 1000px;
 }
 
 th {
