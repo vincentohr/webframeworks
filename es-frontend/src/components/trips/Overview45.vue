@@ -1,4 +1,6 @@
 <template>
+  <h3>full history of my trips:</h3>
+  <p>(click an active trip to finish the ride)</p>
   <div id="content">
     <div id="table">
       <table>
@@ -12,16 +14,15 @@
           <th>Mileage:</th>
         </tr>
         <tr v-for="(trip, index) in trips" :key="index" @click="onSelect (trip)">
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.id }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.scooter.tag }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.startDateTime }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.active }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.startPosition }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.endPosition }}</td>
-          <td :class="{'activeTag': selectedTrip === trip}">{{ trip.mileage }}</td>
+          <td class="placeholder">{{ trip.id }}</td>
+          <td class="placeholder">{{ trip.scooter.tag }}</td>
+          <td class="placeholder">{{ trip.startDateTime }}</td>
+          <td class="placeholder">{{ trip.active }}</td>
+          <td class="placeholder">{{ trip.startPosition }}</td>
+          <td class="placeholder">{{ trip.endPosition }}</td>
+          <td class="placeholder">{{ trip.mileage }}</td>
         </tr>
       </table>
-      <button id="button" @click="onNewScooter">New Trip</button>
     </div>
   </div>
 <!--  <div id="text">-->
@@ -109,30 +110,16 @@ export default {
 
 <style scoped>
 
-div {
-  display: inline;
-  position: absolute;
-}
-
-#detail {
-  margin-left: 60%;
-  width: 200px;
-}
-
-#table {
-  margin-left: 20px;
-}
-
-#text {
-  position: absolute;
-  margin-left: 40%
+h3, p{
+  margin-left: 5%;
+  color:black
 }
 
 table {
-  margin-top: 3%;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 1000px;
+  width: 90%;
+  margin-left: 5%;
 }
 
 th {
@@ -153,13 +140,9 @@ tr:nth-child(odd) {
   background-color: darkgray;
 }
 
-h3 {
-  color: black;
-}
-
-.activeTag {
-  background-color: #11bd11;
-}
+/*.activeTag {*/
+/*  background-color: #11bd11;*/
+/*}*/
 
 #button {
   display: block;

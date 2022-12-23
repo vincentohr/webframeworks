@@ -45,6 +45,7 @@ export default {
 
 *{
   color: black;
+  z-index: -1;
 }
 div {
   display: inline;

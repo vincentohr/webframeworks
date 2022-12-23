@@ -36,7 +36,9 @@ public class DataLoader implements CommandLineRunner {
             return;
         System.out.println("Configuring some initial scooters in the repository");
         for (int i = 0; i < 10; i++) {
-            this.scooterRepository.save(Scooter.createSampleScooter(0));
+            Scooter scooter = Scooter.createSampleScooter(0);
+            this.scooterRepository.save(scooter);
+
         }
     }
 

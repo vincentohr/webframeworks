@@ -68,8 +68,10 @@ public class Trip implements Identifiable {
         trip.startDateTime = randomDate().atStartOfDay();
         trip.endDateTime = trip.startDateTime.plusWeeks(4);
         trip.startPosition = String.format("%.5fN, %.5fE", latitude, longitude);
-        trip.endPosition = String.format("%.5fN, %.5fE", latitudeEnd, longitudeEnd);;
+        trip.endPosition = String.format("%.5fN, %.5fE", latitudeEnd, longitudeEnd);
 
+        // todo
+        System.out.println(!trip.isActive());
         trip.setScooter(Scooter.createSampleScooter(0));
         return trip;
     }
@@ -104,7 +106,6 @@ public class Trip implements Identifiable {
     public static LocalDate randomDate() {
         int days = 75;
         int dateSinceEpochDay = LocalDate.now().getYear() - LocalDate.EPOCH.getYear();
-        System.out.println(dateSinceEpochDay);
         return LocalDate.ofEpochDay(ThreadLocalRandom
                 .current().nextInt(-days, days)).plusYears(dateSinceEpochDay + 1);
     }

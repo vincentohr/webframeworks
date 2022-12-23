@@ -108,6 +108,9 @@ export default {
   float: left;
   overflow: hidden;
 }
+*{
+  z-index: 10;
+}
 
 .dropdown .scooters {
   font-size: 16px;

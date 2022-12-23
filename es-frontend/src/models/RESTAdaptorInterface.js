@@ -2,28 +2,14 @@ export class RESTAdaptorInterface {
   resourcesURL
   copyConstructor
 
-  constructor (resourcesURL) {
+  constructor (resourcesURL, copyConstructor) {
     this.resourcesURL = resourcesURL
+    this.copyConstructor = copyConstructor
     console.log('Created RESTAdaptorInterface for: ' + resourcesURL)
   }
 
-  async fetchJson (url, options = null) {
-    const response = await fetch(url, options)
-    if (response.ok) {
-      return await response.json()
-    } else {
-      console.log(response, !response.bodyUsed ? await response.text() : '')
-      return null
-    }
-  }
-
   async asyncFindAll (queryParams = null) {
-    console.log('RESTAdaptorInterface.asyncFindAll()...')
-    const url = this.fullURL('/trips', queryParams)
-    const trips = await this.fetchJson(this.resourcesURL)
-    this.copyConstructor = Object.assign(trips)
-    console.log(this.copyConstructor)
-    return this.copyConstructor.map(s => s)
+
   }
 
   asyncFindById (queryParams = null) {
