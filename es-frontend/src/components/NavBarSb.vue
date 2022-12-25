@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+  z-index: 10;
+}
 #signOut{
   background-color: gray;
   color: white;

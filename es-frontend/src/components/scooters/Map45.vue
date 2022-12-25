@@ -5,38 +5,89 @@
     <table>
       <tr>
         <th>
-          Tag:
+          Tag: {{this.tag}}
         </th>
       </tr>
       <tr>
         <th>
-          Location:
+          Location: {{this.location}}
         </th>
       </tr>
       <tr>
         <th>
-          Battery: %
+          Battery: {{this.battery}}%
         </th>
       </tr>
     </table>
   </div>
-  <div id="map"></div>
+  <div id="map">
+    <l-map
+      v-model="zoom"
+      v-model:zoom="zoom"
+      :center="[52.371098, 4.897821]"
+    >
+      <l-tile-layer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      ></l-tile-layer>
+      <l-control-layers />
+      <l-marker v-for="(scooter, index) in scooters" :key="index" @click="onSelect (scooter)"
+                :lat-lng="[scooter.gpsLocation.slice(0, scooter.gpsLocation.indexOf(' ')), scooter.gpsLocation.slice(scooter.gpsLocation.indexOf(' ') + 1, scooter.gpsLocation.length)]">
+<!--        <l-icon :icon-url="iconUrl" :icon-size="iconSize" />-->
+      </l-marker>
+    </l-map>
+  </div>
 </template>
 
 <script>
-import leaflet from 'leaflet'
-import { onMounted } from 'vue'
+import {
+  LMap,
+  // LIcon,
+  LTileLayer,
+  LMarker,
+  LControlLayers,
+  LTooltip,
+  LPopup
 
+} from '@vue-leaflet/vue-leaflet'
+import 'leaflet/dist/leaflet.css'
 export default {
   name: 'Map45',
-  setup () {
-    let map = null
-    onMounted(() => {
-      map = leaflet.map('map').setView([52.372405, 4.899631], 12)
-      leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map)
-    })
+  inject: ['scootersService'],
+  async created () {
+    this.scooters = await this.scootersService.asyncFindAll()
+  },
+  components: {
+    LMap,
+    // LIcon,
+    LTileLayer,
+    LMarker,
+    LControlLayers
+  },
+  data () {
+    return {
+      tag: '',
+      battery: '',
+      location: '',
+      zoom: 6,
+      iconWidth: 25,
+      iconHeight: 40,
+      scooters: []
+    }
+  },
+  computed: {
+    // iconUrl () {
+    //   return `https://placekitten.com/${this.iconWidth}/${this.iconHeight}`
+    // },
+    iconSize () {
+      return [this.iconWidth, this.iconHeight]
+    }
+  },
+  methods: {
+    onSelect (scooter) {
+      this.tag = scooter.tag
+      this.location = scooter.gpsLocation
+      this.battery = scooter.batteryCharge
+    }
   }
 }
 </script>
