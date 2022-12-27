@@ -2,7 +2,6 @@ package app.rest;
 
 import app.Exceptions.PreConditionFailedException;
 import app.Exceptions.ResourceNotFoundException;
-import app.models.Scooter;
 import app.models.Trip;
 import app.repositories.TripsRepositoryJpa;
 import app.serialize.CustomJson;
@@ -10,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -39,7 +39,7 @@ public class TripController {
         } else {
             updateTrip.setScooter(tripDetails.getScooter());
             updateTrip.setStartDateTime(tripDetails.getStartDateTime());
-            updateTrip.setEndDateTime(tripDetails.getEndDateTime());
+            updateTrip.setEndDateTime(LocalDateTime.now());
             updateTrip.setStartPosition(tripDetails.getStartPosition());
             updateTrip.setEndPosition(tripDetails.getEndPosition());
             updateTrip.setMileage(tripDetails.getMileage());

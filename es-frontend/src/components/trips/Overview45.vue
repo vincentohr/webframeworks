@@ -20,7 +20,10 @@
           <td class="placeholder">{{ trip.active }}</td>
           <td class="placeholder">{{ trip.startPosition }}</td>
           <td class="placeholder">{{ trip.endPosition }}</td>
-          <td :class="{'finishRun': trip.mileage === 0}">{{ trip.mileage }}</td>
+          <td class="placeholder">
+            <div :class="{'finishRun': trip.mileage === 0}">{{ trip.mileage }}</div>
+            <button :class="{'noButton': trip.mileage !== 0}" @click="finishTrip">CLICK ME</button>
+          </td>
         </tr>
       </table>
     </div>
@@ -85,6 +88,9 @@ export default {
       // } else {
       //   return null
       // }
+    },
+    finishTrip () {
+      this.tripsService.asyncSave(this.selectedScooter)
     }
   },
   watch: {
@@ -92,15 +98,16 @@ export default {
     // '$route' () {
     //   this.selectedScooter = this.findSelectedFromRouteParams(this.$route)
     // }
-  }
+  },
+  computed: {}
 }
 </script>
 
 <style scoped>
 
-h3, p{
+h3, p {
   margin-left: 5%;
-  color:black
+  color: black
 }
 
 table {
@@ -137,8 +144,13 @@ tr:nth-child(odd) {
   color: white;
   padding: 10px;
 }
+
 .finishRun {
   content-visibility: hidden;
+}
+
+.noButton {
+  display: none
 }
 
 </style>

@@ -22,9 +22,9 @@ export class TripAdaptor extends RESTAdaptorInterface {
 
   async asyncFindAll () {
     console.log('ScooterAdaptor.asyncFindAll()...')
-    const scooters = await this.fetchJson(this.resourcesUrl)
-    console.log(scooters.map(s => Trip.copyConstructor(s)))
-    return scooters.map(s => Trip.copyConstructor(s))
+    const trips = await this.fetchJson(this.resourcesUrl)
+    console.log(trips.map(s => Trip.copyConstructor(s)))
+    return trips.map(s => Trip.copyConstructor(s))
   }
 
   async asyncFindById (id) {
@@ -43,14 +43,14 @@ export class TripAdaptor extends RESTAdaptorInterface {
     // test
   }
 
-  async asyncSave (scooter) {
+  async asyncSave (trip) {
     console.log('ScooterAdaptor.asyncSave()...')
-    return this.fetchJson(this.resourcesUrl + '/', {
-      method: 'POST',
+    return this.fetchJson(this.resourcesUrl + '/{tripId}', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(scooter)
+      body: JSON.stringify(trip)
     })
     // }
   }

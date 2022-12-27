@@ -2,5 +2,9 @@
   "dependencies": {
     "fetch-intercept": "^2.4.0",
     "whatwg-fetch": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue-leaflet/vue-leaflet": "^0.7.0",
+    "leaflet": "^1.9.3"
   }
 }

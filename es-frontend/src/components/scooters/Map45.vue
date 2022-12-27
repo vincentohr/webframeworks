@@ -107,7 +107,7 @@ export default {
     },
     newTrip () {
       if (this.selectedscooter != null) {
-        //still doing B
+        // still doing B
       }
     }
   }
