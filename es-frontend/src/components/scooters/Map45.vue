@@ -5,20 +5,21 @@
     <table>
       <tr>
         <th>
-          Tag: {{this.tag}}
+          Tag: {{ this.tag }}
         </th>
       </tr>
       <tr>
         <th>
-          Location: {{this.location}}
+          Location: {{ this.location }}
         </th>
       </tr>
       <tr>
         <th>
-          Battery: {{this.battery}}%
+          Battery: {{ this.battery }}%
         </th>
       </tr>
     </table>
+    <button id="newTrip" @click="newTrip">Start Trip</button>
   </div>
   <div id="map">
     <l-map
@@ -29,11 +30,17 @@
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ></l-tile-layer>
-      <l-control-layers />
+      <l-control-layers/>
       <l-marker v-for="(scooter, index) in scooters" :key="index" @click="onSelect (scooter)"
                 :lat-lng="[scooter.gpsLocation.slice(0, scooter.gpsLocation.indexOf(' ')), scooter.gpsLocation.slice(scooter.gpsLocation.indexOf(' ') + 1, scooter.gpsLocation.length)]">
-<!--        <l-icon :icon-url="iconUrl" :icon-size="iconSize" />-->
+        <!--        <l-icon :icon-url="iconUrl" :icon-size="iconSize" />-->
       </l-marker>
+            <l-circle-marker v-if="selectedscooter != null" :radius="15"
+                             :lat-lng="
+                             [this.selectedscooter.gpsLocation.slice(0, this.selectedscooter.gpsLocation.indexOf(' ')),
+                              this.selectedscooter.gpsLocation.slice(this.selectedscooter.gpsLocation.indexOf(' ') + 1,
+                               this.selectedscooter.gpsLocation.length)]">
+            </l-circle-marker>
     </l-map>
   </div>
 </template>
@@ -45,14 +52,16 @@ import {
   LTileLayer,
   LMarker,
   LControlLayers,
+  LCircleMarker,
   LTooltip,
   LPopup
 
 } from '@vue-leaflet/vue-leaflet'
 import 'leaflet/dist/leaflet.css'
+
 export default {
   name: 'Map45',
-  inject: ['scootersService'],
+  inject: ['tripsService', 'scootersService'],
   async created () {
     this.scooters = await this.scootersService.asyncFindAll()
   },
@@ -60,6 +69,7 @@ export default {
     LMap,
     // LIcon,
     LTileLayer,
+    LCircleMarker,
     LMarker,
     LControlLayers
   },
@@ -68,10 +78,14 @@ export default {
       tag: '',
       battery: '',
       location: '',
-      zoom: 6,
+      zoom: 5,
       iconWidth: 25,
       iconHeight: 40,
-      scooters: []
+      scooters: [],
+      selectedscooter: null,
+      lat: 0,
+      long: 0,
+      test: ''
     }
   },
   computed: {
@@ -84,9 +98,17 @@ export default {
   },
   methods: {
     onSelect (scooter) {
+      this.selectedscooter = scooter
+      this.lat = parseFloat(this.selectedscooter.gpsLocation.slice(0, this.selectedscooter.gpsLocation.indexOf(' ')))
+      this.long = parseFloat(this.selectedscooter.gpsLocation.slice(this.selectedscooter.gpsLocation.indexOf(' ') + 1, this.selectedscooter.gpsLocation.length))
       this.tag = scooter.tag
       this.location = scooter.gpsLocation
       this.battery = scooter.batteryCharge
+    },
+    newTrip () {
+      if (this.selectedscooter != null) {
+        //still doing B
+      }
     }
   }
 }
@@ -94,13 +116,20 @@ export default {
 
 <style scoped>
 
-*{
+* {
   color: black;
   z-index: -1;
 }
+
 div {
   display: inline;
   position: absolute;
+}
+
+#newTrip {
+  color: red;
+  background-color: #f8a73f;
+  border: none;
 }
 
 #map {
@@ -108,6 +137,7 @@ div {
   height: 59%;
   margin-left: 20%;
 }
+
 th {
   text-align: center;
 }
