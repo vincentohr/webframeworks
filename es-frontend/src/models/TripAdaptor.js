@@ -45,7 +45,7 @@ export class TripAdaptor extends RESTAdaptorInterface {
 
   async asyncSave (trip) {
     console.log('ScooterAdaptor.asyncSave()...')
-    return this.fetchJson(this.resourcesUrl + '/{tripId}', {
+    return this.fetchJson(this.resourcesUrl + '/' + trip, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

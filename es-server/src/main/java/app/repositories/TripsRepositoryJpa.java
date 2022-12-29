@@ -29,7 +29,12 @@ public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip> {
 
     @Override
     public Trip findById(long id) {
-        return null;
+        TypedQuery<Trip> query =
+                this.entityManager.createQuery(
+                        "SELECT t FROM Trip t WHERE t.id = ?1", Trip.class
+                );
+        query.setParameter(1, id);
+        return query.getSingleResult();
     }
 
     @Override

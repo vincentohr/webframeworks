@@ -90,7 +90,8 @@ export default {
       // }
     },
     finishTrip () {
-      this.tripsService.asyncSave(this.selectedScooter)
+      const id = 12
+      this.tripsService.asyncSave(id)
     }
   },
   watch: {

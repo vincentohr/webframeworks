@@ -25,13 +25,13 @@ public class TripController {
         return tripRepository.findAll();
     }
 
-    @PutMapping("{tripId}")
+    @PutMapping("/{tripId}")
     public void updateTrip(@RequestParam(required = false) boolean finish, @PathVariable long tripId,
                            @RequestBody Trip tripDetails) throws Exception {
         Trip updateTrip = tripRepository.findById(tripId);
-        if (!finish) {
-            return;
-        }
+//        if (!finish) {
+//            return;
+//        }
         if (updateTrip == null) {
             throw new ResourceNotFoundException(tripId);
         } else if (tripId != tripDetails.getId() && tripDetails.getId() != 0) {
