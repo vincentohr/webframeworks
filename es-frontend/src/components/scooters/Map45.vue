@@ -29,13 +29,17 @@
     >
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        min-zoom="1"
+        max-zoom="19"
       ></l-tile-layer>
       <l-control-layers/>
       <l-marker v-for="(scooter, index) in scooters" :key="index" @click="onSelect (scooter)"
                 :lat-lng="[scooter.gpsLocation.slice(0, scooter.gpsLocation.indexOf(' ')), scooter.gpsLocation.slice(scooter.gpsLocation.indexOf(' ') + 1, scooter.gpsLocation.length)]">
-        <!--        <l-icon :icon-url="iconUrl" :icon-size="iconSize" />-->
+        <l-icon v-if="scooter.batteryCharge > 60" :icon-url="greenScooter" :icon-size="iconSize" />
+        <l-icon v-if="scooter.batteryCharge >= 20 && scooter.batteryCharge <= 60" :icon-url="orangeScooter" :icon-size="iconSize" />
+        <l-icon v-if="scooter.batteryCharge < 20" :icon-url="redScooter" :icon-size="iconSize" />
       </l-marker>
-            <l-circle-marker v-if="selectedscooter != null" :radius="15"
+            <l-circle-marker v-if="selectedscooter != null" :radius="20"
                              :lat-lng="
                              [this.selectedscooter.gpsLocation.slice(0, this.selectedscooter.gpsLocation.indexOf(' ')),
                               this.selectedscooter.gpsLocation.slice(this.selectedscooter.gpsLocation.indexOf(' ') + 1,
@@ -48,7 +52,7 @@
 <script>
 import {
   LMap,
-  // LIcon,
+  LIcon,
   LTileLayer,
   LMarker,
   LControlLayers,
@@ -67,7 +71,7 @@ export default {
   },
   components: {
     LMap,
-    // LIcon,
+    LIcon,
     LTileLayer,
     LCircleMarker,
     LMarker,
@@ -78,8 +82,8 @@ export default {
       tag: '',
       battery: '',
       location: '',
-      zoom: 5,
-      iconWidth: 25,
+      zoom: 13,
+      iconWidth: 40,
       iconHeight: 40,
       scooters: [],
       selectedscooter: null,
@@ -89,9 +93,15 @@ export default {
     }
   },
   computed: {
-    // iconUrl () {
-    //   return `https://placekitten.com/${this.iconWidth}/${this.iconHeight}`
-    // },
+    greenScooter () {
+      return `https://cdn-icons-png.flaticon.com/512/1236/1236909.png?w=1380&t=st=1672328328~exp=1672328928~hmac=03689705bb38e4de8c61bac320d23a191c33ee58e97078317715e9a9bad015bb${this.iconWidth}/${this.iconHeight}`
+    },
+    orangeScooter () {
+      return `https://cdn-icons-png.flaticon.com/512/1198/1198152.png?w=1380&t=st=1672328385~exp=1672328985~hmac=84a5adece7a039faad50815d256134b3d7e28bb386a2e0dead333307aaea83dd${this.iconWidth}/${this.iconHeight}`
+    },
+    redScooter () {
+      return `https://cdn-icons-png.flaticon.com/512/1227/1227962.png?w=1380&t=st=1672328902~exp=1672329502~hmac=6212a6a8f8d9684ca5e63167e560fa764c218f31ac84042f6c2be4320be3c046${this.iconWidth}/${this.iconHeight}`
+    },
     iconSize () {
       return [this.iconWidth, this.iconHeight]
     }
@@ -104,6 +114,8 @@ export default {
       this.tag = scooter.tag
       this.location = scooter.gpsLocation
       this.battery = scooter.batteryCharge
+      console.log(scooter.gpsLocation.slice(0, scooter.gpsLocation.indexOf(' ')))
+      console.log(scooter.gpsLocation.slice(scooter.gpsLocation.indexOf(' ') + 1, scooter.gpsLocation.length))
     },
     newTrip () {
       if (this.selectedscooter != null) {
