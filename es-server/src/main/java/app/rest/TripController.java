@@ -37,12 +37,9 @@ public class TripController {
         } else if (tripId != tripDetails.getId() && tripDetails.getId() != 0) {
             throw new PreConditionFailedException(tripId, tripDetails.getId());
         } else {
-            updateTrip.setScooter(tripDetails.getScooter());
-            updateTrip.setStartDateTime(tripDetails.getStartDateTime());
             updateTrip.setEndDateTime(LocalDateTime.now());
-            updateTrip.setStartPosition(tripDetails.getStartPosition());
-            updateTrip.setEndPosition(tripDetails.getEndPosition());
-            updateTrip.setMileage(tripDetails.getMileage());
+            updateTrip.setEndPosition("53.0000N 4.89000E");
+            updateTrip.setMileage(100);
             tripRepository.save(updateTrip);
         }
     }

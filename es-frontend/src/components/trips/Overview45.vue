@@ -22,7 +22,7 @@
           <td class="placeholder">{{ trip.endPosition }}</td>
           <td class="placeholder">
             <div :class="{'finishRun': trip.mileage === 0}">{{ trip.mileage }}</div>
-            <button :class="{'noButton': trip.mileage !== 0}" @click="finishTrip">CLICK ME</button>
+            <button :class="{'noButton': trip.mileage !== 0}" @click="finishTrip(trip)">Finish Trip</button>
           </td>
         </tr>
       </table>
@@ -55,6 +55,7 @@ export default {
     },
     onSelect (trip) {
       this.isActive = true
+      this.$router.push(this.$route.matched[0].path + '/' + trip.id + '/' + trip.active)
       // if (trip !== null && trip !== this.selectedTrip) {
       //   this.$router.push(this.$route.matched[0].path + '/' + trip.id)
       //   this.selectedTrip = trip
@@ -89,7 +90,7 @@ export default {
       //   return null
       // }
     },
-    finishTrip () {
+    finishTrip (trip) {
       const id = 12
       this.tripsService.asyncSave(id)
     }

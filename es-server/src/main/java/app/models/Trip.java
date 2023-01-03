@@ -85,11 +85,6 @@ public class Trip implements Identifiable {
 
     @Transient
     public boolean isActive() {
-//        if(LocalDateTime.now().isAfter(endDateTime) ||
-//                LocalDateTime.now().isBefore(startDateTime)){
-//            return false;
-//        }
-//        return associateScooter(scooter);
         return endDateTime == null;
     }
 
