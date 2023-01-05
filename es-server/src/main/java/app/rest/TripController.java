@@ -2,13 +2,17 @@ package app.rest;
 
 import app.Exceptions.PreConditionFailedException;
 import app.Exceptions.ResourceNotFoundException;
+import app.models.Scooter;
 import app.models.Trip;
 import app.repositories.TripsRepositoryJpa;
 import app.serialize.CustomJson;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 

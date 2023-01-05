@@ -130,7 +130,7 @@ public class ScooterController {
 
 
     @Transactional
-    @PostMapping("{scooterId}/trip")
+    @PostMapping("{scooterId}/trips")
     public void addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) throws Exception {
         Scooter scooterDetail = scooterRepository.findById(scooterId);
 
@@ -142,12 +142,12 @@ public class ScooterController {
             throw new PreConditionFailedException(scooterId, scooterDetail.getId());
         } else {
             Trip savedTrip = tripRepository.save(trip);
-            savedTrip.associateScooter(scooterDetail);
+//            savedTrip.associateScooter(scooterDetail);
             if (savedTrip.getStartDateTime() == null) {
                 savedTrip.setStartDateTime(LocalDateTime.now());
             }
             scooterDetail.setGpsLocation(scooterDetail.getGpsLocation());
-            scooterDetail.setStatus("IN_USE");
+            scooterDetail.setStatus("INUSE");
         }
     }
 

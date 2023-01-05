@@ -1,4 +1,5 @@
 import { Trip } from '@/models/Trip'
+import { Scooter } from '@/models/scooter'
 import { RESTAdaptorInterface } from '@/models/RESTAdaptorInterface'
 
 export class TripAdaptor extends RESTAdaptorInterface {
@@ -46,6 +47,17 @@ export class TripAdaptor extends RESTAdaptorInterface {
       body: JSON.stringify(trip)
     })
     // }
+  }
+
+  async asyncAddTrip (scooterId, trip) {
+    console.log('add new trip')
+    return this.fetchJson('http://localhost:8085/api/scooters/' + scooterId + '/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(trip)
+    })
   }
 
   async asyncDeleteById (id) {

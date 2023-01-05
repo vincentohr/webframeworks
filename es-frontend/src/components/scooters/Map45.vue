@@ -119,9 +119,13 @@ export default {
     },
     newTrip () {
       if (this.selectedscooter != null) {
-        this.selectedscooter.status = 'INUSE'
-        this.scootersService.asyncSave(this.selectedscooter)
-        window.location.reload()
+        // Adding new trip
+        this.tripsService.asyncAddTrip(this.selectedscooter.id, 12)
+
+        // this.selectedscooter.status = 'INUSE'
+        // this.scootersService.asyncSave(this.selectedscooter)
+        // this.tripsService.asyncSave(12)
+        // window.location.reload()
       }
     }
   }
