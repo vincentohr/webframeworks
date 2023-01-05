@@ -25,7 +25,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         String servletPath = request.getServletPath();
 
         if (HttpMethod.OPTIONS.matches(request.getMethod()) ||
-                this.apiConfig.SECURED_PATHS.stream().anyMatch(servletPath::startsWith)) {
+                this.apiConfig.SECURED_PATHS.stream().noneMatch(servletPath::startsWith)) {
             filterChain.doFilter(request, response);
             return;
         }
