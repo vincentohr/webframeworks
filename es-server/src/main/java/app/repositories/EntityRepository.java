@@ -12,5 +12,7 @@ public interface EntityRepository <E extends Identifiable> {
 
     E deleteById (long id);
 
-    List<E> findByQuery (String jpqlName, Object... params); // finds all instances from a named jpql-query
+    List<E> findByQuery (String jpqlName, Object... params);// finds all instances from a named jpql-query
+
+    List<E> findAllIdleScooters();
 }

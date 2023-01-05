@@ -67,7 +67,7 @@ export default {
   name: 'Map45',
   inject: ['tripsService', 'scootersService'],
   async created () {
-    this.scooters = await this.scootersService.asyncFindAll()
+    this.scooters = await this.scootersService.asyncFindAllIdleScooters()
   },
   components: {
     LMap,
@@ -119,7 +119,9 @@ export default {
     },
     newTrip () {
       if (this.selectedscooter != null) {
-        // still doing B
+        this.selectedscooter.status = 'INUSE'
+        this.scootersService.asyncSave(this.selectedscooter)
+        window.location.reload()
       }
     }
   }

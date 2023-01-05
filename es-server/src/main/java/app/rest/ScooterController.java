@@ -9,6 +9,7 @@ import app.models.Trip;
 import app.repositories.EntityRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,12 @@ public class ScooterController {
         }
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST,
                 new ResourceNotFoundException(status), locationStatus.getPath()));
+    }
+
+    @GetMapping("/idle")
+    public ResponseEntity<Object> findAllIdleScooters() {
+        List<Scooter> idleScooters = scooterRepository.findAllIdleScooters();
+        return idleScooters.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(idleScooters);
     }
 
     @GetMapping("/trips")

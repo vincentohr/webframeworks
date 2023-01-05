@@ -25,6 +25,13 @@ export class ScooterAdaptor {
     return scooters.map(s => Scooter.copyConstructor(s))
   }
 
+  async asyncFindAllIdleScooters () {
+    console.log('ScooterAdaptor.asyncFindAllIdleScooters()...')
+    const scooters = await this.fetchJson(this.resourcesUrl + '/idle')
+    console.log(scooters.map(s => Scooter.copyConstructor(s)))
+    return scooters.map(s => Scooter.copyConstructor(s))
+  }
+
   async asyncFindById (id) {
     console.log('ScooterAdaptor.asyncFindById()...')
     return this.fetchJson(this.resourcesUrl + '/' + id, {
@@ -45,6 +52,18 @@ export class ScooterAdaptor {
     console.log('ScooterAdaptor.asyncSave()...')
     return this.fetchJson(this.resourcesUrl + '/', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(scooter)
+    })
+    // }
+  }
+
+  async asyncUpdate (scooter) {
+    console.log('ScooterAdaptor.asyncSave()...')
+    return this.fetchJson(this.resourcesUrl + '/', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },

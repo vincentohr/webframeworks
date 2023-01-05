@@ -57,4 +57,9 @@ public class TripsRepositoryJpa extends AbstractEntityRepositoryJpa<Trip> {
 
         return query.getResultList();
     }
+
+    @Override
+    public List<Trip> findAllIdleScooters() {
+        return null;
+    }
 }

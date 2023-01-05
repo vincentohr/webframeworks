@@ -29,6 +29,14 @@ public class ScooterRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
     }
 
     @Override
+    public List<Scooter> findAllIdleScooters() {
+        TypedQuery<Scooter> query =
+                this.entityManager.createQuery(
+                        "SELECT s FROM Scooter s WHERE s.status = 'IDLE' ", Scooter.class
+                );
+        return query.getResultList();
+    }
+    @Override
     public Scooter findById(long id) {
         TypedQuery<Scooter> query =
                 this.entityManager.createQuery(
