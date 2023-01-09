@@ -14,7 +14,11 @@ export class TripAdaptor extends RESTAdaptorInterface {
   async fetchJson (url, options = null) {
     const response = await fetch(url, options)
     if (response.ok) {
-      return await response.json()
+      try {
+        return await response.json()
+      } catch (err) {
+        console.log(err)
+      }
     } else {
       console.log(response, !response.bodyUsed ? await response.text() : '')
       return null
@@ -62,7 +66,6 @@ export class TripAdaptor extends RESTAdaptorInterface {
 
   async asyncDeleteById (id) {
     console.log('ScooterAdaptor.asyncDeleteById()...')
-    return this.fetchJson(this.resourcesUrl + '/' + id, {
-    })
+    return this.fetchJson(this.resourcesUrl + '/' + id, {})
   }
 }

@@ -138,11 +138,10 @@ public class ScooterController {
             throw new ResourceNotFoundException(scooterId);
         }
 
-        if (!scooterDetail.getStatus().equals("IDLE") || scooterDetail.getBatteryCharge() < 10) {
+        if (!scooterDetail.getStatus().equals("IDLE") || scooterDetail.getBatteryCharge() <= 10) {
             throw new PreConditionFailedException(scooterId, scooterDetail.getId());
         } else {
             Trip savedTrip = tripRepository.save(trip);
-//            savedTrip.associateScooter(scooterDetail);
             if (savedTrip.getStartDateTime() == null) {
                 savedTrip.setStartDateTime(LocalDateTime.now());
             }

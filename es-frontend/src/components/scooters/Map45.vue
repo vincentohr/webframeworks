@@ -120,8 +120,7 @@ export default {
     newTrip () {
       if (this.selectedscooter != null) {
         // Adding new trip
-        this.tripsService.asyncAddTrip(this.selectedscooter.id, 12)
-
+        this.tripsService.asyncAddTrip(this.selectedscooter.id, 0)
         // this.selectedscooter.status = 'INUSE'
         // this.scootersService.asyncSave(this.selectedscooter)
         // this.tripsService.asyncSave(12)
