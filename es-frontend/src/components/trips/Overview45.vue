@@ -55,7 +55,7 @@ export default {
     },
     onSelect (trip) {
       this.isActive = true
-      this.$router.push(this.$route.matched[0].path + '/' + trip.id + '/' + trip.active)
+      // this.$router.push(this.$route.matched[0].path + '/' + trip.id + '/' + trip.active)
       // if (trip !== null && trip !== this.selectedTrip) {
       //   this.$router.push(this.$route.matched[0].path + '/' + trip.id)
       //   this.selectedTrip = trip
@@ -90,9 +90,13 @@ export default {
       //   return null
       // }
     },
-    finishTrip (trip) {
+    finishTrip () {
       const id = 12
+      let finish
       this.tripsService.asyncSave(id)
+      //      this.$router.push({ path: '/sign-in', query: { signOut: true } })
+      console.log(this.$route.matched[0].path + `${true}`)
+      this.$router.push({ path: this.$route.matched[0].path, query: { finish: true } })
     }
   },
   watch: {

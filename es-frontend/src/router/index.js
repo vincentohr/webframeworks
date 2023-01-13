@@ -78,7 +78,7 @@ const routes = [
     ]
   },
   {
-    path: '/trips/overview45/:id?/:finish?',
+    path: '/trips/overview45/:finish?',
     name: 'overview45',
     component: Overview45
   },

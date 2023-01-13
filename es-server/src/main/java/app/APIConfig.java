@@ -13,7 +13,7 @@ public class APIConfig implements WebMvcConfigurer {
     public static final String IP_FORWARDED_FOR = "X-Forwarded-For";
 
     // path prefixes that will be protected by the authentication filter
-    public Set<String> SECURED_PATHS =
+    public Set<String> NON_SECURED_PATHS =
             Set.of("/authentication", "/h2-console", "/favicon.ico");
 
     // a variable reboot signature can be used as an additional security layer in authentication tokens.
