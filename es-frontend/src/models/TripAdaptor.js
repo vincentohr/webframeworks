@@ -14,11 +14,7 @@ export class TripAdaptor extends RESTAdaptorInterface {
   async fetchJson (url, options = null) {
     const response = await fetch(url, options)
     if (response.ok) {
-      try {
-        return await response.json()
-      } catch (err) {
-        console.log(err)
-      }
+      return await response.json()
     } else {
       console.log(response, !response.bodyUsed ? await response.text() : '')
       return null

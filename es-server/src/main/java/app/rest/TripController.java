@@ -30,7 +30,7 @@ public class TripController {
     }
 
     @PutMapping("/{tripId}")
-    public void updateTrip(@RequestParam(required = false) boolean finish, @PathVariable long tripId,
+    public ResponseEntity<Trip> updateTrip(@RequestParam(required = false) boolean finish, @PathVariable long tripId,
                            @RequestBody Trip tripDetails) throws Exception {
         Trip updateTrip = tripRepository.findById(tripId);
 //        if (!finish) {
@@ -46,5 +46,6 @@ public class TripController {
             updateTrip.setMileage(100);
             tripRepository.save(updateTrip);
         }
+        return ResponseEntity.ok(updateTrip);
     }
 }
