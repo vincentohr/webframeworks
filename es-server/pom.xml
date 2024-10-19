@@ -24,13 +24,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.1.12</version> <!-- or a newer version -->
+            <version>6.1.14</version> <!-- or a newer version -->
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>6.1.12</version>
+            <version>6.1.14</version>
         </dependency>
 
         <dependency>
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>5.3.39</version> <!-- Or use 5.7.12 / 5.8.11 / 6.1.8 / 6.2.3 based on compatibility -->
+            <version>6.1.14</version> <!-- Or use 5.7.12 / 5.8.11 / 6.1.8 / 6.2.3 based on compatibility -->
         </dependency>
 
 
