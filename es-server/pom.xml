@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.1.12</version> <!-- or a newer version -->
+            <version>6.1.21</version> <!-- or a newer version -->
         </dependency>
 
         <dependency>
